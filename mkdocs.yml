@@ -61,6 +61,8 @@ extra:
     release: master
   common:
     release: master
+  dashboard:
+    release: nebula-graph-dashboard-beta
   
 nav:
   - 前言: README.md
@@ -333,6 +335,13 @@ nav:
 
 #  - Nebula Algorithm: nebula-algorithm.md
 
+  - Nebula Graph Dashboard: 
+      - 什么是Nebula Graph Dashboard: nebula-dashboard/1.what-is-dashboard.md
+      - 部署Dashboard: nebula-dashboard/2.deploy-dashboard.md
+      - 连接Dashboard: nebula-dashboard/3.connect-dashboard.md
+      - Dashboard页面介绍: nebula-dashboard/4.use-dashboard.md
+      - 监控指标说明: nebula-dashboard/6.monitor-parameter.md
+
   - 附录:
       - Nebula Graph 常见问题: 20.appendix/0.FAQ.md
       - 生态工具概览: 20.appendix/6.eco-tool-version.md
@@ -400,6 +409,8 @@ plugins:
 extra_javascript:
   - js/version-select.js
   - js/config.js
+  - js/jquery.js
+  - js/init.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
