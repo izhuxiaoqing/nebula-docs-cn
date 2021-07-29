@@ -15,13 +15,13 @@ Explorer 的主页面分为五个部分：
 
 ## 标签栏
 
-- 导出图形：支持导出当前视图的 CSV 文件或 SVG（图片）文件。
+- 导出图形：支持导出当前视图的 CSV 文件或 PNG（图片）文件。
 
 ## 侧边栏
 
 侧边栏包括四个部分，用户可以点击按钮对图进行探索、修改画布上点的内容等等。
 
-- 查询探索：在进行探索之前，用户需要在查询数据并显示在画布中。
+- 查询探索：在进行探索之前，用户需要查询数据并显示在画布中。
 
 - 画布操作：包括框选画布中的点、拖动画布、选中多条点边功能。
 
@@ -38,10 +38,9 @@ Explorer 的主页面分为五个部分：
 ### 画布操作
 
 - 框选模式：单击![frameSelect](../figs/nav-frameSelect.png) 图标，支持框选画布中的点和边。
-
-- 拖动画布：单击![moveCanvas](../figs/nav-moveCanvas.png) 图标，支持拖动画布的位置。
-
 - 选中多条点边：单击![singleSelect](../figs/nav-singleSelect.png) 图标，可以方便的点击画布中的点和边，单击空白处取消选择。
+- 拖动画布：单击![moveCanvas](../figs/nav-moveCanvas.png) 图标，支持拖动画布的位置。
+更多详细信息参考 [画布操作](../operation-guide/ex-ug-canvas.md)。
 
 ### 图探索扩展
 
@@ -49,6 +48,7 @@ Explorer 的主页面分为五个部分：
 - 共同邻居：单击 ![commonNeighbor](../figs/rightclickmenu-commonNeighbor.png)图标，选择页面上 2 个点并查看它们的共同邻居。
 - 路径查询：单击 ![findPath](../figs/rightclickmenu-findPath.png)图标，可以查询起点到终点之间的 `all paths` 、 `Shortest path` 或者是 `Noloop path` 的路径。
 - 查看属性：单击 ![propertyView](../figs/nav-propertyView.png)图标，选择是否显示画板中的点或边的属性值。
+更多详细信息参考 [图探索拓展](../operation-guide/ex-ug-graph-exploration.md)。
 
 ### 删除及撤销
 
@@ -69,7 +69,7 @@ Explorer 的主页面分为五个部分：
 
 - 点边概览：默认隐藏，在当前画布选中点和边时才显示。点击如图标识，用户可以打开菜单，查看当前子图中选中的点和边的详细数据。
 
-  ![review](../figs/ex-ug-027.png)
+  ![review](../figs/ex-ug-027-1.png)
 
 更多详细操作参考 [画布操作](../operation-guide/ex-ug-canvas.md)。
 
@@ -82,6 +82,7 @@ Explorer 的主页面分为五个部分：
   | 图标 | ![force](../figs/Thumbnail-graphView.png) | ![dagre](../figs/Thumbnail-treeView.png) | ![circular](../figs/Thumbnail-sphereView.png) | 
   | ---- | ---- |----| ----|
   | 展示模式 | force（力导向图） | dagre（层次图） | circular（环形图） |
+
 ## 关系列表
 
 点击右侧的 ![unfold](../figs/sidebar-unfold.png)图标，用户可以打开菜单，查看画板中 Tag 和 Edge 的数量、搜索 Tag 和 Edge ，同时也支持修改点的颜色和图标。
