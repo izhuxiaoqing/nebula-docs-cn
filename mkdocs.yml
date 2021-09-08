@@ -288,6 +288,7 @@ nav:
 
   - 监控:
       - 查询Nebula Graph监控指标: 6.monitor-and-metrics/1.query-performance-metrics.md
+      - RocksDB统计数据: 6.monitor-and-metrics/2.rocksdb-statistics.md
 
   - 数据安全:
       - 验证和授权:
