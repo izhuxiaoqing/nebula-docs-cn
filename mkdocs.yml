@@ -161,6 +161,7 @@ nav:
           - collect函数: 3.ngql-guide/6.functions-and-expressions/10.collect.md
           - reduce函数: 3.ngql-guide/6.functions-and-expressions/11.reduce.md
           - hash函数: 3.ngql-guide/6.functions-and-expressions/12.hash.md
+          - concat函数: 3.ngql-guide/6.functions-and-expressions/13.concat.md
           - 谓词函数: 3.ngql-guide/6.functions-and-expressions/8.predicate.md
           - 自定义函数: 3.ngql-guide/6.functions-and-expressions/9.user-defined-functions.md
           - CASE表达式: 3.ngql-guide/6.functions-and-expressions/5.case-expressions.md
@@ -188,6 +189,7 @@ nav:
             - SHOW USERS: 3.ngql-guide/7.general-query-statements/6.show/16.show-users.md
             - SHOW SESSIONS: 3.ngql-guide/7.general-query-statements/6.show/17.show-sessions.md
             - SHOW QUERIES: 3.ngql-guide/7.general-query-statements/6.show/18.show-queries.md
+            - SHOW META LEADER: 3.ngql-guide/7.general-query-statements/6.show/19.show-meta-leader.md
 
       - 子句和选项:
           - GROUP BY: 3.ngql-guide/8.clauses-and-options/group-by.md
