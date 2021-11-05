@@ -4549,6 +4549,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#nebula_graph" class="md-nav__link">
+    Nebula Graph 版本支持
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#rpm" class="md-nav__link">
     RPM 部署
   </a>
@@ -4572,14 +4579,14 @@
         
           <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
-    卸载
+    启停服务
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
-    异常处理
+    卸载
   </a>
   
 </li>
@@ -4606,20 +4613,13 @@
         
           <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
-    安装
+    安装及部署
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#_7" class="md-nav__link">
-    部署
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
     停止服务
   </a>
   
@@ -4631,7 +4631,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     后续操作
   </a>
   
@@ -5677,6 +5677,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#nebula_graph" class="md-nav__link">
+    Nebula Graph 版本支持
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#rpm" class="md-nav__link">
     RPM 部署
   </a>
@@ -5700,14 +5707,14 @@
         
           <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
-    卸载
+    启停服务
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
-    异常处理
+    卸载
   </a>
   
 </li>
@@ -5734,20 +5741,13 @@
         
           <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
-    安装
+    安装及部署
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#_7" class="md-nav__link">
-    部署
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
     停止服务
   </a>
   
@@ -5759,7 +5759,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     后续操作
   </a>
   
@@ -5784,6 +5784,29 @@
                 
                 <h1 id="explorer">部署 Explorer<a class="headerlink" href="#explorer" title="Permanent link">&para;</a></h1>
 <p>本文介绍如何在本地通过 RPM 和 tar 包部署 Explorer。</p>
+<h2 id="nebula_graph">Nebula Graph 版本支持<a class="headerlink" href="#nebula_graph" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Explorer 的版本单独发布，不与 Nebula Graph 内核同步，其命名方式也不遵守命名规则，两者兼容对应关系如下表。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>Nebula Graph 版本</th>
+<th>Explorer 版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2.5.x</td>
+<td>2.0.0</td>
+</tr>
+<tr>
+<td>2.6.x</td>
+<td>2.1.0</td>
+</tr>
+</tbody>
+</table>
 <h2 id="rpm">RPM 部署<a class="headerlink" href="#rpm" title="Permanent link">&para;</a></h2>
 <h3 id="_1">前提条件<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p>在部署 Explorer 之前，用户需要确认以下信息：</p>
@@ -5792,35 +5815,19 @@
 </ul>
 <ul>
 <li>
-<p>以下端口未被使用。</p>
-<table>
-<thead>
-<tr>
-<th>端口号</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>7002</td>
-<td>Explorer 提供的 web 服务</td>
-</tr>
-<tr>
-<td>8070</td>
-<td>Nebula-http-gateway 的 HTTP 服务</td>
-</tr>
-</tbody>
-</table>
+<p>以下端口未被使用。
+  | 端口号 | 说明 |
+  | ---- | ---- |
+  | 7002 | Explorer 提供的 web 服务 |</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Explorer 默认使用的端口号为7002，用户可以在安装目录下的 <code>conf/app.conf</code> 文件中修改 <code>httpport</code>，并重启服务。</p>
+</div>
 </li>
 </ul>
 <ul>
-<li>
-<p>使用的 Linux 发行版为 CentOS ，安装有版本为 v10.16.0 + 以上的 Node.js，安装有版本为1.13及以上的Go。</p>
-<div class="admonition caution">
-<p class="admonition-title">Caution</p>
-<p>目前 Nebula Explorer 提供的包仅在 Linux 环境中使用，如果用户使用 mac 或其他环境，需要克隆 <a href="https://github.com/vesoft-inc/nebula-http-gateway">http-gateway repo</a>，并修改 <code>nebula-http-gateway/conf/app.conf</code> 文件中的 <code>httpport = 8070</code> 后使用 <code>make</code> 命令编译启动。</p>
-</div>
-</li>
+<li>使用的 Linux 发行版为 CentOS。</li>
+<li>安装有版本为1.13及以上的Go。</li>
 </ul>
 <h3 id="_2">安装<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <ol>
@@ -5833,31 +5840,47 @@
 </li>
 <li>
 <p>使用<code>sudo rpm -i &lt;rpm&gt;</code>命令安装RPM包。</p>
-<p>例如，安装 Explorer 需要运行以下命令：</p>
-<div class="highlight"><pre><span></span><code>$ sudo rpm -i nebula-graph-explorer-&lt;version&gt;.x86_64.rpm
+<p>例如，安装 Explorer 需要运行以下命令，默认安装路径为<code>/usr/local/nebula-explorer</code>：</p>
+<div class="highlight"><pre><span></span><code>$ sudo rpm -i nebula-explorer-&lt;version&gt;.x86_64.rpm
+</code></pre></div>
+<p>也可以使用以下命令安装到指定路径：
+ <div class="highlight"><pre><span></span><code>$ sudo rpm -i nebula-explorer-xxx.rpm --prefix<span class="o">=</span>&lt;path&gt; 
+</code></pre></div></p>
+</li>
+<li>
+<p>拷贝 License 至安装路径下。</p>
+<div class="highlight"><pre><span></span><code>$ cp -r &lt;license&gt; &lt;explorer_path&gt;
+</code></pre></div>
+<p>例如：
+ <div class="highlight"><pre><span></span><code>$ cp -r nebula.license /usr/local/nebula-explorer
+</code></pre></div></p>
+<div class="admonition enterpriseonly">
+<p class="admonition-title">Enterpriseonly</p>
+<p>License 仅在企业版提供，请发送邮件至inquiry@vesoft.com。</p>
+</div>
+</li>
+<li>
+<p>添加 License 后需要使用以下命令停止并重启服务。</p>
+<div class="highlight"><pre><span></span><code>$ systemctl stop nebula-explorer <span class="c1">#停止服务</span>
+$ systemctl start nebula-explorer <span class="c1">#启动服务</span>
 </code></pre></div>
 </li>
 </ol>
-<h3 id="_3">卸载<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h3 id="_3">启停服务<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>支持使用systemctl 服务控制项目启停。默认 rpm 安装后以 systemctl 启动，可使用以下命令：
+<div class="highlight"><pre><span></span><code>$ systemctl status nebula-explorer <span class="c1">#查看服务状态</span>
+$ systemctl stop nebula-explorer <span class="c1">#停止服务</span>
+$ systemctl start nebula-explorer <span class="c1">#启动服务</span>
+</code></pre></div>
+也可以在安装目录下使用以下命令，手动启动或停止服务：
+<div class="highlight"><pre><span></span><code>$ <span class="nb">cd</span> ./scripts/rpm
+$ bash ./start.sh <span class="c1">#启动服务</span>
+$ bash ./stop.sh <span class="c1">#停止服务</span>
+</code></pre></div></p>
+<h3 id="_4">卸载<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>使用以下的命令卸载 Explorer 。</p>
-<div class="highlight"><pre><span></span><code>$ sudo rpm -e nebula-graph-explorer-&lt;version&gt;.x86_64
+<div class="highlight"><pre><span></span><code>$ sudo rpm -e nebula-explorer-&lt;version&gt;.x86_64
 </code></pre></div>
-<h3 id="_4">异常处理<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>如果在安装过程中自动启动失败或是需要手动启动或停止服务，请使用以下命令.</p>
-<ul>
-<li>
-<p>手动启动服务</p>
-<div class="highlight"><pre><span></span><code>$ sudo sh ./scripts/start.sh
-</code></pre></div>
-</li>
-</ul>
-<ul>
-<li>
-<p>手动停止服务</p>
-<div class="highlight"><pre><span></span><code>$ sudo sh ./scripts/stop.sh
-</code></pre></div>
-</li>
-</ul>
 <h2 id="tar">tar 包部署<a class="headerlink" href="#tar" title="Permanent link">&para;</a></h2>
 <h3 id="_5">前提条件<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>在部署 Explorer 之前，用户需要确认以下信息：</p>
@@ -5866,37 +5889,21 @@
 </ul>
 <ul>
 <li>
-<p>使用的 Linux 发行版为 CentOS ，安装有版本为 v10.16.0 + 以上的 Node.js，安装有版本为1.13及以上的Go。</p>
+<p>以下端口未被使用。
+  | 端口号 | 说明 |
+  | ---- | ---- |
+  | 7002 | Explorer 提供的 web 服务 |</p>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>目前 Nebula Explorer 提供的包仅在 Linux 环境中使用，如果用户使用 mac 或其他环境，需要克隆<a href="https://github.com/vesoft-inc/nebula-http-gateway">http-gateway repo</a>，并修改 <code>nebula-http-gateway/conf/app.conf</code> 文件中的<code>httpport = 8070</code> 后使用 <code>make</code> 命令编译启动。</p>
+<p>Explorer 默认使用的端口号为7002，用户可以在安装目录下的 <code>conf/app.conf</code> 文件中修改 <code>httpport</code>，并重启服务。</p>
 </div>
 </li>
 </ul>
 <ul>
-<li>
-<p>以下端口未被使用。</p>
-<table>
-<thead>
-<tr>
-<th>端口号</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>7002</td>
-<td>Explorer 提供的 web 服务</td>
-</tr>
-<tr>
-<td>8070</td>
-<td>Nebula-http-gateway 的 HTTP 服务</td>
-</tr>
-</tbody>
-</table>
-</li>
+<li>使用的 Linux 发行版为 CentOS。</li>
+<li>安装有版本为1.13及以上的Go。</li>
 </ul>
-<h3 id="_6">安装<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<h3 id="_6">安装及部署<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
 <p>根据需要下载 tar 包，建议选择最新版本。</p>
@@ -5907,39 +5914,36 @@
 </li>
 <li>
 <p>使用 <code>tar -xvf</code> 解压 tar 包。</p>
-<div class="highlight"><pre><span></span><code>tar -xvf nebula-graph-explorer-&lt;version&gt;.tar.gz
+<div class="highlight"><pre><span></span><code>$ tar -xvf nebula-graph-explorer-&lt;version&gt;.tar.gz
 </code></pre></div>
 </li>
-</ol>
-<h3 id="_7">部署<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>根目录 nebula-graph-explorer 下一共有两个安装包：nebula-graph-explorer 和 nebula-http-gateway。用户需要在同一台机器上分别部署并启动服务，才能完成 Explorer 的部署。</p>
+<li>
+<p>拷贝 License 至<code>nebula-explorer</code>目录下。</p>
+<div class="highlight"><pre><span></span><code>$ cp -r &lt;license&gt; &lt;explorer_path&gt;
+</code></pre></div>
+<p>例如：
+ <div class="highlight"><pre><span></span><code>$ cp -r nebula.license /usr/local/nebula-explorer
+</code></pre></div></p>
+<div class="admonition enterpriseonly">
+<p class="admonition-title">Enterpriseonly</p>
+<p>License 仅在企业版提供，请发送邮件至inquiry@vesoft.com。</p>
 </div>
-<ol>
-<li>
-<p>部署 nebula-http-gateway 并启动。</p>
-<div class="highlight"><pre><span></span><code>$ <span class="nb">cd</span> nebula-http-gateway
-$ nohup ./nebula-httpd <span class="p">&amp;</span>
-</code></pre></div>
 </li>
 <li>
-<p>部署 nebula-graph-explorer</p>
-<div class="highlight"><pre><span></span><code>$ <span class="nb">cd</span> nebula-graph-explorer
-$ npm run start
+<p>进入<code>nebula-explorer</code>文件夹，启动explorer。</p>
+<div class="highlight"><pre><span></span><code>$ <span class="nb">cd</span> nebula-explorer
+$ ./nebula-httpd <span class="p">&amp;</span>
 </code></pre></div>
 </li>
 </ol>
-<h3 id="_8">停止服务<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<h3 id="_7">停止服务<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>用户可以采用<code>kill pid</code>的方式来关停服务：</p>
-<div class="highlight"><pre><span></span><code>$ <span class="nb">kill</span> <span class="k">$(</span>lsof -t -i :8070<span class="k">)</span> <span class="c1"># 停止 nebula-http-gateway</span>
-$ <span class="nb">cd</span> nebula-graph-explorer
-$ npm run stop <span class="c1"># 停止 nebula-graph-explorer</span>
+<div class="highlight"><pre><span></span><code>$ <span class="nb">kill</span> <span class="k">$(</span>lsof -t -i :7002<span class="k">)</span>
 </code></pre></div>
-<h2 id="_9">后续操作<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h2 id="_8">后续操作<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p>启动成功后，在浏览器地址栏输入 <code>http://&lt;ip_address&gt;:7002</code>。</p>
 <p>在浏览器窗口中看到以下登录界面表示已经成功部署并启动了 Explorer。</p>
-<p><img alt="Nebula Explorer 登录页面" src="../../figs/ex-ug-002.png" /></p>
+<p><img alt="Nebula Explorer 登录页面" src="../../figs/ex-ug-002-1.png" /></p>
 <p>进入 Explorer 登录界面后，用户需要连接 Nebula Graph。详细信息，参考<a href="../ex-ug-connect/">连接数据库</a>。</p>
                 
                   
@@ -5949,7 +5953,7 @@ $ npm run stop <span class="c1"># 停止 nebula-graph-explorer</span>
 <div class="md-source-date">
   <small>
     
-      最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 22, 2021</span>
+      最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 5, 2021</span>
       
     
   </small>
