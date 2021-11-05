@@ -5783,7 +5783,7 @@ nebula&gt; SHOW SNAPSHOTS;
 <p>当前未提供恢复快照命令，需要手动拷贝快照文件到对应的文件夹内，也可以通过shell脚本进行操作。实现逻辑如下：</p>
 <ol>
 <li>
-<p>创建快照后，会在Meta服务器和Storage服务器的安装目录内生成<code>checkpoints</code>目录，保存创建的快照。以本文为例，当存在2个图空间时，创建的快照分别保存在<code>/usr/local/nebula/data/meta/nebula/0/checkpoints</code>、<code>/usr/local/nebula/data/storage/nebula/3/checkpoints</code>和<code>/usr/local/nebula/data/storage/nebula/4/checkpoints</code>中。</p>
+<p>创建快照后，会在leader Meta服务器和所有Storage服务器的安装目录内生成<code>checkpoints</code>目录，保存创建的快照。以本文为例，当存在2个图空间时，创建的快照分别保存在<code>/usr/local/nebula/data/meta/nebula/0/checkpoints</code>、<code>/usr/local/nebula/data/storage/nebula/3/checkpoints</code>和<code>/usr/local/nebula/data/storage/nebula/4/checkpoints</code>中。</p>
 <div class="highlight"><pre><span></span><code>$ ls /usr/local/nebula/data/meta/nebula/0/checkpoints/
 SNAPSHOT_2021_03_09_09_10_52
 $ ls /usr/local/nebula/data/storage/nebula/3/checkpoints/
@@ -5794,6 +5794,10 @@ SNAPSHOT_2021_03_09_09_10_52
 </li>
 <li>
 <p>当数据丢失需要通过快照恢复时，用户可以找到合适的时间点快照，将内部的文件夹<code>data</code>和<code>wal</code>分别拷贝到各自的上级目录（和<code>checkpoints</code>平级），覆盖之前的<code>data</code>和<code>wal</code>，然后重启集群即可。</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>需要同时覆盖所有Meta节点的data和wal目录，因为存在重启集群后发生Meta重新选举leader的情况，如果不覆盖所有Meta节点，新的leader使用的还是最新的Meta数据，导致恢复失败。</p>
+</div>
 </li>
 </ol>
 <!-- TODO
@@ -5810,7 +5814,7 @@ SNAPSHOT_2021_03_09_09_10_52
 <div class="md-source-date">
   <small>
     
-      最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 27, 2021</span>
+      最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 3, 2021</span>
       
     
   </small>
