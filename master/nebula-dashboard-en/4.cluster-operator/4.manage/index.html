@@ -5957,13 +5957,14 @@
                 
                 
                 <h1 id="_1">集群操作<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>本文主要介绍 Dashboard 的集群操作，主要为以下四个部分：
-- 节点管理
-- 服务管理
-- 扩缩容
-- 更新配置</p>
+<p>本文主要介绍 Dashboard 的集群操作，主要为以下四个部分：</p>
+<ul>
+<li>节点管理</li>
+<li>服务管理</li>
+<li>扩缩容</li>
+<li>更新配置</li>
+</ul>
 <h2 id="_2">节点管理<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p><img alt="vertex manage" src="../../figs/ds-008.png" /></p>
 <p>在节点管理页面中，展示所有的节点详情信息，包括节点名称、Host及SSH用户名称、CPU核等信息。</p>
 <ul>
 <li>点击 <strong>添加节点</strong> 输入Host信息、SSH端口号、用户、密码信息，选择Nebula Graph安装包，可快速添加节点。</li>
@@ -5982,29 +5983,32 @@
 </ul>
 </li>
 </ul>
+<p><img alt="vertex manage" src="../../figs/ds-008.png" /></p>
 <h2 id="_3">服务管理<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p><img alt="服务管理" src="../../figs/ds-015.png" /></p>
-<p>在服务管理页面，用户可以选择服务类型、服务状态、Host对展示的数据进行筛选，快速选中一个或多个服务，一键启动/停止/重启服务。</p>
+<ul>
+<li>在服务管理页面，用户可以选择服务类型、服务状态、Host对展示的数据进行筛选，快速选中一个或多个服务，一键启动/停止/重启服务。</li>
+</ul>
+<ul>
+<li>点击 <img alt="nav" src="../../figs/nav-dashboard.png" />图标，可快速查看 <a href="../2.monitor/">服务监控</a>。</li>
+</ul>
 <div class="admonition danger">
 <p class="admonition-title">Danger</p>
 <p>单击<strong>停止</strong>/<strong>重启</strong>，会立即中断进行中的任务，可能会导致数据不一致，请在业务低峰期执行该操作。</p>
 </div>
-<p>点击 <img alt="nav" src="../../figs/nav-dashboard.png" />图标，可快速查看 <a href="../2.monitor/">服务监控</a>。</p>
+<p><img alt="服务管理" src="../../figs/ds-015.png" /></p>
 <h2 id="_4">扩缩容<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p><img alt="扩缩容" src="../../figs/ds-016.png" /></p>
-<p>在扩缩容页面，用户可以快速<strong>添加节点</strong>、<strong>批量导入节点</strong>，并对已存在的节点添加 <strong>Graph服务</strong> 及 <strong>Storage服务</strong>。点击 <strong>重置</strong> 按钮，可以恢复到初始状态。</p>
+<ul>
+<li>在扩缩容页面，用户可以快速<strong>添加节点</strong>、<strong>批量导入节点</strong>，并对已存在的节点添加 <strong>Graph服务</strong> 及 <strong>Storage服务</strong>。</li>
+<li>点击 <strong>重置</strong> 按钮，可以恢复到初始状态。</li>
+</ul>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>目前仅支持对graphd和storaged进行扩缩容，不支持移除或添加metad服务。</p>
+<p>目前仅支持对graphd和storaged进行扩缩容，不支持移除或添加metad服务。扩缩容集群时，建议提前备份数据，以便故障发生时回滚数据。关于扩缩容，详情参见<a href="../../../20.appendix/0.FAQ/#_11">如何扩缩容</a>。</p>
 </div>
-<p>在该示例中，新增了节点为<code>192.168.8.169</code>，<code>192.168.8.143</code>和<code>192.168.8.144</code>的 Graph 服务，删除了节点为<code>192.168.8.144</code>的Storage服务。虚线框并置灰服务名表示移除的服务，实线框表示添加的服务。</p>
+<p>在该示例中，新增了节点为<code>192.168.8.143</code>和<code>192.168.8.167</code>的Storage服务，删除了节点为<code>192.168.8.169</code>的Graph服务。虚线框并置灰服务名表示移除的服务，实线框表示添加的服务。</p>
 <p>在下方的<strong>服务</strong>中，绿色表示即将新增的服务，红色表示即将移除的服务。可以修改新增服务的端口号、HTTP端口号、HTTP2端口号信息。</p>
-<div class="admonition caution">
-<p class="admonition-title">Caution</p>
-<p>扩缩容集群时，建议提前备份数据，以便故障发生时回滚数据。关于扩缩容，详情参见<a href="../../../20.appendix/0.FAQ/#_11">如何扩缩容</a>。</p>
-</div>
+<p><img alt="扩缩容" src="../../figs/ds-016.png" /></p>
 <h2 id="_5">更新配置<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p><img alt="更新配置" src="../../figs/ds-017.png" /></p>
 <p>更新配置页面可以修改Storage及Graph服务的配置文件，具体参数及描述见 <a href="../../../5.configurations-and-logs/1.configurations/4.storage-config/">Storage服务配置</a> 和 <a href="../../../5.configurations-and-logs/1.configurations/3.graph-config/">Graph服务配置</a>。更新配置文件为批量操作，将会修改每一个Storage/Graph的配置文件。</p>
 <ul>
 <li>点击保存后，在下一次服务重启后配置即生效。</li>
@@ -6018,6 +6022,7 @@
 </div>
 </li>
 </ul>
+<p><img alt="更新配置" src="../../figs/ds-017.png" /></p>
                 
                   
                     
@@ -6026,7 +6031,7 @@
 <div class="md-source-date">
   <small>
     
-      最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 8, 2021</span>
+      最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 9, 2021</span>
       
     
   </small>

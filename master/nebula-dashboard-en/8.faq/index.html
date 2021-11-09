@@ -4796,6 +4796,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#dashboard" class="md-nav__link">
+    为什么无法启动Dashboard（企业版）？
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -5965,6 +5972,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#dashboard" class="md-nav__link">
+    为什么无法启动Dashboard（企业版）？
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -5985,9 +5999,15 @@
                 <h1 id="faq">常见问题FAQ<a class="headerlink" href="#faq" title="Permanent link">&para;</a></h1>
 <p>本文列出了使用Dashboard时可能遇到的常见问题，用户可以使用文档中心或者浏览器的搜索功能查找相应问题。</p>
 <h2 id="_1">什么是集群、节点和服务？<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>集群： Dashboard集群特指由多个Nebula Graph服务所在的节点组成的一组系统；
-节点： 特指承载运行Nebula Graph服务的物理或虚拟机；
-服务： 特指Nebula服务，包括Metad，Storaged和Graphd。</p>
+<ul>
+<li>集群：Dashboard集群特指由多个Nebula Graph服务所在的节点组成的一组系统。</li>
+</ul>
+<ul>
+<li>节点：特指承载运行Nebula Graph服务的物理或虚拟机。</li>
+</ul>
+<ul>
+<li>服务：特指Nebula服务，包括Metad，Storaged和Graphd。</li>
+</ul>
 <h2 id="_2">什么是集群的状态？<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>集群的状态有以下几种：</p>
 <ul>
@@ -6007,6 +6027,12 @@
 <li>缩容Storage, Dashboard会自动执行balance data remove 语句，确保被指定的服务上的数据分片迁移完成后，停止服务。</li>
 <li>扩缩容Graph对数据不会有影响。</li>
 </ul>
+<h2 id="dashboard">为什么无法启动Dashboard（企业版）？<a class="headerlink" href="#dashboard" title="Permanent link">&para;</a></h2>
+<ul>
+<li>确保License已拷贝至Dashboard目录中，且执行了<code>bash ./scripts/start.sh</code>命令。</li>
+<li>确保License未过期。</li>
+</ul>
+<p>用户也可以在Dashboard目录中执行<code>cat logs/webserver.log</code>查看各个模块的启动信息。如果满足以上条件，仍无法启动Dashboard。请前往 <a href="https://discuss.nebula-graph.com.cn/" title="点击前往 Nebula Graph 官方论坛">Nebula Graph 官方论坛</a> 咨询。</p>
                 
                   
                     
@@ -6015,7 +6041,7 @@
 <div class="md-source-date">
   <small>
     
-      最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 8, 2021</span>
+      最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 9, 2021</span>
       
     
   </small>

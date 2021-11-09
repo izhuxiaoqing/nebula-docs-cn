@@ -5941,25 +5941,24 @@
 <p>在导入集群页面，输入连接Nebula Graph的信息：</p>
 <ul>
 <li>Graphd Host：&lt;其中一个Graphd进程的虚机IP&gt;:&lt;端口号&gt;。本示例设置为 <code>192.168.8.157:9669</code>。</li>
-<li>用户名：连接Nebula Graph的账号。</li>
-<li>密码：连接Nebula Graph的密码。</li>
+<li>用户名：连接Nebula Graph的账号，本示例设置为<code>vesoft</code>。</li>
+<li>密码：连接Nebula Graph的密码，本示例设置为<code>nebula</code>。</li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>因为 Nebula Graph 默认不启用身份验证，所以，一般情况下用户可以使用 <code>root</code> 账号和任意密码连接 Nebula。
   当 Nebula Graph 启用了身份验证后，用户只能使用指定的账号和密码连接 Nebula。关于 Nebula Graph 的身份验证功能，参考 <a href="../../../7.data-security/1.authentication/1.authentication/" title="点击前往 Nebula Graph 官网">Nebula Graph 用户手册</a>。</p>
 </div>
-</li>
-<li>
-<p>输入 <strong>用户名</strong> 及 <strong>密码</strong>，本示例设置为<code>vesoft</code>和<code>nebula</code>。</p>
 <p><img alt="connect" src="../../figs/ds-025.png" /></p>
 </li>
 <li>
 <p>在连接服务节点页面完成以下配置：</p>
 <ul>
-<li>输入集群的名称，最大可输入15个字符，本示例设置为<code>create_1027</code>。
- <img alt="connect" src="../../figs/ds-026.png" /></li>
-<li>对节点进行 <strong>授权</strong> 或 <strong>批量授权</strong> 。授权需输入每个节点的 SSH 用户名及密码；批量授权需要上传CSV文件。请根据下载的CSV文件，编辑每个节点授权信息，尽量确保节点信息正确，否则容易造成上传失败。页面中节点状变为 <strong>已授权</strong>，则该节点授权成功。
+<li>输入集群的名称，最大可输入15个字符，本示例设置为<code>create_1027</code>。</li>
+<li>对节点进行 <strong>授权</strong>，授权需输入每个节点的 SSH 用户名及密码。</li>
+<li><strong>批量授权</strong>需要上传CSV文件。请根据下载的CSV文件，编辑每个节点授权信息，尽量确保节点信息正确，否则容易造成上传失败。
+ <img alt="批量授权" src="../../figs/ds-026.png" /></li>
+<li>页面中节点状变为 <strong>已授权</strong>，则该节点授权成功。
  <img alt="授权" src="../../figs/ds-027.png" /></li>
 </ul>
 </li>
@@ -5977,7 +5976,7 @@
 <div class="md-source-date">
   <small>
     
-      最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 8, 2021</span>
+      最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 9, 2021</span>
       
     
   </small>

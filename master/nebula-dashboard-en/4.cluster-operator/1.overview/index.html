@@ -6009,7 +6009,7 @@
 <li>服务监控</li>
 </ul>
 <h3 id="_3">集群概况<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>在集群概况中，显示了节点数量，Graphd、Storaged、Metad正在运行服务及异常服务数量。在本示例中，Storaged存在异常服务为 <strong>1</strong>，可以点击 <strong>查看</strong> 按钮，快速查看异常服务。</p>
+<p>在集群概况中，显示了节点数量，Graphd、Storaged、Metad正在运行服务及异常服务数量。在本示例中，Graphd存在异常服务为 <strong>1</strong>，可以点击 <strong>查看</strong> 按钮，快速查看异常服务。</p>
 <h3 id="_4">集群信息<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>在集群信息中，显示了 <strong>集群名称</strong>、<strong>创建时间</strong>、<strong>创建用户</strong>、<strong>版本</strong> 的信息。</p>
 <div class="admonition note">
@@ -6018,14 +6018,26 @@
 </div>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>如果用户导入的Nebula Graph版本低于2.5或版本未知的情况下，默认显示为v2.0.1。</p>
+<p>如果用户导入的Nebula Graph版本低于v2.5.0或版本未知的情况下，默认显示为v2.0.1。</p>
 </div>
 <h3 id="_5">节点监控<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>支持快速查看节点监控信息，如cpu、memory等信息，支持在页面上点击<img alt="setup" src="../../figs/Setup.png" />插入基准线。并且用户也可以点击<img alt="watch" src="../../figs/watch.png" />快速跳转至节点监控页面，查看详情信息。</p>
+<ul>
+<li>支持快速查看节点监控信息，可点击切换展示的信息，默认显示cpu信息。</li>
+<li>支持在页面上点击<img alt="setup" src="../../figs/Setup.png" />插入基准线。</li>
+<li>点击<img alt="watch" src="../../figs/watch.png" />快速跳转至节点监控页面，查看详情信息。</li>
+</ul>
 <h3 id="_6">状态列表<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>用饼图的方式形象的展示节点运行服务状态。</p>
 <h3 id="_7">服务监控<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<p>默认显示<code>query_latency_us</code>（查询平均延迟）和<code>slow_query_latency_us</code>（慢查询平均延迟）的信息，支持在页面上点击<img alt="setup" src="../../figs/Setup.png" />设置插入基准线。并且用户也可以点击<img alt="watch" src="../../figs/watch.png" />快速跳转至服务监控页面，查看详情信息。</p>
+<ul>
+<li>默认显示<code>query_latency_us</code>（查询平均延迟）和<code>slow_query_latency_us</code>（慢查询平均延迟）的信息。</li>
+</ul>
+<ul>
+<li>点击<img alt="setup" src="../../figs/Setup.png" /><strong>设置</strong> 插入基准线。</li>
+</ul>
+<ul>
+<li>点击<img alt="watch" src="../../figs/watch.png" />快速跳转至服务监控页面，查看详情信息。</li>
+</ul>
                 
                   
                     
@@ -6034,7 +6046,7 @@
 <div class="md-source-date">
   <small>
     
-      最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 8, 2021</span>
+      最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 9, 2021</span>
       
     
   </small>

@@ -5940,7 +5940,7 @@
 <li>输入 <strong>集群名称</strong>，最大可输入15个字符，本示例设置为<code>test_foesa</code>。</li>
 <li>选择Nebula Graph安装版本，本示例设置为<code>v2.6.1</code>。</li>
 <li>
-<p>添加节点或者批量导入节点，如果是多节点的集群，需要添加每个节点的相关信息。</p>
+<p><strong>添加节点</strong>，如果是多节点的集群，需要添加每个节点的相关信息。</p>
 <ol>
 <li>配置每个Host的IP信息，本示例设置为<code>192.168.8.144</code>。</li>
 <li>配置 SSH 信息，本示例设置如下：SSH端口号为<code>22</code>，SSH用户名为 <code>vesoft</code>，SSH 密码为<code>nebula</code>。</li>
@@ -5950,6 +5950,12 @@
 <p><img alt="cluster" src="../../figs/ds-021.png" /></p>
 </li>
 </ul>
+<ul>
+<li>
+<p><strong>批量导入节点</strong>，需要添加每个节点的相关信息。批量导入需要先选择安装包后点击<strong>下载CSV模版</strong>。按照模版填写后上传，尽量确保节点信息正确，否则容易造成上传失败。</p>
+<p><img alt="batch-import" src="../../figs/ds-030.png" /></p>
+</li>
+</ul>
 </li>
 <li>
 <p>勾选节点并在节点右上方，点击需要添加的服务。创建集群需要给节点添加3种类型的服务，如果不熟悉Nebula Graph架构，建议点击 <strong>自动添加服务</strong> 按钮。</p>
@@ -5957,15 +5963,14 @@
 </li>
 <li>
 <p>（可选）在下方的服务中，选择编辑meta、graph、storage服务的端口号、HTTP端口号、HTTP2端口号，点击确认保存。</p>
-<p><img alt="install" src="../../figs/ds-021.png" /></p>
 </li>
 <li>
 <p>点击<strong>创建集群</strong>，确定配置信息无误且节点无冲突后，点击<strong>确认</strong>。</p>
 <p><img alt="check" src="../../figs/ds-023.png" /></p>
 </li>
 <li>
-<p>在集群管理页面中的列表中出现状态为<code>installing</code>的集群，需等待3-10分钟，状态变为<code>healthy</code>即集群创建成功。如果服务状态为<code>unhealthy</code>，表示集群服务中存在非正常运行的服务，请点击详情进行查看。
-   <img alt="installing" src="../../figs/ds-024.png" /></p>
+<p>在集群管理页面中的列表中出现状态为<code>installing</code>的集群，需等待3-10分钟，状态变为<code>healthy</code>即集群创建成功。如果服务状态为<code>unhealthy</code>，表示集群服务中存在非正常运行的服务，请点击详情进行查看。</p>
+<p><img alt="installing" src="../../figs/ds-024.png" /></p>
 </li>
 </ol>
 <h2 id="_3">后续操作<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
@@ -5978,7 +5983,7 @@
 <div class="md-source-date">
   <small>
     
-      最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 8, 2021</span>
+      最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 9, 2021</span>
       
     
   </small>
