@@ -926,11 +926,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://docs.nebula-graph.com.cn/master/nebula-dashboard-ent/2.deploy-connect-dashboard-en/</loc>
-         <lastmod>2021-11-09</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://docs.nebula-graph.com.cn/master/nebula-dashboard-ent/2.deploy-connect-dashboard-ent/</loc>
          <lastmod>2021-11-09</lastmod>
          <changefreq>daily</changefreq>
