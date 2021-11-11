@@ -13,14 +13,14 @@
         <meta name="author" content="Nebula Graph">
       
       
-        <link rel="canonical" href="https://docs.nebula-graph.com.cn/master/nebula-operator/4.connect-to-nebula-graph-service/">
+        <link rel="canonical" href="https://docs.nebula-graph.com.cn/master/nebula-operator/9.upgrade-nebula-cluster/">
       
       <link rel="icon" href="../../assets/images/favicon.ico">
       <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.3">
     
     
       
-        <title>连接Nebula Graph数据库 - Nebula Graph Database 手册</title>
+        <title>升级Nebula Graph集群 - Nebula Graph Database 手册</title>
       
     
     
@@ -90,7 +90,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#nebular_operatornebula_graph" class="md-skip">
+        <a href="#nebula_graph" class="md-skip">
           跳转至
         </a>
       
@@ -125,7 +125,7 @@
           <div class="md-header__topic" data-md-component="header-topic">
             <span class="md-ellipsis">
               
-                连接Nebula Graph数据库
+                升级Nebula Graph集群
               
             </span>
           </div>
@@ -5455,14 +5455,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_18" type="checkbox" id="__nav_18" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_18" type="checkbox" id="__nav_18" >
       
       
       
@@ -5586,72 +5584,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          连接Nebula Graph数据库
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../4.connect-to-nebula-graph-service/" class="md-nav__link">
         连接Nebula Graph数据库
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    前提条件
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#nebula_graphnebula_graph" class="md-nav__link">
-    在Nebula Graph集群内连接Nebula Graph数据库
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#nodeportnebula_graphnebula_graph" class="md-nav__link">
-    通过NodePort在Nebula Graph集群外部连接Nebula Graph数据库
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ingressnebula_graphnebula_graph" class="md-nav__link">
-    通过Ingress在Nebula Graph集群外部连接Nebula Graph数据库
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -5917,22 +5854,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#nebula_graphnebula_graph" class="md-nav__link">
-    在Nebula Graph集群内连接Nebula Graph数据库
+  <a href="#_2" class="md-nav__link">
+    使用限制
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#nodeportnebula_graphnebula_graph" class="md-nav__link">
-    通过NodePort在Nebula Graph集群外部连接Nebula Graph数据库
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ingressnebula_graphnebula_graph" class="md-nav__link">
-    通过Ingress在Nebula Graph集群外部连接Nebula Graph数据库
+  <a href="#_3" class="md-nav__link">
+    操作步骤
   </a>
   
 </li>
@@ -5949,590 +5879,114 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/vesoft-inc/nebula-docs-cn/edit/master/docs-2.0/nebula-operator/4.connect-to-nebula-graph-service.md" title="编辑此页" class="md-content__button md-icon">
+                  <a href="https://github.com/vesoft-inc/nebula-docs-cn/edit/master/docs-2.0/nebula-operator/9.upgrade-nebula-cluster.md" title="编辑此页" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="nebular_operatornebula_graph">通过Nebular Operator连接Nebula Graph数据库<a class="headerlink" href="#nebular_operatornebula_graph" title="Permanent link">&para;</a></h1>
-<p>使用Nebula Operator创建Nebula Graph集群后，用户可在Nebula Graph集群内部访问Nebula Graph数据库，也可在集群外访问Nebula Graph数据库。</p>
+                <h1 id="nebula_graph">升级Nebula Graph集群<a class="headerlink" href="#nebula_graph" title="Permanent link">&para;</a></h1>
+<p>本文介绍如何升级通过Nebula Operator创建的Nebula Graph集群。</p>
 <h2 id="_1">前提条件<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>使用Nebula Operator创建Nebula Graph集群。具体步骤参考<a href="../3.deploy-nebula-graph-cluster/3.1create-cluster-with-kubectl/">使用Kubectl部署Nebula Graph集群</a>或者<a href="../3.deploy-nebula-graph-cluster/3.2create-cluster-with-helm/">使用Helm部署Nebula Graph集群</a>。</p>
-<h2 id="nebula_graphnebula_graph">在Nebula Graph集群内连接Nebula Graph数据库<a class="headerlink" href="#nebula_graphnebula_graph" title="Permanent link">&para;</a></h2>
-<p>当使用Nebula Operator创建Nebula Graph集群后，Nebula Operator会自动在同一命名空间下，创建名为<code>&lt;cluster-name&gt;-graphd-svc</code>、类型为<code>ClusterIP</code>的Service。通过该Service的IP和数据库的端口号，用户可连接Nebula Graph数据库。</p>
+<p>已创建Nebula Graph集群。具体步骤，参见<a href="../3.deploy-nebula-graph-cluster/3.1create-cluster-with-kubectl/">使用Kubectl创建Nebula Graph集群</a>。</p>
+<p>本文示例中待升级的Nebula Graph版本为2.5.1，其YAML文件名为<code>apps_v1alpha1_nebulacluster.yaml</code>。</p>
+<h2 id="_2">使用限制<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>只支持使用Nebula Operator创建的Nebula Graph集群。</li>
+</ul>
+<ul>
+<li>只支持升级Nebula Graph 2.5.x至2.6.x版本。</li>
+</ul>
+<h2 id="_3">操作步骤<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ol>
 <li>
-<p>查看Service，命令如下：</p>
-<div class="highlight"><pre><span></span><code>$ kubectl get service -l app.kubernetes.io/cluster<span class="o">=</span>&lt;nebula&gt;  <span class="c1">#&lt;nebula&gt;为变量值，请用实际集群名称替换。</span>
-NAME                       TYPE        CLUSTER-IP     EXTERNAL-IP   PORT<span class="o">(</span>S<span class="o">)</span>                                          AGE
-nebula-graphd-svc          ClusterIP   <span class="m">10</span>.98.213.34   &lt;none&gt;        <span class="m">9669</span>/TCP,19669/TCP,19670/TCP                     23h
-nebula-metad-headless      ClusterIP   None           &lt;none&gt;        <span class="m">9559</span>/TCP,19559/TCP,19560/TCP                     23h
-nebula-storaged-headless   ClusterIP   None           &lt;none&gt;        <span class="m">9779</span>/TCP,19779/TCP,19780/TCP,9778/TCP            23h
-</code></pre></div>
-<p><code>ClusterIP</code>类型的Service只允许在集群内部访问容器应用。更多信息，请参考<a href="https://kubernetes.io/docs/concepts/services-networking/service/">ClusterIP</a>。</p>
-</li>
-<li>
-<p>使用上述<code>&lt;cluster-name&gt;-graphd-svc</code> Service的IP连接Nebula Graph数据库：</p>
-<div class="highlight"><pre><span></span><code>kubectl run -ti --image vesoft/nebula-console:v2.6.0 --restart<span class="o">=</span>Never -- &lt;nebula_console_name&gt; -addr &lt;cluster_ip&gt;  -port &lt;service_port&gt; -u &lt;username&gt; -p &lt;password&gt;
-</code></pre></div>
-<p>示例：</p>
-<div class="highlight"><pre><span></span><code>kubectl run -ti --image vesoft/nebula-console:v2.6.0 --restart<span class="o">=</span>Never -- nebula-console -addr <span class="m">10</span>.98.213.34  -port <span class="m">9669</span> -u root -p vesoft
-</code></pre></div>
-<ul>
-<li><code>--image</code>：为连接Nebula Graph的工具Nebula Console的镜像。</li>
-<li><code>&lt;nebula-console&gt;</code>：自定义的Pod名称。</li>
-<li><code>-addr</code>：连接Graphd服务的IP地址，即<code>ClusterIP</code>类型的Service IP地址。</li>
-<li><code>-port</code>：连接Graphd服务的端口。默认端口为9669。</li>
-<li><code>-u</code>：Nebula Graph账号的用户名。未启用身份认证时，可以使用任意已存在的用户名（默认为root）。</li>
-<li><code>-p</code>：用户名对应的密码。未启用身份认证时，密码可以填写任意字符。</li>
-</ul>
-<p>如果返回以下内容，说明成功连接数据库：</p>
-<div class="highlight"><pre><span></span><code>If you don<span class="err">&#39;</span>t see a <span class="nb">command</span> prompt, try pressing enter.
-
-<span class="o">(</span>root@nebula<span class="o">)</span> <span class="o">[(</span>none<span class="o">)]</span>&gt;
-</code></pre></div>
-</li>
-</ol>
-<p>用户还可以使用<strong>完全限定域名（FQDN）</strong>连接数据库，域名格式为<code>&lt;cluster-name&gt;-graphd.&lt;cluster-namespace&gt;.svc.&lt;CLUSTER_DOMAIN&gt;</code>：</p>
-<p><div class="highlight"><pre><span></span><code>kubectl run -ti --image vesoft/nebula-console:v2.6.0 --restart<span class="o">=</span>Never -- &lt;nebula_console_name&gt; -addr &lt;cluster_name&gt;-graphd-svc.default.svc.cluster.local -port &lt;service_port&gt; -u &lt;username&gt; -p &lt;password&gt;
-</code></pre></div>
-<code>CLUSTER_DOMAIN</code>的默认值为<code>cluster.local</code>。</p>
-<h2 id="nodeportnebula_graphnebula_graph">通过<code>NodePort</code>在Nebula Graph集群外部连接Nebula Graph数据库<a class="headerlink" href="#nodeportnebula_graphnebula_graph" title="Permanent link">&para;</a></h2>
-<p>用户可创建<code>NodePort</code>类型的Service，通过节点IP和暴露的节点端口，从集群外部访问集群内部的服务。用户也可以使用云厂商（例如Azure、AWS等）提供的负载均衡服务，设置Service的类型为<code>LoadBalancer</code>。</p>
-<p><code>NodePort</code>类型的Service通过标签选择器<code>spec.selector</code>将前端的请求转发到带有标签<code>app.kubernetes.io/cluster: &lt;cluster-name&gt;</code>、<code>app.kubernetes.io/component: graphd</code>的Graphd pod中。</p>
-<p>操作步骤如下：</p>
-<ol>
-<li>
-<p>创建名为<code>graphd-nodeport-service.yaml</code>的文件。YAML文件内容如下：</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
-<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Service</span>
-<span class="nt">metadata</span><span class="p">:</span>
-  <span class="nt">labels</span><span class="p">:</span>
-    <span class="nt">app.kubernetes.io/cluster</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nebula</span>
-    <span class="nt">app.kubernetes.io/component</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">graphd</span>
-    <span class="nt">app.kubernetes.io/managed-by</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nebula-operator</span>
-    <span class="nt">app.kubernetes.io/name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nebula-graph</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nebula-graphd-svc-nodeport</span>
-  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default</span>
-<span class="nt">spec</span><span class="p">:</span>
-  <span class="nt">externalTrafficPolicy</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Local</span>
-  <span class="nt">ports</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">thrift</span>
-    <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">9669</span>
-    <span class="nt">protocol</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TCP</span>
-    <span class="nt">targetPort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">9669</span>
-  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http</span>
-    <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">19669</span>
-    <span class="nt">protocol</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TCP</span>
-    <span class="nt">targetPort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">19669</span>
-  <span class="nt">selector</span><span class="p">:</span>
-    <span class="nt">app.kubernetes.io/cluster</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nebula</span>
-    <span class="nt">app.kubernetes.io/component</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">graphd</span>
-    <span class="nt">app.kubernetes.io/managed-by</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nebula-operator</span>
-    <span class="nt">app.kubernetes.io/name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nebula-graph</span>
-  <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">NodePort</span>
-</code></pre></div>
-<ul>
-<li>Nebula Graph默认使用<code>9669</code>端口为客户端提供服务。<code>19669</code>为Graph服务端口号。</li>
-<li><code>targetPort</code>的值为映射至Pod的端口，可自定义。</li>
-</ul>
-</li>
-<li>
-<p>执行以下命令使Service服务在集群中生效。</p>
-<div class="highlight"><pre><span></span><code>kubectl create -f graphd-nodeport-service.yaml
-</code></pre></div>
-</li>
-<li>
-<p>查看Service中Nebula Graph映射至集群节点的端口。</p>
-<div class="highlight"><pre><span></span><code>kubectl get services
+<p>查看集群中服务的镜像版本。</p>
+<div class="highlight"><pre><span></span><code>kubectl get pods -l app.kubernetes.io/cluster<span class="o">=</span>nebula  -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;{.items[*].spec.containers[*].image}&quot;</span> <span class="p">|</span>tr -s <span class="s1">&#39;[[:space:]]&#39;</span> <span class="s1">&#39;\n&#39;</span> <span class="p">|</span>sort <span class="p">|</span>uniq -c
 </code></pre></div>
 <p>返回：</p>
-<div class="highlight"><pre><span></span><code>NAME                           TYPE        CLUSTER-IP     EXTERNAL-IP   PORT<span class="o">(</span>S<span class="o">)</span>                                          AGE
-nebula-graphd-svc              ClusterIP   <span class="m">10</span>.98.213.34   &lt;none&gt;        <span class="m">9669</span>/TCP,19669/TCP,19670/TCP                     23h
-nebula-graphd-svc-nodeport     NodePort    <span class="m">10</span>.107.153.129 &lt;none&gt;        <span class="m">9669</span>:32236/TCP,19669:31674/TCP,19670:31057/TCP   24h
-nebula-metad-headless          ClusterIP   None           &lt;none&gt;        <span class="m">9559</span>/TCP,19559/TCP,19560/TCP                     23h
-nebula-storaged-headless       ClusterIP   None           &lt;none&gt;        <span class="m">9779</span>/TCP,19779/TCP,19780/TCP,9778/TCP            23h
-</code></pre></div>
-<p>NodePort类型的Service中，映射至集群节点的端口为<code>32236</code>。</p>
-</li>
-<li>
-<p>使用节点IP和上述映射的节点端口连接Nebula Graph。</p>
-<div class="highlight"><pre><span></span><code>kubectl run -ti --image vesoft/nebula-console:v2.6.0 --restart<span class="o">=</span>Never -- &lt;nebula_console_name&gt; -addr &lt;node_ip&gt; -port &lt;node_port&gt; -u &lt;username&gt; -p &lt;password&gt;
-</code></pre></div>
-<p>示例如下：</p>
-<div class="highlight"><pre><span></span><code>kubectl run -ti --image vesoft/nebula-console:v2.6.0 --restart<span class="o">=</span>Never -- nebula-console2 -addr <span class="m">192</span>.168.8.24 -port <span class="m">32236</span> -u root -p vesoft
-If you don<span class="err">&#39;</span>t see a <span class="nb">command</span> prompt, try pressing enter.
-
-<span class="o">(</span>root@nebula<span class="o">)</span> <span class="o">[(</span>none<span class="o">)]</span>&gt;
-</code></pre></div>
-<ul>
-<li><code>--image</code>：为连接Nebula Graph的工具Nebula Console的镜像。</li>
-<li><code>&lt;nebula-console&gt;</code>：自定义的Pod名称。本示例为<code>nebula-console2</code>。</li>
-<li><code>-addr</code>：Nebula Graph集群中任一节点IP地址。本示例为<code>192.168.8.24</code>。</li>
-<li><code>-port</code>：Nebula Graph映射至节点的端口。本示例为<code>32236</code>。</li>
-<li><code>-u</code>：Nebula Graph账号的用户名。未启用身份认证时，可以使用任意已存在的用户名（默认为root）。</li>
-<li><code>-p</code>：用户名对应的密码。未启用身份认证时，密码可以填写任意字符。</li>
-</ul>
-</li>
-</ol>
-<h2 id="ingressnebula_graphnebula_graph">通过<code>Ingress</code>在Nebula Graph集群外部连接Nebula Graph数据库<a class="headerlink" href="#ingressnebula_graphnebula_graph" title="Permanent link">&para;</a></h2>
-<p>Nginx Ingress是Kubernetes Ingress的一个实现。Nginx Ingress观察Kubernetes集群的Ingress资源，将Ingress规则生成Nginx配置，使Nginx能够转发第7层流量。</p>
-<p>用户可以通过HostNetwork和DaemonSet组合的模式使用Nginx Ingress从集群外部连接Nebula Graph集群。</p>
-<p>由于使用了HostNetwork，Nginx Ingress pods不能被安排在同一个节点上。为了避免监听端口冲突，可以事先选择一些节点并将其标记为边缘节点，专门用于部署Nginx Ingress。 然后，Nginx Ingress以DaemonSet模式部署在这些节点上。</p>
-<p>由于Ingress不支持TCP或UDP服务，为此nginx-ingress-controller使用<code>--tcp-services-configmap</code>和<code>--udp-services-configmap</code>参数指向一个ConfigMap，该ConfigMap中的键指需要使用的外部端口，值指要公开的服务的格式，值的格式为<code>&lt;命名空间/服务名称&gt;：&lt;服务端口&gt;</code>。</p>
-<p>例如指向名为<code>tcp-services</code>的ConfigMap的配置如下：</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
-<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ConfigMap</span>
-<span class="nt">metadata</span><span class="p">:</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tcp-services</span>
-  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-<span class="nt">data</span><span class="p">:</span>
-  <span class="c1"># update </span>
-  <span class="nt">9769</span><span class="p">:</span> <span class="s">&quot;default/nebula-graphd-svc:9669&quot;</span>
-</code></pre></div>
-<p>在配置了名为<code>tcp-services</code>的ConfigMap后，其配置中的端口需要在定义了Nginx Ingress的服务中公开。</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
-<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Service</span>
-<span class="nt">metadata</span><span class="p">:</span>
-  <span class="nt">labels</span><span class="p">:</span>
-    <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-    <span class="nt">component</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default-backend</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress-proxy-tcp</span>
-  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-<span class="nt">spec</span><span class="p">:</span>
-  <span class="nt">ports</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">proxied-tcp</span>
-      <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">9769</span>
-      <span class="nt">protocol</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TCP</span>
-      <span class="nt">targetPort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">9669</span>
-  <span class="nt">selector</span><span class="p">:</span>
-    <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-    <span class="nt">component</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default-backend</span>
-  <span class="nt">type</span><span class="p">:</span> <span class="s">&quot;ClusterIP&quot;</span>
-</code></pre></div>
-<ul>
-<li><code>port</code>的值<code>9769</code>指外部端口，用户可自行设置。</li>
-<li><code>targetPort</code>的值<code>9669</code>指要连接的graphd服务的端口。</li>
-</ul>
-<p>完整的示例及操作步骤如下：</p>
-<ol>
-<li>
-<p>创建名为<code>nginx-ingress-daemonset-hostnetwork.yaml</code>的文件。YAML文件内容如下：</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
-<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ConfigMap</span>
-<span class="nt">metadata</span><span class="p">:</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress-controller</span>
-  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-<span class="nt">data</span><span class="p">:</span>
-  <span class="nt">keep-alive-requests</span><span class="p">:</span> <span class="s">&quot;100&quot;</span>
-  <span class="nt">upstream-keepalive-connections</span><span class="p">:</span> <span class="s">&quot;200&quot;</span>
-  <span class="nt">max-worker-connections</span><span class="p">:</span> <span class="s">&quot;65536&quot;</span>
-<span class="nn">---</span>
-<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
-<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ConfigMap</span>
-<span class="nt">metadata</span><span class="p">:</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tcp-services</span>
-  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-<span class="nt">data</span><span class="p">:</span>
-  <span class="nt">9769</span><span class="p">:</span> <span class="s">&quot;default/nebula-graphd-svc:9669&quot;</span>
-<span class="nn">---</span>
-<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
-<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ServiceAccount</span>
-<span class="nt">metadata</span><span class="p">:</span>
-  <span class="nt">labels</span><span class="p">:</span>
-    <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-<span class="nn">---</span>
-<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
-<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ServiceAccount</span>
-<span class="nt">metadata</span><span class="p">:</span>
-  <span class="nt">labels</span><span class="p">:</span>
-    <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress-backend</span>
-  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-<span class="nn">---</span>
-<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1</span>
-<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterRole</span>
-<span class="nt">metadata</span><span class="p">:</span>
-  <span class="nt">labels</span><span class="p">:</span>
-    <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-<span class="nt">rules</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">apiGroups</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="s">&quot;&quot;</span>
-    <span class="nt">resources</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">configmaps</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">endpoints</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">nodes</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pods</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">secrets</span>
-    <span class="nt">verbs</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">list</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">watch</span>
-  <span class="p p-Indicator">-</span> <span class="nt">apiGroups</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="s">&quot;&quot;</span>
-    <span class="nt">resources</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">nodes</span>
-    <span class="nt">verbs</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">get</span>
-  <span class="p p-Indicator">-</span> <span class="nt">apiGroups</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="s">&quot;&quot;</span>
-    <span class="nt">resources</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">services</span>
-    <span class="nt">verbs</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">get</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">list</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">update</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">watch</span>
-  <span class="p p-Indicator">-</span> <span class="nt">apiGroups</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">extensions</span>
-      <span class="p p-Indicator">-</span> <span class="s">&quot;networking.k8s.io&quot;</span> <span class="c1"># k8s 1.14+</span>
-    <span class="nt">resources</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ingresses</span>
-    <span class="nt">verbs</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">get</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">list</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">watch</span>
-  <span class="p p-Indicator">-</span> <span class="nt">apiGroups</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="s">&quot;&quot;</span>
-    <span class="nt">resources</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">events</span>
-    <span class="nt">verbs</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">create</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">patch</span>
-  <span class="p p-Indicator">-</span> <span class="nt">apiGroups</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">extensions</span>
-      <span class="p p-Indicator">-</span> <span class="s">&quot;networking.k8s.io&quot;</span> <span class="c1"># k8s 1.14+</span>
-    <span class="nt">resources</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ingresses/status</span>
-    <span class="nt">verbs</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">update</span>
-<span class="nn">---</span>
-<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1</span>
-<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterRoleBinding</span>
-<span class="nt">metadata</span><span class="p">:</span>
-  <span class="nt">labels</span><span class="p">:</span>
-    <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-<span class="nt">roleRef</span><span class="p">:</span>
-  <span class="nt">apiGroup</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io</span>
-  <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterRole</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-<span class="nt">subjects</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ServiceAccount</span>
-    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-    <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-<span class="nn">---</span>
-<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1</span>
-<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Role</span>
-<span class="nt">metadata</span><span class="p">:</span>
-  <span class="nt">labels</span><span class="p">:</span>
-    <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-<span class="nt">rules</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">apiGroups</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="s">&quot;&quot;</span>
-    <span class="nt">resources</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">namespaces</span>
-    <span class="nt">verbs</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">get</span>
-  <span class="p p-Indicator">-</span> <span class="nt">apiGroups</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="s">&quot;&quot;</span>
-    <span class="nt">resources</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">configmaps</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pods</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">secrets</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">endpoints</span>
-    <span class="nt">verbs</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">get</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">list</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">watch</span>
-  <span class="p p-Indicator">-</span> <span class="nt">apiGroups</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="s">&quot;&quot;</span>
-    <span class="nt">resources</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">services</span>
-    <span class="nt">verbs</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">get</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">list</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">update</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">watch</span>
-  <span class="p p-Indicator">-</span> <span class="nt">apiGroups</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">extensions</span>
-      <span class="p p-Indicator">-</span> <span class="s">&quot;networking.k8s.io&quot;</span> <span class="c1"># k8s 1.14+</span>
-    <span class="nt">resources</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ingresses</span>
-    <span class="nt">verbs</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">get</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">list</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">watch</span>
-  <span class="p p-Indicator">-</span> <span class="nt">apiGroups</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">extensions</span>
-      <span class="p p-Indicator">-</span> <span class="s">&quot;networking.k8s.io&quot;</span> <span class="c1"># k8s 1.14+</span>
-    <span class="nt">resources</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ingresses/status</span>
-    <span class="nt">verbs</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">update</span>
-  <span class="p p-Indicator">-</span> <span class="nt">apiGroups</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="s">&quot;&quot;</span>
-    <span class="nt">resources</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">configmaps</span>
-    <span class="nt">resourceNames</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ingress-controller-leader-nginx</span>
-    <span class="nt">verbs</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">get</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">update</span>
-  <span class="p p-Indicator">-</span> <span class="nt">apiGroups</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="s">&quot;&quot;</span>
-    <span class="nt">resources</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">configmaps</span>
-    <span class="nt">verbs</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">create</span>
-  <span class="p p-Indicator">-</span> <span class="nt">apiGroups</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="s">&quot;&quot;</span>
-    <span class="nt">resources</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">endpoints</span>
-    <span class="nt">verbs</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">create</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">get</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">update</span>
-  <span class="p p-Indicator">-</span> <span class="nt">apiGroups</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="s">&quot;&quot;</span>
-    <span class="nt">resources</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">events</span>
-    <span class="nt">verbs</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">create</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">patch</span>
-<span class="nn">---</span>
-<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1</span>
-<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">RoleBinding</span>
-<span class="nt">metadata</span><span class="p">:</span>
-  <span class="nt">labels</span><span class="p">:</span>
-    <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-<span class="nt">roleRef</span><span class="p">:</span>
-  <span class="nt">apiGroup</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io</span>
-  <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Role</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-<span class="nt">subjects</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ServiceAccount</span>
-    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-    <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-<span class="nn">---</span>
-<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
-<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Service</span>
-<span class="nt">metadata</span><span class="p">:</span>
-  <span class="nt">labels</span><span class="p">:</span>
-    <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-    <span class="nt">component</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">controller</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress-controller-metrics</span>
-  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-<span class="nt">spec</span><span class="p">:</span>
-  <span class="nt">ports</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">metrics</span>
-      <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">9913</span>
-      <span class="nt">targetPort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">metrics</span>
-  <span class="nt">selector</span><span class="p">:</span>
-    <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-    <span class="nt">component</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">controller</span>
-  <span class="nt">type</span><span class="p">:</span> <span class="s">&quot;ClusterIP&quot;</span>
-<span class="nn">---</span>
-<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
-<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Service</span>
-<span class="nt">metadata</span><span class="p">:</span>
-  <span class="nt">labels</span><span class="p">:</span>
-    <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-    <span class="nt">component</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default-backend</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress-default-backend</span>
-  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-<span class="nt">spec</span><span class="p">:</span>
-  <span class="nt">ports</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http</span>
-      <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
-      <span class="nt">protocol</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TCP</span>
-      <span class="nt">targetPort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http</span>
-  <span class="nt">selector</span><span class="p">:</span>
-    <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-    <span class="nt">component</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default-backend</span>
-  <span class="nt">type</span><span class="p">:</span> <span class="s">&quot;ClusterIP&quot;</span>
-<span class="nn">---</span>
-<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
-<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Service</span>
-<span class="nt">metadata</span><span class="p">:</span>
-  <span class="nt">labels</span><span class="p">:</span>
-    <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-    <span class="nt">component</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default-backend</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress-proxy-tcp</span>
-  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-<span class="nt">spec</span><span class="p">:</span>
-  <span class="nt">ports</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">proxied-tcp</span>
-      <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">9769</span>
-      <span class="nt">protocol</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TCP</span>
-      <span class="nt">targetPort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">9669</span>
-  <span class="nt">selector</span><span class="p">:</span>
-    <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-    <span class="nt">component</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default-backend</span>
-  <span class="nt">type</span><span class="p">:</span> <span class="s">&quot;ClusterIP&quot;</span>
-<span class="nn">---</span>
-<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
-<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">DaemonSet</span>
-<span class="nt">metadata</span><span class="p">:</span>
-  <span class="nt">labels</span><span class="p">:</span>
-    <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-    <span class="nt">component</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">controller</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress-controller</span>
-  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-<span class="nt">spec</span><span class="p">:</span>
-  <span class="nt">selector</span><span class="p">:</span>
-    <span class="nt">matchLabels</span><span class="p">:</span>
-      <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-      <span class="nt">component</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">controller</span>
-  <span class="nt">template</span><span class="p">:</span>
-    <span class="nt">metadata</span><span class="p">:</span>
-      <span class="nt">labels</span><span class="p">:</span>
-        <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-        <span class="nt">component</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">controller</span>
-    <span class="nt">spec</span><span class="p">:</span>
-      <span class="nt">dnsPolicy</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterFirst</span>
-      <span class="nt">initContainers</span><span class="p">:</span>
-        <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">setsysctl</span>
-          <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">busybox</span>
-          <span class="nt">securityContext</span><span class="p">:</span>
-            <span class="nt">privileged</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-          <span class="nt">command</span><span class="p">:</span>
-            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">sh</span>
-            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">-c</span>
-            <span class="p p-Indicator">-</span> <span class="p p-Indicator">|</span>
-              <span class="no">sysctl -w net.core.somaxconn=65535</span>
-              <span class="no">sysctl -w net.ipv4.ip_local_port_range=&quot;1024 65535&quot;</span>
-              <span class="no">sysctl -w net.ipv4.tcp_tw_reuse=1</span>
-              <span class="no">sysctl -w fs.file-max=1048576</span>
-      <span class="nt">containers</span><span class="p">:</span>
-        <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress-controller</span>
-          <span class="nt">image</span><span class="p">:</span> <span class="s">&quot;ccr.ccs.tencentyun.com/mirrors/nginx-ingress-controller:v0.34.1&quot;</span>
-          <span class="nt">imagePullPolicy</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">IfNotPresent</span>
-          <span class="nt">args</span><span class="p">:</span>
-            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/nginx-ingress-controller</span>
-            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">--default-backend-service=$(POD_NAMESPACE)/nginx-ingress-default-backend</span>
-            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">--election-id=ingress-controller-leader</span>
-            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">--ingress-class=nginx</span>
-            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">--configmap=$(POD_NAMESPACE)/nginx-ingress-controller</span>
-            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">--tcp-services-configmap=$(POD_NAMESPACE)/tcp-services</span>
-          <span class="nt">securityContext</span><span class="p">:</span>
-            <span class="nt">capabilities</span><span class="p">:</span>
-              <span class="nt">drop</span><span class="p">:</span>
-                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ALL</span>
-              <span class="nt">add</span><span class="p">:</span>
-                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">NET_BIND_SERVICE</span>
-            <span class="nt">runAsUser</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">101</span>
-            <span class="nt">allowPrivilegeEscalation</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-          <span class="nt">env</span><span class="p">:</span>
-            <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">POD_NAME</span>
-              <span class="nt">valueFrom</span><span class="p">:</span>
-                <span class="nt">fieldRef</span><span class="p">:</span>
-                  <span class="nt">fieldPath</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">metadata.name</span>
-            <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">POD_NAMESPACE</span>
-              <span class="nt">valueFrom</span><span class="p">:</span>
-                <span class="nt">fieldRef</span><span class="p">:</span>
-                  <span class="nt">fieldPath</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">metadata.namespace</span>
-          <span class="nt">livenessProbe</span><span class="p">:</span>
-            <span class="nt">httpGet</span><span class="p">:</span>
-              <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/healthz</span>
-              <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10254</span>
-              <span class="nt">scheme</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">HTTP</span>
-            <span class="nt">initialDelaySeconds</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
-            <span class="nt">periodSeconds</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
-            <span class="nt">timeoutSeconds</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-            <span class="nt">successThreshold</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-            <span class="nt">failureThreshold</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3</span>
-          <span class="nt">ports</span><span class="p">:</span>
-            <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http</span>
-              <span class="nt">containerPort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
-              <span class="nt">protocol</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TCP</span>
-            <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">proxied-tcp</span>
-              <span class="nt">containerPort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">9769</span>
-              <span class="nt">protocol</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TCP</span>
-            <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https</span>
-              <span class="nt">containerPort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">443</span>
-              <span class="nt">protocol</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TCP</span>
-            <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">metrics</span>
-              <span class="nt">containerPort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10254</span>
-              <span class="nt">protocol</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TCP</span>
-          <span class="nt">readinessProbe</span><span class="p">:</span>
-            <span class="nt">httpGet</span><span class="p">:</span>
-              <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/healthz</span>
-              <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10254</span>
-              <span class="nt">scheme</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">HTTP</span>
-            <span class="nt">initialDelaySeconds</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
-            <span class="nt">periodSeconds</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
-            <span class="nt">timeoutSeconds</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-            <span class="nt">successThreshold</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-            <span class="nt">failureThreshold</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3</span>
-      <span class="nt">hostNetwork</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-      <span class="nt">affinity</span><span class="p">:</span>
-        <span class="nt">nodeAffinity</span><span class="p">:</span>
-          <span class="nt">requiredDuringSchedulingIgnoredDuringExecution</span><span class="p">:</span>
-            <span class="nt">nodeSelectorTerms</span><span class="p">:</span>
-              <span class="p p-Indicator">-</span> <span class="nt">matchExpressions</span><span class="p">:</span>  <span class="l l-Scalar l-Scalar-Plain">//为运行该DaemonSet的节点指定标签。</span>
-                  <span class="l l-Scalar l-Scalar-Plain">- key</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-                    <span class="l l-Scalar l-Scalar-Plain">operator</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">In</span>
-                    <span class="l l-Scalar l-Scalar-Plain">values</span><span class="p p-Indicator">:</span>
-                      <span class="p p-Indicator">-</span> <span class="s">&quot;true&quot;</span>
-      <span class="nt">serviceAccountName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
-      <span class="nt">terminationGracePeriodSeconds</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">60</span>  
-</code></pre></div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>上述YAML中的资源对象均使用<code>nginx-ingress</code>命名空间。用户可执行<code>kubectl create namesapce nginx-ingress</code>创建命名空间，或者自定义其他命名空间。</p>
-</div>
-</li>
-<li>
-<p>为任一节点（本示例使用的节点名为<code>worker2</code>，IP为<code>192.168.8.160</code>）打上标签，以运行上述YAML文件中名为<code>nginx-ingress-controller</code>的DaemonSet。</p>
-<div class="highlight"><pre><span></span><code>kubectl label node worker2 nginx-ingress<span class="o">=</span><span class="nb">true</span>
+<div class="highlight"><pre><span></span><code>      <span class="m">1</span> vesoft/nebula-graphd:v2.5.1
+      <span class="m">1</span> vesoft/nebula-metad:v2.5.1
+      <span class="m">3</span> vesoft/nebula-storaged:v2.5.1  
 </code></pre></div>
 </li>
 <li>
-<p>执行以下命令使Nginx Ingress在集群中生效。</p>
-<div class="highlight"><pre><span></span><code>kubectl create -f nginx-ingress-daemonset-hostnetwork.yaml
+<p>编辑<code>apps_v1alpha1_nebulacluster.yaml</code>并将所有<code>version</code>的值从v2.5.1修改至master。</p>
+<p>修改后的YAML文件内容如下：</p>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">apps.nebula-graph.io/v1alpha1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">NebulaCluster</span>
+<span class="nt">metadata</span><span class="p">:</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nebula</span>
+<span class="nt">spec</span><span class="p">:</span>
+    <span class="nt">graphd</span><span class="p">:</span>
+        <span class="nt">resources</span><span class="p">:</span>
+            <span class="nt">requests</span><span class="p">:</span>
+                <span class="nt">cpu</span><span class="p">:</span> <span class="s">&quot;500m&quot;</span>
+                <span class="nt">memory</span><span class="p">:</span> <span class="s">&quot;500Mi&quot;</span>
+            <span class="nt">limits</span><span class="p">:</span>
+                <span class="nt">cpu</span><span class="p">:</span> <span class="s">&quot;1&quot;</span>
+                <span class="nt">memory</span><span class="p">:</span> <span class="s">&quot;1Gi&quot;</span>
+        <span class="nt">replicas</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
+        <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">vesoft/nebula-graphd</span>
+        <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">master //将值从v2.5.1修改至master。</span>
+        <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">NodePort</span>
+            <span class="nt">externalTrafficPolicy</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Local</span>
+        <span class="nt">storageClaim</span><span class="p">:</span>
+            <span class="nt">resources</span><span class="p">:</span>
+                <span class="nt">requests</span><span class="p">:</span>
+                    <span class="nt">storage</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2Gi</span>
+            <span class="nt">storageClassName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">local-path</span>
+    <span class="nt">metad</span><span class="p">:</span>
+        <span class="nt">resources</span><span class="p">:</span>
+            <span class="nt">requests</span><span class="p">:</span>
+                <span class="nt">cpu</span><span class="p">:</span> <span class="s">&quot;500m&quot;</span>
+                <span class="nt">memory</span><span class="p">:</span> <span class="s">&quot;500Mi&quot;</span>
+            <span class="nt">limits</span><span class="p">:</span>
+                <span class="nt">cpu</span><span class="p">:</span> <span class="s">&quot;1&quot;</span>
+                <span class="nt">memory</span><span class="p">:</span> <span class="s">&quot;1Gi&quot;</span>
+        <span class="nt">replicas</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+        <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">vesoft/nebula-metad</span>
+        <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">master //将值从v2.5.1修改至master。</span>
+        <span class="nt">storageClaim</span><span class="p">:</span>
+            <span class="nt">resources</span><span class="p">:</span>
+                <span class="nt">requests</span><span class="p">:</span>
+                    <span class="nt">storage</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2Gi</span>
+            <span class="nt">storageClassName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">local-path</span>
+    <span class="nt">storaged</span><span class="p">:</span>
+        <span class="nt">resources</span><span class="p">:</span>
+            <span class="nt">requests</span><span class="p">:</span>
+                <span class="nt">cpu</span><span class="p">:</span> <span class="s">&quot;500m&quot;</span>
+                <span class="nt">memory</span><span class="p">:</span> <span class="s">&quot;500Mi&quot;</span>
+            <span class="nt">limits</span><span class="p">:</span>
+                <span class="nt">cpu</span><span class="p">:</span> <span class="s">&quot;1&quot;</span>
+                <span class="nt">memory</span><span class="p">:</span> <span class="s">&quot;1Gi&quot;</span>
+        <span class="nt">replicas</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3</span>
+        <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">vesoft/nebula-storaged</span>
+        <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">master //将值从v2.5.1修改至master。</span>
+        <span class="nt">storageClaim</span><span class="p">:</span>
+            <span class="nt">resources</span><span class="p">:</span>
+                <span class="nt">requests</span><span class="p">:</span>
+                    <span class="nt">storage</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2Gi</span>
+            <span class="nt">storageClassName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">local-path</span>
+    <span class="nt">reference</span><span class="p">:</span>
+        <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">statefulsets.apps</span>
+        <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+    <span class="nt">schedulerName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default-scheduler</span>
+    <span class="nt">imagePullPolicy</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">IfNotPresent</span>
+</code></pre></div>
+</li>
+<li>
+<p>执行以下命令将版本升级的更新应用于集群CR中。</p>
+<div class="highlight"><pre><span></span><code>kubectl apply -f apps_v1alpha1_nebulacluster.yaml
+</code></pre></div>
+</li>
+<li>
+<p>等待约2分钟后，执行以下命令可查看到服务的镜像版本变更为master。</p>
+<div class="highlight"><pre><span></span><code>kubectl get pods -l app.kubernetes.io/cluster<span class="o">=</span>nebula  -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;{.items[*].spec.containers[*].image}&quot;</span> <span class="p">|</span>tr -s <span class="s1">&#39;[[:space:]]&#39;</span> <span class="s1">&#39;\n&#39;</span> <span class="p">|</span>sort <span class="p">|</span>uniq -c
 </code></pre></div>
 <p>返回：</p>
-<div class="highlight"><pre><span></span><code>configmap/nginx-ingress-controller created
-configmap/tcp-services created
-serviceaccount/nginx-ingress created
-serviceaccount/nginx-ingress-backend created
-clusterrole.rbac.authorization.k8s.io/nginx-ingress created
-clusterrolebinding.rbac.authorization.k8s.io/nginx-ingress created
-role.rbac.authorization.k8s.io/nginx-ingress created
-rolebinding.rbac.authorization.k8s.io/nginx-ingress created
-service/nginx-ingress-controller-metrics created
-service/nginx-ingress-default-backend created
-service/nginx-ingress-proxy-tcp created
-daemonset.apps/nginx-ingress-controller created
-</code></pre></div>
-<p>成功部署Nginx Ingress后，由于Nginx Ingress中配置的网络类型为<code>hostNetwork</code>，因此用户可通过部署了Nginx Ingress的节点的IP（<code>192.168.8.160</code>）和外部端口（<code>9769</code>）访问Nebula Graph服务。</p>
-</li>
-<li>
-<p>执行以下命令部署连接Nebula Graph服务的Console并通过宿主机IP（本示例为<code>192.168.8.160</code>）和上述配置的外部端口访问Nebula Graph服务。</p>
-<div class="highlight"><pre><span></span><code>kubectl run -ti --image vesoft/nebula-console:v2.6.0 --restart<span class="o">=</span>Never -- &lt;nebula_console_name&gt; -addr &lt;host_ip&gt; -port &lt;external_port&gt; -u &lt;username&gt; -p &lt;password&gt;
-</code></pre></div>
-<p>示例：</p>
-<div class="highlight"><pre><span></span><code>kubectl run -ti --image vesoft/nebula-console:v2.6.0 --restart<span class="o">=</span>Never -- nebula-console -addr <span class="m">192</span>.168.8.160 -port <span class="m">9769</span> -u root -p vesoft
-</code></pre></div>
-<ul>
-<li><code>--image</code>：为连接Nebula Graph的工具Nebula Console的镜像。</li>
-<li><code>&lt;nebula-console&gt;</code>：自定义的Pod名称。本示例为<code>nebula-console</code>。</li>
-<li><code>-addr</code>：部署Nginx Ingress的节点IP，本示例为<code>192.168.8.160</code>。</li>
-<li><code>-port</code>：外网访问使用的的端口。本示例设置为<code>9769</code>。</li>
-<li><code>-u</code>：Nebula Graph账号的用户名。未启用身份认证时，可以使用任意已存在的用户名（默认为root）。</li>
-<li><code>-p</code>：用户名对应的密码。未启用身份认证时，密码可以填写任意字符。</li>
-</ul>
-<p>如果返回以下内容，说明成功连接数据库：</p>
-<div class="highlight"><pre><span></span><code>If you don<span class="err">&#39;</span>t see a <span class="nb">command</span> prompt, try pressing enter.
-
-<span class="o">(</span>root@nebula<span class="o">)</span> <span class="o">[(</span>none<span class="o">)]</span>&gt;
+<div class="highlight"><pre><span></span><code>      <span class="m">1</span> vesoft/nebula-graphd:master
+      <span class="m">1</span> vesoft/nebula-metad:master
+      <span class="m">3</span> vesoft/nebula-storaged:master  
 </code></pre></div>
 </li>
 </ol>
@@ -6570,41 +6024,6 @@ daemonset.apps/nginx-ingress-controller created
       
         
 <footer class="md-footer">
-  
-    <nav class="md-footer__inner md-grid" aria-label="Footer">
-      
-        
-        <a href="../3.deploy-nebula-graph-cluster/3.2create-cluster-with-helm/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 使用Helm部署Nebula Graph集群" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                上一页
-              </span>
-              使用Helm部署Nebula Graph集群
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../5.operator-failover/" class="md-footer__link md-footer__link--next" aria-label="下一页: 故障自愈" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                下一页
-              </span>
-              故障自愈
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

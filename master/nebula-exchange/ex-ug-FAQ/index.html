@@ -5586,6 +5586,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#exchange_1" class="md-nav__link">
+    Exchange传输数据的性能如何？
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -6120,6 +6127,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#exchange_1" class="md-nav__link">
+    Exchange传输数据的性能如何？
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -6223,6 +6237,8 @@ nebula-docker-compose_storaged2_1   ./bin/nebula-storaged --fl ...   Up <span cl
 <ul>
 <li>修复了Spark Writer的部分问题。例如Spark读取HDFS里的数据时，默认读取到的源数据均为String类型，可能与Nebula Graph定义的Schema不同，所以Exchange增加了数据类型的自动匹配和类型转换，当Nebula Graph定义的Schema中数据类型为非String类型（如double）时，Exchange会将String类型的源数据转换为对应的类型（如double）。</li>
 </ul>
+<h3 id="exchange_1">Exchange传输数据的性能如何？<a class="headerlink" href="#exchange_1" title="Permanent link">&para;</a></h3>
+<p>Exchange的性能测试数据和测试方法参见<a href="https://github.com/vesoft-inc/nebula-exchange/blob/master/bench/exchange-test.md">Nebula Exchange test result</a>。</p>
                 
                   
                     
@@ -6231,7 +6247,7 @@ nebula-docker-compose_storaged2_1   ./bin/nebula-storaged --fl ...   Up <span cl
 <div class="md-source-date">
   <small>
     
-      最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 8, 2021</span>
+      最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 11, 2021</span>
       
     
   </small>

@@ -6243,7 +6243,7 @@ if (!s.ok()) {
 <li>如果只需要生成SST文件，不需要在部署Storage服务的机器上安装Hadoop服务。</li>
 </ul>
 <ul>
-<li>如果希望在 ingest（数据导入）结束后自动删除 download 操作下载的 SST 文件，请在Storage服务配置文件中增加配置 <code>--move_files=true</code>。</li>
+<li>如需在INGEST（数据导入）结束后自动移除SST文件，在Storage服务配置文件中增加<code>--move_files=true</code>，该配置会让Nebula Graph在INGEST后将SST文件移动（<code>mv</code>）到<code>data</code>目录下。<code>--move_files</code>的默认值为<code>false</code>，此时Nebula Graph会复制（<code>cp</code>）SST文件而不是移动。</li>
 </ul>
 </div>
 </li>
@@ -6676,7 +6676,7 @@ nebula&gt; CREATE EDGE serve(start_year int, end_year int);
 <div class="md-source-date">
   <small>
     
-      最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 4, 2021</span>
+      最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 11, 2021</span>
       
     
   </small>
