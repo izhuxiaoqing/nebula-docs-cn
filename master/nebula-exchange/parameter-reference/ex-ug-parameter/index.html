@@ -2053,7 +2053,7 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../ex-ug-compile/">
-        编译Exchange
+        获取Nebula Exchange
       </a>
 </li>
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
@@ -2169,6 +2169,11 @@
     SST源特有参数
   </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#nebula_graph_1">
+    Nebula Graph源特有参数
+  </a>
+</li>
 </ul>
 </nav>
 </li>
@@ -2181,6 +2186,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#_5">
     通用参数
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#nebula_graph_2">
+    Nebula Graph源特有参数
   </a>
 </li>
 </ul>
@@ -2267,6 +2277,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../use-exchange/ex-ug-import-from-sst/">
         导入SST文件数据
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../use-exchange/ex-ug-export-from-nebula/">
+        导出Nebula Graph数据
       </a>
 </li>
 </ul>
@@ -2555,6 +2570,11 @@
     SST源特有参数
   </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#nebula_graph_1">
+    Nebula Graph源特有参数
+  </a>
+</li>
 </ul>
 </nav>
 </li>
@@ -2567,6 +2587,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#_5">
     通用参数
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#nebula_graph_2">
+    Nebula Graph源特有参数
   </a>
 </li>
 </ul>
@@ -2747,6 +2772,62 @@
 <td align="left">-</td>
 <td align="left">是</td>
 <td align="left">需要导入数据的的图空间名称。</td>
+</tr>
+<tr>
+<td align="left"><code>nebula.ssl.enable.graph</code></td>
+<td align="left">bool</td>
+<td align="left"><code>false</code></td>
+<td align="left">是</td>
+<td align="left">开启Exchange与Graph服务之间的<a href="https://en.wikipedia.org/wiki/Transport_Layer_Security">SSL加密</a>传输。当值为<code>true</code>时开启，下方的SSL相关参数生效。如果Exchange运行在多机集群上，在设置以下SSL相关路径时，需要在每台机器的相同路径都存储相应的文件。</td>
+</tr>
+<tr>
+<td align="left"><code>nebula.ssl.sign</code></td>
+<td align="left">string</td>
+<td align="left"><code>ca</code></td>
+<td align="left">是</td>
+<td align="left">签名方式，可选值：<code>ca</code>（CA签名）或<code>self</code>（自签名）。</td>
+</tr>
+<tr>
+<td align="left"><code>nebula.ssl.ca.param.caCrtFilePath</code></td>
+<td align="left">string</td>
+<td align="left"><code>"/path/caCrtFilePath"</code></td>
+<td align="left">是</td>
+<td align="left"><code>nebula.ssl.sign</code>的值为<code>ca</code>时生效，用于指定CA证书的存储路径。</td>
+</tr>
+<tr>
+<td align="left"><code>nebula.ssl.ca.param.crtFilePath</code></td>
+<td align="left">string</td>
+<td align="left"><code>"/path/crtFilePath"</code></td>
+<td align="left">是</td>
+<td align="left"><code>nebula.ssl.sign</code>的值为<code>ca</code>时生效，用于指定CRT证书的存储路径。</td>
+</tr>
+<tr>
+<td align="left"><code>nebula.ssl.ca.param.keyFilePath</code></td>
+<td align="left">string</td>
+<td align="left"><code>"/path/keyFilePath"</code></td>
+<td align="left">是</td>
+<td align="left"><code>nebula.ssl.sign</code>的值为<code>ca</code>时生效，用于指定私钥文件的存储路径。</td>
+</tr>
+<tr>
+<td align="left"><code>nebula.ssl.self.param.crtFilePath</code></td>
+<td align="left">string</td>
+<td align="left"><code>"/path/crtFilePath"</code></td>
+<td align="left">是</td>
+<td align="left"><code>nebula.ssl.sign</code>的值为<code>self</code>时生效，用于指定CRT证书的存储路径。</td>
+</tr>
+<tr>
+<td align="left"><code>nebula.ssl.self.param.keyFilePath</code></td>
+<td align="left">string</td>
+<td align="left"><code>"/path/keyFilePath"</code></td>
+<td align="left">是</td>
+<td align="left"><code>nebula.ssl.sign</code>的值为<code>self</code>时生效，用于指定私钥文件的存储路径。</td>
+</tr>
+<tr>
+<td align="left"><code>nebula.ssl.self.param.password</code></td>
+<td align="left">string</td>
+<td align="left"><code>"nebula"</code></td>
+<td align="left">是</td>
+<td align="left"><code>nebula.ssl.sign</code>的值为<code>self</code>时生效，用于指定密码文件的存储路径。</td>
 </tr>
 <tr>
 <td align="left"><code>nebula.path.local</code></td>
@@ -3347,6 +3428,45 @@
 </tr>
 </tbody>
 </table>
+<h3 id="nebula_graph_1">Nebula Graph源特有参数<a class="headerlink" href="#nebula_graph_1" title="Permanent link">¶</a></h3>
+<div class="admonition enterpriseonly">
+<p class="admonition-title">Enterpriseonly</p>
+<p>Nebula Graph源特有参数用于导出Nebula Graph数据，仅企业版Exchange支持。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">数据类型</th>
+<th align="left">默认值</th>
+<th align="left">是否必须</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>tags.path</code></td>
+<td align="left">string</td>
+<td align="left"><code>"hdfs://namenode:9000/path/vertex"</code></td>
+<td align="left">是</td>
+<td align="left">指定CSV文件的存储路径。设置的路径必须不存在，Exchange会自动创建该路径。存储到HDFS服务器时路径格式同默认值，例如<code>"hdfs://192.168.8.177:9000/vertex/player"</code>。存储到本地时路径格式为<code>"file:///path/vertex"</code>，例如<code>"file:///home/nebula/vertex/player"</code>。有多个Tag时必须为每个Tag设置不同的目录。</td>
+</tr>
+<tr>
+<td align="left"><code>tags.noField</code></td>
+<td align="left">bool</td>
+<td align="left"><code>false</code></td>
+<td align="left">是</td>
+<td align="left">当值为<code>true</code>时，仅导出VID而不导出属性数据；当值为<code>false</code>时导出VID和属性数据。</td>
+</tr>
+<tr>
+<td align="left"><code>tags.return.fields</code></td>
+<td align="left">list</td>
+<td align="left"><code>[]</code></td>
+<td align="left">是</td>
+<td align="left">指定要导出的属性。例如，要导出<code>name</code>和<code>age</code>属性，需将参数值设置为<code>["name","age"]</code>。该参数仅在<code>tags.noField</code>的值为<code>false</code>时生效。</td>
+</tr>
+</tbody>
+</table>
 <h2 id="_4">边配置<a class="headerlink" href="#_4" title="Permanent link">¶</a></h2>
 <p>对于不同的数据源，边的配置也有所不同，有很多通用参数，也有部分特有参数，配置时需要配置通用参数和不同数据源的特有参数。</p>
 <p>边配置的不同数据源特有参数请参见上方点配置内的特有参数介绍，注意区分tags和edges即可。</p>
@@ -3434,11 +3554,46 @@
 </tr>
 </tbody>
 </table>
+<h3 id="nebula_graph_2">Nebula Graph源特有参数<a class="headerlink" href="#nebula_graph_2" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">数据类型</th>
+<th align="left">默认值</th>
+<th align="left">是否必须</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>edges.path</code></td>
+<td align="left">string</td>
+<td align="left"><code>"hdfs://namenode:9000/path/edge"</code></td>
+<td align="left">是</td>
+<td align="left">指定CSV文件的存储路径。设置的路径必须不存在，Exchange会自动创建该路径。存储到HDFS服务器时路径格式同默认值，例如<code>"hdfs://192.168.8.177:9000/edge/follow"</code>。存储到本地时路径格式为<code>"file:///path/edge"</code>，例如<code>"file:///home/nebula/edge/follow"</code>。有多个Edge时必须为每个Edge设置不同的目录。</td>
+</tr>
+<tr>
+<td align="left"><code>edges.noField</code></td>
+<td align="left">bool</td>
+<td align="left"><code>false</code></td>
+<td align="left">是</td>
+<td align="left">当值为<code>true</code>时，仅导出起始点VID、目的点VID和Rank，而不导出属性数据；当值为<code>false</code>时导出起始点VID、目的点VID、Rank和属性数据。</td>
+</tr>
+<tr>
+<td align="left"><code>edges.return.fields</code></td>
+<td align="left">list</td>
+<td align="left"><code>[]</code></td>
+<td align="left">是</td>
+<td align="left">指定要导出的属性。例如，要导出<code>start_year</code>和<code>end_year</code>属性，需将参数值设置为<code>["start_year","end_year"]</code>。该参数仅在<code>edges.noField</code>的值为<code>false</code>时生效。</td>
+</tr>
+</tbody>
+</table>
 <hr/>
 <div class="md-source-date">
 <small>
     
-      最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 18, 2021</span>
+      最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 18, 2021</span>
 </small>
 </div>
 </article>

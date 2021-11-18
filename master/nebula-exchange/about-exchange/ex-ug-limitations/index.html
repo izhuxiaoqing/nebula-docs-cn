@@ -2059,17 +2059,17 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#nebula_graph">
-    Nebula Graph版本
-  </a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#_2">
-    使用环境
+    版本兼容性
   </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#_3">
+    使用环境
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_4">
     软件依赖
   </a>
 </li>
@@ -2081,7 +2081,7 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../ex-ug-compile/">
-        编译Exchange
+        获取Nebula Exchange
       </a>
 </li>
 <li class="md-nav__item md-nav__item--nested">
@@ -2184,6 +2184,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../use-exchange/ex-ug-import-from-sst/">
         导入SST文件数据
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../use-exchange/ex-ug-export-from-nebula/">
+        导出Nebula Graph数据
       </a>
 </li>
 </ul>
@@ -2392,17 +2397,17 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#nebula_graph">
-    Nebula Graph版本
-  </a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#_2">
-    使用环境
+    版本兼容性
   </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#_3">
+    使用环境
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_4">
     软件依赖
   </a>
 </li>
@@ -2418,8 +2423,8 @@
 </a>
 <h1 id="_1">使用限制<a class="headerlink" href="#_1" title="Permanent link">¶</a></h1>
 <p>本文描述Exchange 2.x的一些使用限制。</p>
-<h2 id="nebula_graph">Nebula Graph版本<a class="headerlink" href="#nebula_graph" title="Permanent link">¶</a></h2>
-<p>Nebula Exchange版本（即JAR包版本）和Nebula Graph的版本对应关系如下。</p>
+<h2 id="_2">版本兼容性<a class="headerlink" href="#_2" title="Permanent link">¶</a></h2>
+<p>Nebula Exchange版本（即JAR包版本）和Nebula Graph内核的版本对应关系如下。</p>
 <table>
 <thead>
 <tr>
@@ -2460,13 +2465,13 @@
 </table>
 <p>JAR包有两种获取方式：<a href="../../ex-ug-compile/">自行编译</a>或者从maven仓库下载。</p>
 <p>如果正在使用Nebula Graph 1.x，请使用<a href="https://github.com/vesoft-inc/nebula-java/tree/v1.0/tools" title="Click to go to GitHub">Nebula Exchange 1.x</a>。</p>
-<h2 id="_2">使用环境<a class="headerlink" href="#_2" title="Permanent link">¶</a></h2>
+<h2 id="_3">使用环境<a class="headerlink" href="#_3" title="Permanent link">¶</a></h2>
 <p>Exchange 2.x 支持以下操作系统：</p>
 <ul>
 <li>CentOS 7</li>
 <li>macOS</li>
 </ul>
-<h2 id="_3">软件依赖<a class="headerlink" href="#_3" title="Permanent link">¶</a></h2>
+<h2 id="_4">软件依赖<a class="headerlink" href="#_4" title="Permanent link">¶</a></h2>
 <p>为保证Exchange正常工作，请确认机器上已经安装如下软件：</p>
 <ul>
 <li>Apache Spark：2.4.x</li>
@@ -2486,7 +2491,7 @@
 <div class="md-source-date">
 <small>
     
-      最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 1, 2021</span>
+      最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 18, 2021</span>
 </small>
 </div>
 </article>
@@ -2512,13 +2517,13 @@
             </div>
 </div>
 </a>
-<a aria-label="下一页: 编译Exchange" class="md-footer__link md-footer__link--next" href="../../ex-ug-compile/" rel="next">
+<a aria-label="下一页: 获取Nebula Exchange" class="md-footer__link md-footer__link--next" href="../../ex-ug-compile/" rel="next">
 <div class="md-footer__title">
 <div class="md-ellipsis">
 <span class="md-footer__direction">
                 下一页
               </span>
-              编译Exchange
+              获取Nebula Exchange
             </div>
 </div>
 <div class="md-footer__button md-icon">
