@@ -113,7 +113,6 @@ extra:
     branch: v0.9.0
 
 nav:
-  - PDF: ./pdf/NebulaGraph-CN.pdf
   - 前言: README.md
   - 简介:
       - 什么是Nebula Graph: 1.introduction/1.what-is-nebula-graph.md
@@ -481,6 +480,7 @@ nav:
       - 思维导图: 20.appendix/mind-map.md
 
   - English Docs: https://docs.nebula-graph.io/
+  - PDF: ./pdf/NebulaGraph-CN.pdf
 
 # Extensions
 markdown_extensions:
