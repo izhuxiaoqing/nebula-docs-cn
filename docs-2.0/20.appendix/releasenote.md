@@ -2,18 +2,18 @@
 
 ## Feature
 
-- 新增TOSS功能。[#2525](https://github.com/vesoft-inc/nebula/pull/2525)
-- 新增Group&Zone功能。[#181](https://github.com/vesoft-inc/nebula-storage/pull/181)
-- 新增Geo Spatial功能。[#2954](https://github.com/vesoft-inc/nebula/pull/2954)、[#2979](https://github.com/vesoft-inc/nebula/pull/2979)、[#3043](https://github.com/vesoft-inc/nebula/pull/3043)
-- 新增传输加密功能。[#2584](https://github.com/vesoft-inc/nebula/pull/2584)
-- 新增服务端返回JSON格式的查询结果。[#2824](https://github.com/vesoft-inc/nebula/pull/2824)
-- 新增图空间的meta克隆。[#2763](https://github.com/vesoft-inc/nebula/pull/2763)
-- 新增LOOKUP中使用IN表达式。[#2906](https://github.com/vesoft-inc/nebula/pull/2906)
+- 新增[TOSS](../5.configurations-and-logs/1.configurations/3.graph-config.md)功能。[#2525](https://github.com/vesoft-inc/nebula/pull/2525)
+- 新增[Group&Zone](../7.data-security/5.zone.md)功能。[#181](https://github.com/vesoft-inc/nebula-storage/pull/181)
+- 新增[Geo Spatial](../3.ngql-guide/6.functions-and-expressions/14.geo.md)功能。[#2954](https://github.com/vesoft-inc/nebula/pull/2954)、[#2979](https://github.com/vesoft-inc/nebula/pull/2979)、[#3043](https://github.com/vesoft-inc/nebula/pull/3043)
+- 新增[传输加密](../7.data-security/4.ssl.md)功能。[#2584](https://github.com/vesoft-inc/nebula/pull/2584)
+- 新增服务端返回[JSON格式](../14.client/1.nebula-client.md)的查询结果。[#2824](https://github.com/vesoft-inc/nebula/pull/2824)
+- 新增图空间的[meta克隆](../3.ngql-guide/9.space-statements/1.create-space.md)。[#2763](https://github.com/vesoft-inc/nebula/pull/2763)
+- 新增[LOOKUP中使用IN表达式](../3.ngql-guide/7.general-query-statements/5.lookup.md)。[#2906](https://github.com/vesoft-inc/nebula/pull/2906)
 - 集成Breakpad。[#2536](https://github.com/vesoft-inc/nebula/pull/2536)
-- 新增将metad的本地文件夹复制到远程。 [#2532](https://github.com/vesoft-inc/nebula/pull/2532)
-- 新增DELETE TAG。[#2520](https://github.com/vesoft-inc/nebula/pull/2520)
-- 新增concat函数。 [#2540](https://github.com/vesoft-inc/nebula/pull/2540)
-- 新增SHOW META LEADER。[#2542](https://github.com/vesoft-inc/nebula/pull/2542)
+- 新增将metad的本地文件夹[复制到远程](../20.appendix/0.FAQ.md)。 [#2532](https://github.com/vesoft-inc/nebula/pull/2532)
+- 新增[DELETE TAG](../3.ngql-guide/10.tag-statements/6.delete-tag.md)。[#2520](https://github.com/vesoft-inc/nebula/pull/2520)
+- 新增[concat函数](../3.ngql-guide/6.functions-and-expressions/13.concat.md)。 [#2540](https://github.com/vesoft-inc/nebula/pull/2540)
+- 新增[SHOW META LEADER](../3.ngql-guide/7.general-query-statements/6.show/19.show-meta-leader.md)。[#2542](https://github.com/vesoft-inc/nebula/pull/2542)
 
 ## Enhancement
 
