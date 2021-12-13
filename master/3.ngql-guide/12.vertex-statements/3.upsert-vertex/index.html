@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://docs.nebula-graph.com.cn/master/3.ngql-guide/12.vertex-statements/3.upsert-vertex/">
       
       <link rel="icon" href="../../../assets/images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.2">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.0">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.816931ca.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.82f3c0b9.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.9204c3b2.min.css">
@@ -48,21 +48,9 @@
     
       <link rel="stylesheet" href="../../../stylesheets/extra.css">
     
-    <script>function __md_scope(e,t,_){return new URL(_||(t===localStorage?"../../..":"../../.."),location).pathname+"."+e}function __md_get(e,t=localStorage,_){return JSON.parse(t.getItem(__md_scope(e,t,_)))}function __md_set(e,t,_=localStorage,o){try{_.setItem(__md_scope(e,_,o),JSON.stringify(t))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
-  
-
-
-
-  
-  
-
-
-
-  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-60523578-15","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
-  <script async src="https://www.google-analytics.com/analytics.js"></script>
-
 
     
     
@@ -6190,10 +6178,11 @@ SET &lt;update_prop&gt;
 </table>
 <p>示例如下：</p>
 <div class="highlight"><pre><span></span><code>// 查看三个点是否存在，结果 “Empty set” 表示顶点不存在。
-nebula&gt; FETCH PROP ON * &quot;player666&quot;, &quot;player667&quot;, &quot;player668&quot;;
-+-----------+
-| vertices_ |
-+-----------+
+nebula&gt; FETCH PROP ON * &quot;player666&quot;, &quot;player667&quot;, &quot;player668&quot; YIELD properties(vertex);
++--------------------+
+| properties(VERTEX) |
++--------------------+
++--------------------+
 Empty set
 
 nebula&gt; UPSERT VERTEX ON player &quot;player666&quot; \
@@ -6250,12 +6239,12 @@ nebula&gt; UPSERT VERTEX ON player_with_default &quot;player101&quot; \
 </code></pre></div>
 <h2 id="_3">修改存在的点<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>如果点存在，且满足<code>WHEN</code>子句的条件，就会修改点的属性值。</p>
-<div class="highlight"><pre><span></span><code>nebula&gt; FETCH PROP ON player &quot;player101&quot;;
-+-----------------------------------------------------+
-| vertices_                                           |
-+-----------------------------------------------------+
-| (&quot;player101&quot; :player{age: 42, name: &quot;Tony Parker&quot;}) |
-+-----------------------------------------------------+
+<div class="highlight"><pre><span></span><code>nebula&gt; FETCH PROP ON player &quot;player101&quot; YIELD properties(vertex);
++--------------------------------+
+| properties(VERTEX)             |
++--------------------------------+
+| {age: 36, name: &quot;Tony Parker&quot;} |
++--------------------------------+
 
 nebula&gt; UPSERT VERTEX ON player &quot;player101&quot; \
         SET age = age + 2 \
@@ -6264,16 +6253,16 @@ nebula&gt; UPSERT VERTEX ON player &quot;player101&quot; \
 +---------------+-----+
 | Name          | Age |
 +---------------+-----+
-| &quot;Tony Parker&quot; | 44  |
+| &quot;Tony Parker&quot; | 38  |
 +---------------+-----+
 </code></pre></div>
 <p>如果点存在，但是不满足<code>WHEN</code>子句的条件，修改不会生效。</p>
-<div class="highlight"><pre><span></span><code>nebula&gt; FETCH PROP ON player &quot;player101&quot;;
-+-----------------------------------------------------+
-| vertices_                                           |
-+-----------------------------------------------------+
-| (&quot;player101&quot; :player{age: 44, name: &quot;Tony Parker&quot;}) |
-+-----------------------------------------------------+
+<div class="highlight"><pre><span></span><code>nebula&gt; FETCH PROP ON player &quot;player101&quot; YIELD properties(vertex);
++--------------------------------+
+| properties(VERTEX)             |
++--------------------------------+
+| {age: 38, name: &quot;Tony Parker&quot;} |
++--------------------------------+
 
 nebula&gt; UPSERT VERTEX ON player &quot;player101&quot; \
         SET age = age + 2 \
@@ -6282,7 +6271,7 @@ nebula&gt; UPSERT VERTEX ON player &quot;player101&quot; \
 +---------------+-----+
 | Name          | Age |
 +---------------+-----+
-| &quot;Tony Parker&quot; | 44  |
+| &quot;Tony Parker&quot; | 38  |
 +---------------+-----+
 </code></pre></div>
 
@@ -6291,7 +6280,7 @@ nebula&gt; UPSERT VERTEX ON player &quot;player101&quot; \
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 25, 2021</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 8, 2021</span>
       
     
   </small>
@@ -6383,10 +6372,10 @@ nebula&gt; UPSERT VERTEX ON player &quot;player101&quot; \
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../../assets/javascripts/workers/search.01824240.min.js", "version": {"method": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../../assets/javascripts/workers/search.cefbb252.min.js", "version": {"method": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.ff0eccb3.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.17f42bbf.min.js"></script>
       
         <script src="../../../js/version-select.js"></script>
       

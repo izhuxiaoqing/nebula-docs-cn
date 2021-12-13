@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://docs.nebula-graph.com.cn/master/3.ngql-guide/7.general-query-statements/3.go/">
       
       <link rel="icon" href="../../../assets/images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.2">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.0">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.816931ca.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.82f3c0b9.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.9204c3b2.min.css">
@@ -48,21 +48,9 @@
     
       <link rel="stylesheet" href="../../../stylesheets/extra.css">
     
-    <script>function __md_scope(e,t,_){return new URL(_||(t===localStorage?"../../..":"../../.."),location).pathname+"."+e}function __md_get(e,t=localStorage,_){return JSON.parse(t.getItem(__md_scope(e,t,_)))}function __md_set(e,t,_=localStorage,o){try{_.setItem(__md_scope(e,_,o),JSON.stringify(t))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
-  
-
-
-
-  
-  
-
-
-
-  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-60523578-15","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
-  <script async src="https://www.google-analytics.com/analytics.js"></script>
-
 
     
     
@@ -6085,7 +6073,7 @@
 <div class="highlight"><pre><span></span><code>GO [[&lt;M&gt; TO] &lt;N&gt; STEPS ] FROM &lt;vertex_list&gt;
 OVER &lt;edge_type_list&gt; [{REVERSELY | BIDIRECT}]
 [ WHERE &lt;conditions&gt; ]
-[YIELD [DISTINCT] &lt;return_list&gt;]
+YIELD [DISTINCT] &lt;return_list&gt;
 [{SAMPLE &lt;sample_list&gt; | LIMIT &lt;limit_list&gt;}]
 [| GROUP BY {col_name | expr | position} YIELD &lt;col_name&gt;]
 [| ORDER BY &lt;expression&gt; [{ASC | DESC}]]
@@ -6132,7 +6120,7 @@ OVER &lt;edge_type_list&gt; [{REVERSELY | BIDIRECT}]
 </li>
 </ul>
 <ul>
-<li><code>YIELD [DISTINCT] &lt;return_list&gt;</code>：定义需要返回的输出。<code>&lt;return_list&gt;</code>建议使用 <a href="../../6.functions-and-expressions/4.schema/">Schema 函数</a>，当前支持<code>src(edge)</code>、<code>dst(edge)</code>、<code>type(edge)</code>、<code>rank(edge)</code>、<code>properties(edge)</code>、<code>id(vertex)</code>、<code>properties(vertex)</code>，暂不支持嵌套函数。详情参见 <a href="../../8.clauses-and-options/yield/">YIELD</a>。如果没有指定，默认返回目的点 ID。</li>
+<li><code>YIELD [DISTINCT] &lt;return_list&gt;</code>：定义需要返回的输出。<code>&lt;return_list&gt;</code>建议使用 <a href="../../6.functions-and-expressions/4.schema/">Schema 函数</a>，当前支持<code>src(edge)</code>、<code>dst(edge)</code>、<code>type(edge)</code>等，暂不支持嵌套函数。详情参见 <a href="../../8.clauses-and-options/yield/">YIELD</a>。</li>
 </ul>
 <ul>
 <li><code>SAMPLE &lt;sample_list&gt;</code>：用于在结果集中取样。详情参见 <a href="../../8.clauses-and-options/sample/">SAMPLE</a>。</li>
@@ -6157,23 +6145,25 @@ OVER &lt;edge_type_list&gt; [{REVERSELY | BIDIRECT}]
 </ul>
 <h2 id="_2">示例<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code># 返回 player102 所属队伍。
-nebula&gt; GO FROM &quot;player102&quot; OVER serve;
-+------------+
-| serve._dst |
-+------------+
-| &quot;team203&quot;  |
-| &quot;team204&quot;  |
-+------------+
+nebula&gt; GO FROM &quot;player102&quot; OVER serve YIELD dst(edge);
++-----------+
+| dst(EDGE) |
++-----------+
+| &quot;team203&quot; |
+| &quot;team204&quot; |
++-----------+
 </code></pre></div>
 <div class="highlight"><pre><span></span><code># 返回距离 player102 两跳的朋友。
-nebula&gt; GO 2 STEPS FROM &quot;player102&quot; OVER follow;
+nebula&gt; GO 2 STEPS FROM &quot;player102&quot; OVER follow YIELD dst(edge);
 +-------------+
-| follow._dst |
+| dst(EDGE)   |
 +-------------+
 | &quot;player101&quot; |
 | &quot;player125&quot; |
+| &quot;player100&quot; |
+| &quot;player102&quot; |
+| &quot;player125&quot; |
 +-------------+
-...
 </code></pre></div>
 <div class="highlight"><pre><span></span><code># 添加过滤条件。
 nebula&gt; GO FROM &quot;player100&quot;, &quot;player102&quot; OVER serve \
@@ -6195,6 +6185,7 @@ nebula&gt; GO FROM &quot;player100&quot; OVER follow, serve \
 | properties(EDGE).degree | properties(EDGE).start_year |
 +-------------------------+-----------------------------+
 | 95                      | UNKNOWN_PROP                |
+| 95                      | UNKNOWN_PROP                |
 | UNKNOWN_PROP            | 1997                        |
 +-------------------------+-----------------------------+
 </code></pre></div>
@@ -6206,7 +6197,6 @@ nebula&gt; GO FROM &quot;player100&quot; OVER follow REVERSELY \
 +-------------+
 | &quot;player101&quot; |
 | &quot;player102&quot; |
-+-------------+
 ...
 
 # 该 MATCH 查询与上一个 GO 查询具有相同的语义。
@@ -6217,7 +6207,6 @@ nebula&gt; MATCH (v)&lt;-[e:follow]- (v2) WHERE id(v) == &#39;player100&#39; \
 +-------------+
 | &quot;player101&quot; |
 | &quot;player102&quot; |
-+-------------+
 ...
 </code></pre></div>
 <div class="highlight"><pre><span></span><code># 查询 player100 的朋友和朋友所属队伍。
@@ -6307,7 +6296,7 @@ nebula&gt; GO FROM &quot;player100&quot; OVER follow WHERE properties($$).name I
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 25, 2021</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 8, 2021</span>
       
     
   </small>
@@ -6399,10 +6388,10 @@ nebula&gt; GO FROM &quot;player100&quot; OVER follow WHERE properties($$).name I
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../../assets/javascripts/workers/search.01824240.min.js", "version": {"method": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../../assets/javascripts/workers/search.cefbb252.min.js", "version": {"method": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.ff0eccb3.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.17f42bbf.min.js"></script>
       
         <script src="../../../js/version-select.js"></script>
       

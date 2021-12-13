@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://docs.nebula-graph.com.cn/master/3.ngql-guide/7.general-query-statements/4.fetch/">
       
       <link rel="icon" href="../../../assets/images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.2">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.0">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.816931ca.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.82f3c0b9.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.9204c3b2.min.css">
@@ -48,21 +48,9 @@
     
       <link rel="stylesheet" href="../../../stylesheets/extra.css">
     
-    <script>function __md_scope(e,t,_){return new URL(_||(t===localStorage?"../../..":"../../.."),location).pathname+"."+e}function __md_get(e,t=localStorage,_){return JSON.parse(t.getItem(__md_scope(e,t,_)))}function __md_set(e,t,_=localStorage,o){try{_.setItem(__md_scope(e,_,o),JSON.stringify(t))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
-  
-
-
-
-  
-  
-
-
-
-  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-60523578-15","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
-  <script async src="https://www.google-analytics.com/analytics.js"></script>
-
 
     
     
@@ -6270,8 +6258,6 @@
 
 
 <h1 id="fetch">FETCH<a class="headerlink" href="#fetch" title="Permanent link">&para;</a></h1>
-<!-- 3.0 强制使用 YIELD 后需要修改本文档，参考 https://confluence.nebula-graph.io/pages/viewpage.action?pageId=10723963 -->
-
 <p><code>FETCH</code>可以获取指定点或边的属性值。</p>
 <h2 id="opencypher">openCypher 兼容性<a class="headerlink" href="#opencypher" title="Permanent link">&para;</a></h2>
 <p>本文操作仅适用于原生 nGQL。</p>
@@ -6279,7 +6265,7 @@
 <h3 id="_2">语法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>FETCH PROP ON {&lt;tag_name&gt;[, tag_name ...] | *}
 &lt;vid&gt; [, vid ...]
-[YIELD &lt;return_list&gt; [AS &lt;alias&gt;]];
+YIELD &lt;return_list&gt; [AS &lt;alias&gt;];
 </code></pre></div>
 <table>
 <thead>
@@ -6303,7 +6289,7 @@
 </tr>
 <tr>
 <td align="left"><code>YIELD</code></td>
-<td align="left">定义需要返回的输出。除了返回定义的属性，额外返回<code>VertexID</code>。详情请参见 <a href="../../8.clauses-and-options/yield/"><code>YIELD</code></a>。如果没有<code>YIELD</code>子句，默认返回<code>vertices_</code>，包含点的所有信息。</td>
+<td align="left">定义需要返回的输出。详情请参见 <a href="../../8.clauses-and-options/yield/"><code>YIELD</code></a>。</td>
 </tr>
 <tr>
 <td align="left"><code>AS</code></td>
@@ -6313,33 +6299,33 @@
 </table>
 <h3 id="tag">基于 Tag 获取点的属性值<a class="headerlink" href="#tag" title="Permanent link">&para;</a></h3>
 <p>在<code>FETCH</code>语句中指定 Tag 获取对应点的属性值。</p>
-<div class="highlight"><pre><span></span><code>nebula&gt; FETCH PROP ON player &quot;player100&quot;;
-+----------------------------------------------------+
-| vertices_                                          |
-+----------------------------------------------------+
-| (&quot;player100&quot; :player{age: 42, name: &quot;Tim Duncan&quot;}) |
-+----------------------------------------------------+
+<div class="highlight"><pre><span></span><code>nebula&gt; FETCH PROP ON player &quot;player100&quot; YIELD properties(vertex);
++-------------------------------+
+| properties(VERTEX)            |
++-------------------------------+
+| {age: 42, name: &quot;Tim Duncan&quot;} |
++-------------------------------+
 </code></pre></div>
 <h3 id="_3">获取点的指定属性值<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>使用<code>YIELD</code>子句指定返回的属性。</p>
 <div class="highlight"><pre><span></span><code>nebula&gt; FETCH PROP ON player &quot;player100&quot; \
         YIELD properties(vertex).name AS name;
-+-------------+--------------+
-| VertexID    | name         |
-+-------------+--------------+
-| &quot;player100&quot; | &quot;Tim Duncan&quot; |
-+-------------+--------------+
++--------------+
+| name         |
++--------------+
+| &quot;Tim Duncan&quot; |
++--------------+
 </code></pre></div>
 <h3 id="_4">获取多个点的属性值<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>指定多个点 ID 获取多个点的属性值，点之间用英文逗号（,）分隔。</p>
-<div class="highlight"><pre><span></span><code>nebula&gt; FETCH PROP ON player &quot;player101&quot;, &quot;player102&quot;, &quot;player103&quot;;
-+-----------------------------------------------------------+
-| vertices_                                                 |
-+-----------------------------------------------------------+
-| (&quot;player101&quot; :player{age: 36, name: &quot;Tony Parker&quot;})       |
-| (&quot;player102&quot; :player{age: 33, name: &quot;LaMarcus Aldridge&quot;}) |
-| (&quot;player103&quot; :player{age: 32, name: &quot;Rudy Gay&quot;})          |
-+-----------------------------------------------------------+
+<div class="highlight"><pre><span></span><code>nebula&gt; FETCH PROP ON player &quot;player101&quot;, &quot;player102&quot;, &quot;player103&quot; YIELD properties(vertex);
++--------------------------------------+
+| properties(VERTEX)                   |
++--------------------------------------+
+| {age: 33, name: &quot;LaMarcus Aldridge&quot;} |
+| {age: 40, name: &quot;Tony Parker&quot;}       |
+| {age: 32, name: &quot;Rudy Gay&quot;}          |
++--------------------------------------+
 </code></pre></div>
 <h3 id="tag_1">基于多个 Tag 获取点的属性值<a class="headerlink" href="#tag_1" title="Permanent link">&para;</a></h3>
 <p>在<code>FETCH</code>语句中指定多个 Tag 获取属性值。Tag 之间用英文逗号（,）分隔。</p>
@@ -6347,40 +6333,40 @@
 nebula&gt; CREATE TAG IF NOT EXISTS t1(a string, b int);
 
 # 为点 player100 添加 Tag t1。
-nebula&gt; INSERT VERTEX t1(a, b) VALUE &quot;player100&quot;:(&quot;Hello&quot;, 100);
+nebula&gt; INSERT VERTEX t1(a, b) VALUES &quot;player100&quot;:(&quot;Hello&quot;, 100);
 
 # 基于 Tag player 和 t1 获取点 player100 上的属性值。
-nebula&gt; FETCH PROP ON player, t1 &quot;player100&quot;;
+nebula&gt; FETCH PROP ON player, t1 &quot;player100&quot; YIELD vertex AS v;
 +----------------------------------------------------------------------------+
-| vertices_                                                                  |
+| v                                                                          |
 +----------------------------------------------------------------------------+
-| (&quot;player100&quot; :t1{a: &quot;Hello&quot;, b: 100} :player{age: 42, name: &quot;Tim Duncan&quot;}) |
+| (&quot;player100&quot; :player{age: 42, name: &quot;Tim Duncan&quot;} :t1{a: &quot;Hello&quot;, b: 100}) |
 +----------------------------------------------------------------------------+
 </code></pre></div>
 <p>用户可以在<code>FETCH</code>语句中组合多个 Tag 和多个点。</p>
-<div class="highlight"><pre><span></span><code>nebula&gt; FETCH PROP ON player, t1 &quot;player100&quot;, &quot;player103&quot;;
+<div class="highlight"><pre><span></span><code>nebula&gt; FETCH PROP ON player, t1 &quot;player100&quot;, &quot;player103&quot; YIELD vertex AS v;
 +----------------------------------------------------------------------------+
-| vertices_                                                                  |
+| v                                                                          |
 +----------------------------------------------------------------------------+
-| (&quot;player100&quot; :t1{a: &quot;Hello&quot;, b: 100} :player{age: 42, name: &quot;Tim Duncan&quot;}) |
+| (&quot;player100&quot; :player{age: 42, name: &quot;Tim Duncan&quot;} :t1{a: &quot;Hello&quot;, b: 100}) |
 | (&quot;player103&quot; :player{age: 32, name: &quot;Rudy Gay&quot;})                           |
 +----------------------------------------------------------------------------+
 </code></pre></div>
 <h3 id="_5">在所有标签中获取点的属性值<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>在<code>FETCH</code>语句中使用<code>*</code>获取当前图空间所有标签里，点的属性值。</p>
-<div class="highlight"><pre><span></span><code>nebula&gt; FETCH PROP ON * &quot;player100&quot;, &quot;player106&quot;, &quot;team200&quot;;
+<div class="highlight"><pre><span></span><code>nebula&gt; FETCH PROP ON * &quot;player100&quot;, &quot;player106&quot;, &quot;team200&quot; YIELD vertex AS v;
 +----------------------------------------------------------------------------+
-| vertices_                                                                  |
+| v                                                                          |
 +----------------------------------------------------------------------------+
+| (&quot;player100&quot; :player{age: 42, name: &quot;Tim Duncan&quot;} :t1{a: &quot;Hello&quot;, b: 100}) |
 | (&quot;player106&quot; :player{age: 25, name: &quot;Kyle Anderson&quot;})                      |
 | (&quot;team200&quot; :team{name: &quot;Warriors&quot;})                                        |
-| (&quot;player100&quot; :t1{a: &quot;Hello&quot;, b: 100} :player{age: 42, name: &quot;Tim Duncan&quot;}) |
 +----------------------------------------------------------------------------+
 </code></pre></div>
 <h2 id="_6">获取边的属性值<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="_7">语法<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>FETCH PROP ON &lt;edge_type&gt; &lt;src_vid&gt; -&gt; &lt;dst_vid&gt;[@&lt;rank&gt;] [, &lt;src_vid&gt; -&gt; &lt;dst_vid&gt; ...]
-[YIELD &lt;output&gt;]
+YIELD &lt;output&gt;;
 </code></pre></div>
 <table>
 <thead>
@@ -6408,34 +6394,34 @@ nebula&gt; FETCH PROP ON player, t1 &quot;player100&quot;;
 </tr>
 <tr>
 <td align="left"><code>YIELD</code></td>
-<td align="left">定义需要返回的输出。除了返回定义的属性，额外返回<code>起始点 ID</code>、<code>目的点 ID</code>和<code>rank</code>。详情请参见 <a href="../../8.clauses-and-options/yield/"><code>YIELD</code></a>。如果没有<code>YIELD</code>子句，默认返回<code>edges_</code>，包含边的所有信息。</td>
+<td align="left">定义需要返回的输出。详情请参见 <a href="../../8.clauses-and-options/yield/"><code>YIELD</code></a>。</td>
 </tr>
 </tbody>
 </table>
 <h3 id="_8">获取边的所有属性值<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code># 获取连接 player100 和 team204 的边 serve 的所有属性值。
-nebula&gt; FETCH PROP ON serve &quot;player100&quot; -&gt; &quot;team204&quot;;
-+-----------------------------------------------------------------------+
-| edges_                                                                |
-+-----------------------------------------------------------------------+
-| [:serve &quot;player100&quot;-&gt;&quot;team204&quot; @0 {end_year: 2016, start_year: 1997}] |
-+-----------------------------------------------------------------------+
+nebula&gt; FETCH PROP ON serve &quot;player100&quot; -&gt; &quot;team204&quot; YIELD properties(edge);
++------------------------------------+
+| properties(EDGE)                   |
++------------------------------------+
+| {end_year: 2016, start_year: 1997} |
++------------------------------------+
 </code></pre></div>
 <h3 id="_9">获取边的指定属性值<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>使用<code>YIELD</code>子句指定返回的属性。</p>
 <div class="highlight"><pre><span></span><code>nebula&gt; FETCH PROP ON serve &quot;player100&quot; -&gt; &quot;team204&quot;    \
         YIELD properties(edge).start_year;
-+-------------+------------+-------------+-----------------------------+
-| serve._src  | serve._dst | serve._rank | properties(EDGE).start_year |
-+-------------+------------+-------------+-----------------------------+
-| &quot;player100&quot; | &quot;team204&quot;  | 0           | 1997                        |
-+-------------+------------+-------------+-----------------------------+
++-----------------------------+
+| properties(EDGE).start_year |
++-----------------------------+
+| 1997                        |
++-----------------------------+
 </code></pre></div>
 <h3 id="_10">获取多条边的属性值<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <p>指定多个边模式 (<code>&lt;src_vid&gt; -&gt; &lt;dst_vid&gt;[@&lt;rank&gt;]</code>) 获取多个边的属性值。模式之间用英文逗号（,）分隔。</p>
-<div class="highlight"><pre><span></span><code>nebula&gt; FETCH PROP ON serve &quot;player100&quot; -&gt; &quot;team204&quot;, &quot;player133&quot; -&gt; &quot;team202&quot;;
+<div class="highlight"><pre><span></span><code>nebula&gt; FETCH PROP ON serve &quot;player100&quot; -&gt; &quot;team204&quot;, &quot;player133&quot; -&gt; &quot;team202&quot; YIELD edge AS e;
 +-----------------------------------------------------------------------+
-| edges_                                                                |
+| e                                                                     |
 +-----------------------------------------------------------------------+
 | [:serve &quot;player100&quot;-&gt;&quot;team204&quot; @0 {end_year: 2016, start_year: 1997}] |
 | [:serve &quot;player133&quot;-&gt;&quot;team202&quot; @0 {end_year: 2011, start_year: 2002}] |
@@ -6451,17 +6437,17 @@ nebula&gt; insert edge serve(start_year,end_year) \
         values &quot;player100&quot;-&gt;&quot;team204&quot;@2:(1990, 2018);
 
 # 默认返回 rank 为 0 的边。
-nebula&gt; FETCH PROP ON serve &quot;player100&quot; -&gt; &quot;team204&quot;;
+nebula&gt; FETCH PROP ON serve &quot;player100&quot; -&gt; &quot;team204&quot; YIELD edge AS e;
 +-----------------------------------------------------------------------+
-| edges_                                                                |
+| e                                                                     |
 +-----------------------------------------------------------------------+
 | [:serve &quot;player100&quot;-&gt;&quot;team204&quot; @0 {end_year: 2016, start_year: 1997}] |
 +-----------------------------------------------------------------------+
 
 # 要获取 rank 不为 0 的边，请在 FETCH 语句中设置 rank。
-nebula&gt; FETCH PROP ON serve &quot;player100&quot; -&gt; &quot;team204&quot;@1;
+nebula&gt; FETCH PROP ON serve &quot;player100&quot; -&gt; &quot;team204&quot;@1 YIELD edge AS e;
 +-----------------------------------------------------------------------+
-| edges_                                                                |
+| e                                                                     |
 +-----------------------------------------------------------------------+
 | [:serve &quot;player100&quot;-&gt;&quot;team204&quot; @1 {end_year: 2017, start_year: 1998}] |
 +-----------------------------------------------------------------------+
@@ -6473,26 +6459,26 @@ nebula&gt; GO FROM &quot;player101&quot; OVER follow \
         YIELD src(edge) AS s, dst(edge) AS d \
         | FETCH PROP ON follow $-.s -&gt; $-.d \
         YIELD properties(edge).degree;
-+-------------+-------------+--------------+-------------------------+
-| follow._src | follow._dst | follow._rank | properties(EDGE).degree |
-+-------------+-------------+--------------+-------------------------+
-| &quot;player101&quot; | &quot;player100&quot; | 0            | 95                      |
-| &quot;player101&quot; | &quot;player102&quot; | 0            | 90                      |
-| &quot;player101&quot; | &quot;player125&quot; | 0            | 95                      |
-+-------------+-------------+--------------+-------------------------+
++-------------------------+
+| properties(EDGE).degree |
++-------------------------+
+| 95                      |
+| 90                      |
+| 95                      |
++-------------------------+
 </code></pre></div>
 <p>用户也可以通过自定义变量构建类似的查询。</p>
 <div class="highlight"><pre><span></span><code>nebula&gt; $var = GO FROM &quot;player101&quot; OVER follow \
         YIELD src(edge) AS s, dst(edge) AS d; \
         FETCH PROP ON follow $var.s -&gt; $var.d \
         YIELD properties(edge).degree;
-+-------------+-------------+--------------+-------------------------+
-| follow._src | follow._dst | follow._rank | properties(EDGE).degree |
-+-------------+-------------+--------------+-------------------------+
-| &quot;player101&quot; | &quot;player100&quot; | 0            | 95                      |
-| &quot;player101&quot; | &quot;player102&quot; | 0            | 90                      |
-| &quot;player101&quot; | &quot;player125&quot; | 0            | 95                      |
-+-------------+-------------+--------------+-------------------------+
++-------------------------+
+| properties(EDGE).degree |
++-------------------------+
+| 95                      |
+| 90                      |
+| 95                      |
++-------------------------+
 </code></pre></div>
 <p>更多复合语句的详情，请参见<a href="../../4.variable-and-composite-queries/1.composite-queries/">复合查询（子句结构）</a>。</p>
 
@@ -6501,7 +6487,7 @@ nebula&gt; GO FROM &quot;player101&quot; OVER follow \
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 25, 2021</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 8, 2021</span>
       
     
   </small>
@@ -6593,10 +6579,10 @@ nebula&gt; GO FROM &quot;player101&quot; OVER follow \
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../../assets/javascripts/workers/search.01824240.min.js", "version": {"method": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../../assets/javascripts/workers/search.cefbb252.min.js", "version": {"method": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.ff0eccb3.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.17f42bbf.min.js"></script>
       
         <script src="../../../js/version-select.js"></script>
       

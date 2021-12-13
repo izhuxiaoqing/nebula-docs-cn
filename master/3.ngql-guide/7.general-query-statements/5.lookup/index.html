@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://docs.nebula-graph.com.cn/master/3.ngql-guide/7.general-query-statements/5.lookup/">
       
       <link rel="icon" href="../../../assets/images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.2">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.0">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.816931ca.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.82f3c0b9.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.9204c3b2.min.css">
@@ -48,21 +48,9 @@
     
       <link rel="stylesheet" href="../../../stylesheets/extra.css">
     
-    <script>function __md_scope(e,t,_){return new URL(_||(t===localStorage?"../../..":"../../.."),location).pathname+"."+e}function __md_get(e,t=localStorage,_){return JSON.parse(t.getItem(__md_scope(e,t,_)))}function __md_set(e,t,_=localStorage,o){try{_.setItem(__md_scope(e,_,o),JSON.stringify(t))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
-  
-
-
-
-  
-  
-
-
-
-  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-60523578-15","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
-  <script async src="https://www.google-analytics.com/analytics.js"></script>
-
 
     
     
@@ -6162,8 +6150,6 @@
 
 
 <h1 id="lookup">LOOKUP<a class="headerlink" href="#lookup" title="Permanent link">&para;</a></h1>
-<!-- 3.0 强制使用 YIELD 后需要修改本文档，参考 https://confluence.nebula-graph.io/pages/viewpage.action?pageId=10723963 -->
-
 <p><code>LOOKUP</code>根据索引遍历数据。用户可以使用<code>LOOKUP</code>实现如下功能：</p>
 <ul>
 <li>根据<code>WHERE</code>子句搜索特定数据。</li>
@@ -6198,7 +6184,7 @@
 <h2 id="_3">语法<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>LOOKUP ON {&lt;vertex_tag&gt; | &lt;edge_type&gt;}
 [WHERE &lt;expression&gt; [AND &lt;expression&gt; ...]]
-[YIELD &lt;return_list&gt; [AS &lt;alias&gt;]];
+YIELD &lt;return_list&gt; [AS &lt;alias&gt;];
 
 &lt;return_list&gt;
     &lt;prop_name&gt; [AS &lt;col_alias&gt;] [, &lt;prop_name&gt; [AS &lt;prop_alias&gt;] ...];
@@ -6207,13 +6193,7 @@
 <li><code>WHERE &lt;expression&gt;</code>：指定遍历的过滤条件，还可以结合布尔运算符 AND 和 OR 一起使用。详情请参见 <a href="../../8.clauses-and-options/where/">WHERE</a>。</li>
 </ul>
 <ul>
-<li>
-<p><code>YIELD</code>：定义需要返回的输出。</p>
-<ul>
-<li><code>LOOKUP</code>Tag 时，除了返回定义的属性，额外返回<code>VertexID</code>。如果没有<code>YIELD</code>子句，返回<code>VertexID</code>。</li>
-<li><code>LOOKUP</code>Edge type 时，除了返回定义的属性，额外返回<code>起始点 ID</code>、<code>目的点 ID</code>和<code>rank</code>。如果没有<code>YIELD</code>子句，返回<code>起始点 ID</code>、<code>目的点 ID</code>和<code>rank</code>。</li>
-</ul>
-</li>
+<li><code>YIELD</code>：定义需要返回的输出。详情请参见 <a href="../../8.clauses-and-options/yield/"><code>YIELD</code></a>。</li>
 </ul>
 <ul>
 <li><code>AS</code>：设置别名。</li>
@@ -6239,45 +6219,50 @@ nebula&gt; REBUILD TAG INDEX index_player;
 +------------+
 
 nebula&gt; LOOKUP ON player \
-        WHERE player.name == &quot;Tony Parker&quot;;
-+-------------+
-| VertexID    |
-+-------------+
-| &quot;player101&quot; |
-+-------------+
+        WHERE player.name == &quot;Tony Parker&quot; \
+        YIELD id(vertex);
++---------------+
+| id(VERTEX)    |
++---------------+
+| &quot;player101&quot;   |
++---------------+
 
 nebula&gt; LOOKUP ON player \
         WHERE player.name == &quot;Tony Parker&quot; \
         YIELD properties(vertex).name AS name, properties(vertex).age AS age;
-+-------------+---------------+-----+
-| VertexID    | name          | age |
-+-------------+---------------+-----+
-| &quot;player101&quot; | &quot;Tony Parker&quot; | 36  |
-+-------------+---------------+-----+
++---------------+-----+
+| name          | age |
++---------------+-----+
+| &quot;Tony Parker&quot; | 36  |
++---------------+-----+
 
 nebula&gt; LOOKUP ON player \
-        WHERE player.age  &gt; 45;
+        WHERE player.age  &gt; 45 \
+        YIELD id(vertex);
 +-------------+
-| VertexID    |
+| id(VERTEX)  |
 +-------------+
-| &quot;player140&quot; |
 | &quot;player144&quot; |
+| &quot;player140&quot; |
+| &quot;player111&quot; |
 +-------------+
 
 nebula&gt; LOOKUP ON player \
         WHERE player.name STARTS WITH &quot;B&quot; \
         AND player.age IN [22,30] \
         YIELD properties(vertex).name, properties(vertex).age;
-+-------------+-------------------------+------------------------+
-| VertexID    | properties(VERTEX).name | properties(VERTEX).age |
-+-------------+-------------------------+------------------------+
-| &quot;player134&quot; | &quot;Blake Griffin&quot;         | 30                     |
-| &quot;player149&quot; | &quot;Ben Simmons&quot;           | 22                     |
-+-------------+-------------------------+------------------------+
++-------------------------+------------------------+
+| properties(VERTEX).name | properties(VERTEX).age |
++-------------------------+------------------------+
+| &quot;Blake Griffin&quot;         | 30                     |
+| &quot;Ben Simmons&quot;           | 22                     |
+| &quot;Blake Griffin&quot;         | 30                     |
+| &quot;Ben Simmons&quot;           | 22                     |
++-------------------------+------------------------+
 
 nebula&gt; LOOKUP ON player \
         WHERE player.name == &quot;Kobe Bryant&quot;\
-        YIELD properties(vertex).name AS name |\
+        YIELD id(vertex) AS VertexID, properties(vertex).name AS name |\
         GO FROM $-.VertexID OVER serve \
         YIELD $-.name, properties(edge).start_year, properties(edge).end_year, properties($$).name;
 +---------------+-----------------------------+---------------------------+---------------------+
@@ -6298,13 +6283,13 @@ nebula&gt; REBUILD EDGE INDEX index_follow;
 +------------+
 
 nebula&gt; LOOKUP ON follow \
-        WHERE follow.degree == 90;
-+-------------+-------------+---------+
-| SrcVID      | DstVID      | Ranking |
-+-------------+-------------+---------+
-| &quot;player150&quot; | &quot;player143&quot; | 0       |
-| &quot;player150&quot; | &quot;player137&quot; | 0       |
-| &quot;player148&quot; | &quot;player136&quot; | 0       |
+        WHERE follow.degree == 90 YIELD edge AS e;
++----------------------------------------------------+
+| e                                                  |
++----------------------------------------------------+
+| [:follow &quot;player109&quot;-&gt;&quot;player125&quot; @0 {degree: 90}] |
+| [:follow &quot;player118&quot;-&gt;&quot;player120&quot; @0 {degree: 90}] |
+| [:follow &quot;player118&quot;-&gt;&quot;player131&quot; @0 {degree: 90}] |
 ...
 
 nebula&gt; LOOKUP ON follow \
@@ -6320,16 +6305,16 @@ nebula&gt; LOOKUP ON follow \
 
 nebula&gt; LOOKUP ON follow \
         WHERE follow.degree == 60 \
-        YIELD properties(edge).degree AS Degree |\
+        YIELD dst(edge) AS DstVID, properties(edge).degree AS Degree |\
         GO FROM $-.DstVID OVER serve \
         YIELD $-.DstVID, properties(edge).start_year, properties(edge).end_year, properties($$).name;
-+-------------+------------------------------+---------------------------+---------------------+
-| $-.DstVID   |  properties(EDGE).start_year | properties(EDGE).end_year | properties($$).name |
-+-------------+------------------------------+---------------------------+---------------------+
-| &quot;player105&quot; | 2010                         | 2018                      | &quot;Spurs&quot;             |
-| &quot;player105&quot; | 2009                         | 2010                      | &quot;Cavaliers&quot;         |
-| &quot;player105&quot; | 2018                         | 2019                      | &quot;Raptors&quot;           |
-+-------------+------------------------------+---------------------------+---------------------+
++-------------+-----------------------------+---------------------------+---------------------+
+| $-.DstVID   | properties(EDGE).start_year | properties(EDGE).end_year | properties($$).name |
++-------------+-----------------------------+---------------------------+---------------------+
+| &quot;player105&quot; | 2010                        | 2018                      | &quot;Spurs&quot;             |
+| &quot;player105&quot; | 2009                        | 2010                      | &quot;Cavaliers&quot;         |
+| &quot;player105&quot; | 2018                        | 2019                      | &quot;Raptors&quot;           |
++-------------+-----------------------------+---------------------------+---------------------+
 </code></pre></div>
 <h2 id="tag_edge_type">通过 Tag 列出所有的对应的点/通过 Edge type 列出边<a class="headerlink" href="#tag_edge_type" title="Permanent link">&para;</a></h2>
 <p>如果需要通过 Tag 列出所有的点，或通过 Edge type 列出边，则 Tag、Edge type 或属性上必须有至少一个索引。</p>
@@ -6351,13 +6336,13 @@ nebula&gt; INSERT VERTEX player(name,age) \
 
 # 列出所有的 player。类似于 MATCH (n:player) RETURN id(n) /*, n */。
 
-nebula&gt; LOOKUP ON player;
+nebula&gt; LOOKUP ON player YIELD id(vertex);
 +-------------+
-|  VertexID   |
+| id(VERTEX)  |
 +-------------+
 | &quot;player100&quot; |
 | &quot;player101&quot; |
-+-------------+
+...
 </code></pre></div>
 </li>
 </ul>
@@ -6378,18 +6363,20 @@ nebula&gt; INSERT EDGE follow(degree) \
 
 # 列出所有的 follow 边。类似于 MATCH (s)-[e:follow]-&gt;(d) RETURN id(s), rank(e), id(d) /*, type(e) */。
 
-nebula)&gt; LOOKUP ON follow;
-+-------------+-------------+---------+
-| SrcVID      | DstVID      | Ranking |
-+-------------+-------------+---------+
-| &quot;player100&quot; | &quot;player101&quot; | 0       |
-+-------------+-------------+---------+
+nebula)&gt; LOOKUP ON follow YIELD edge AS e;
++-----------------------------------------------------+
+| e                                                   |
++-----------------------------------------------------+
+| [:follow &quot;player105&quot;-&gt;&quot;player100&quot; @0 {degree: 70}]  |
+| [:follow &quot;player105&quot;-&gt;&quot;player116&quot; @0 {degree: 80}]  |
+| [:follow &quot;player109&quot;-&gt;&quot;player100&quot; @0 {degree: 80}]  |
+...
 </code></pre></div>
 </li>
 </ul>
 <h2 id="_6">统计点或边<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>统计 Tag 为<code>player</code>的点和 Edge type 为<code>follow</code>的边。</p>
-<div class="highlight"><pre><span></span><code>nebula&gt; LOOKUP ON player |\
+<div class="highlight"><pre><span></span><code>nebula&gt; LOOKUP ON player YIELD id(vertex)|\
         YIELD COUNT(*) AS Player_Number;
 +---------------+
 | Player_Number |
@@ -6397,7 +6384,7 @@ nebula)&gt; LOOKUP ON follow;
 | 51            |
 +---------------+
 
-nebula&gt; LOOKUP ON follow | \
+nebula&gt; LOOKUP ON follow YIELD edge AS e| \
         YIELD COUNT(*) AS Follow_Number;
 +---------------+
 | Follow_Number |
@@ -6415,7 +6402,7 @@ nebula&gt; LOOKUP ON follow | \
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 25, 2021</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 8, 2021</span>
       
     
   </small>
@@ -6507,10 +6494,10 @@ nebula&gt; LOOKUP ON follow | \
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../../assets/javascripts/workers/search.01824240.min.js", "version": {"method": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../../assets/javascripts/workers/search.cefbb252.min.js", "version": {"method": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.ff0eccb3.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.17f42bbf.min.js"></script>
       
         <script src="../../../js/version-select.js"></script>
       

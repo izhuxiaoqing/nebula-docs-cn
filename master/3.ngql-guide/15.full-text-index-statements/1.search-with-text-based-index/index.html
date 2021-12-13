@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://docs.nebula-graph.com.cn/master/3.ngql-guide/15.full-text-index-statements/1.search-with-text-based-index/">
       
       <link rel="icon" href="../../../assets/images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.2">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.0">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.816931ca.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.82f3c0b9.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.9204c3b2.min.css">
@@ -48,21 +48,9 @@
     
       <link rel="stylesheet" href="../../../stylesheets/extra.css">
     
-    <script>function __md_scope(e,t,_){return new URL(_||(t===localStorage?"../../..":"../../.."),location).pathname+"."+e}function __md_get(e,t=localStorage,_){return JSON.parse(t.getItem(__md_scope(e,t,_)))}function __md_set(e,t,_=localStorage,o){try{_.setItem(__md_scope(e,_,o),JSON.stringify(t))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
-  
-
-
-
-  
-  
-
-
-
-  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-60523578-15","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
-  <script async src="https://www.google-analytics.com/analytics.js"></script>
-
 
     
     
@@ -6295,9 +6283,9 @@ nebula&gt; INSERT VERTEX player(name, age) VALUES \
   &quot;Blake Griffin&quot;: (&quot;Blake Griffin&quot;, 30);
 
 //测试查询
-nebula&gt; LOOKUP ON player WHERE PREFIX(player.name, &quot;B&quot;);
+nebula&gt; LOOKUP ON player WHERE PREFIX(player.name, &quot;B&quot;) YIELD id(vertex);
 +-----------------+
-| _vid            |
+| id(VERTEX)      |
 +-----------------+
 | &quot;Boris Diaw&quot;    |
 | &quot;Ben Simmons&quot;   |
@@ -6305,13 +6293,13 @@ nebula&gt; LOOKUP ON player WHERE PREFIX(player.name, &quot;B&quot;);
 +-----------------+
 
 nebula&gt; LOOKUP ON player WHERE WILDCARD(player.name, &quot;*ri*&quot;) YIELD player.name, player.age;
-+-----------------+-----------------+-----+
-| _vid            | name            | age |
-+-----------------+-----------------+-----+
-| &quot;Chris Paul&quot;    | &quot;Chris Paul&quot;    | 33  |
-| &quot;Boris Diaw&quot;    | &quot;Boris Diaw&quot;    | 36  |
-| &quot;Blake Griffin&quot; | &quot;Blake Griffin&quot; | 30  |
-+-----------------+-----------------+-----+
++-----------------+-----+
+| name            | age |
++-----------------+-----+
+| &quot;Chris Paul&quot;    | 33  |
+| &quot;Boris Diaw&quot;    | 36  |
+| &quot;Blake Griffin&quot; | 30  |
++-----------------+-----+
 
 nebula&gt; LOOKUP ON player WHERE WILDCARD(player.name, &quot;*ri*&quot;) | YIELD count(*);
 +----------+
@@ -6321,15 +6309,15 @@ nebula&gt; LOOKUP ON player WHERE WILDCARD(player.name, &quot;*ri*&quot;) | YIEL
 +----------+
 
 nebula&gt; LOOKUP ON player WHERE REGEXP(player.name, &quot;R.*&quot;) YIELD player.name, player.age;
-+---------------------+---------------------+-----+
-| _vid                | name                | age |
-+---------------------+---------------------+-----+
-| &quot;Russell Westbrook&quot; | &quot;Russell Westbrook&quot; | 30  |
-+---------------------+---------------------+-----+
++---------------------+-----+
+| name                | age |
++---------------------+-----+
+| &quot;Russell Westbrook&quot; | 30  |
++---------------------+-----+
 
-nebula&gt; LOOKUP ON player WHERE REGEXP(player.name, &quot;.*&quot;);
+nebula&gt; LOOKUP ON player WHERE REGEXP(player.name, &quot;.*&quot;) YIELD id(vertex);
 +---------------------+
-| _vid                |
+| id(VERTEX)          |
 +---------------------+
 | &quot;Danny Green&quot;       |
 | &quot;David West&quot;        |
@@ -6338,11 +6326,11 @@ nebula&gt; LOOKUP ON player WHERE REGEXP(player.name, &quot;.*&quot;);
 ...
 
 nebula&gt; LOOKUP ON player WHERE FUZZY(player.name, &quot;Tim Dunncan&quot;, AUTO, OR) YIELD player.name;
-+--------------+--------------+
-| _vid         | name         |
-+--------------+--------------+
-| &quot;Tim Duncan&quot; | &quot;Tim Duncan&quot; |
-+--------------+--------------+
++--------------+
+| name         |
++--------------+
+| &quot;Tim Duncan&quot; |
++--------------+
 
 //删除全文索引。
 nebula&gt; DROP FULLTEXT INDEX nebula_index_1;
@@ -6353,7 +6341,7 @@ nebula&gt; DROP FULLTEXT INDEX nebula_index_1;
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 25, 2021</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 8, 2021</span>
       
     
   </small>
@@ -6445,10 +6433,10 @@ nebula&gt; DROP FULLTEXT INDEX nebula_index_1;
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../../assets/javascripts/workers/search.01824240.min.js", "version": {"method": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../../assets/javascripts/workers/search.cefbb252.min.js", "version": {"method": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.ff0eccb3.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.17f42bbf.min.js"></script>
       
         <script src="../../../js/version-select.js"></script>
       

@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://docs.nebula-graph.com.cn/master/3.ngql-guide/6.functions-and-expressions/4.schema/">
       
       <link rel="icon" href="../../../assets/images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.2">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.0">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.816931ca.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.82f3c0b9.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.9204c3b2.min.css">
@@ -48,21 +48,9 @@
     
       <link rel="stylesheet" href="../../../stylesheets/extra.css">
     
-    <script>function __md_scope(e,t,_){return new URL(_||(t===localStorage?"../../..":"../../.."),location).pathname+"."+e}function __md_get(e,t=localStorage,_){return JSON.parse(t.getItem(__md_scope(e,t,_)))}function __md_set(e,t,_=localStorage,o){try{_.setItem(__md_scope(e,_,o),JSON.stringify(t))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
-  
-
-
-
-  
-  
-
-
-
-  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-60523578-15","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
-  <script async src="https://www.google-analytics.com/analytics.js"></script>
-
 
     
     
@@ -6082,11 +6070,7 @@
 <h2 id="ngql">原生 nGQL 语句适用<a class="headerlink" href="#ngql" title="Permanent link">&para;</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<ul>
-<li>GO 语句中，WHERE 子句和 YIELD 子句中可以使用如下函数。</li>
-<li>LOOKUP 语句中，YIELD 子句中可以使用如下函数。</li>
-<li>FETCH 语句中，YIELD 子句中可以使用如下函数。</li>
-</ul>
+<p>YIELD 和 WHERE 子句中可以使用如下函数。</p>
 </div>
 <table>
 <thead>
@@ -6124,8 +6108,32 @@
 <td align="left">int rank(edge)</td>
 <td align="left">返回边的 rank。</td>
 </tr>
+<tr>
+<td align="left">vertex</td>
+<td align="left">返回点的信息。包括点 ID、Tag、属性和值。</td>
+</tr>
+<tr>
+<td align="left">edge</td>
+<td align="left">返回边的信息。包括 Edge type、起始点 ID、目的点 ID、rank、属性和值。</td>
+</tr>
+<tr>
+<td align="left">vertices</td>
+<td align="left">返回子图中的点的信息。详情参见 <a href="../../16.subgraph-and-path/1.get-subgraph/">GET SUBGRAPH</a>。</td>
+</tr>
+<tr>
+<td align="left">edges</td>
+<td align="left">返回子图中的边的信息。详情参见 <a href="../../16.subgraph-and-path/1.get-subgraph/">GET SUBGRAPH</a>。</td>
+</tr>
+<tr>
+<td align="left">path</td>
+<td align="left">返回路径信息。详情参见 <a href="../../16.subgraph-and-path/2.find-path/">FIND PATH</a>。</td>
+</tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>由于 vertex、edge、vertices、edges、path 属于关键字，使用时需要用<code>AS &lt;alias&gt;</code>设置别名才能正常使用。例如<code>GO FROM "player100" OVER follow YIELD edge AS e;</code>。</p>
+</div>
 <h2 id="opencypher">openCypher 兼容语句适用<a class="headerlink" href="#opencypher" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -6185,15 +6193,15 @@
 +-------------+
 | &quot;player101&quot; |
 | &quot;player102&quot; |
-+-------------+
+...
 
 nebula&gt; LOOKUP ON player WHERE player.age  &gt; 45 YIELD id(vertex);
-+-------------+-------------+
-| VertexID    | id(VERTEX)  |
-+-------------+-------------+
-| &quot;player144&quot; | &quot;player144&quot; |
-| &quot;player140&quot; | &quot;player140&quot; |
-+-------------+-------------+
++-------------+
+| id(VERTEX)  |
++-------------+
+| &quot;player144&quot; |
+| &quot;player140&quot; |
++-------------+
 
 nebula&gt; MATCH (a:player) WHERE id(a) == &quot;player100&quot; \
         RETURN tags(a), labels(a), properties(a);
@@ -6225,7 +6233,7 @@ nebula&gt; MATCH p = (a :player {name : &quot;Tim Duncan&quot;})-[r:serve]-(t) \
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 25, 2021</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 8, 2021</span>
       
     
   </small>
@@ -6317,10 +6325,10 @@ nebula&gt; MATCH p = (a :player {name : &quot;Tim Duncan&quot;})-[r:serve]-(t) \
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../../assets/javascripts/workers/search.01824240.min.js", "version": {"method": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../../assets/javascripts/workers/search.cefbb252.min.js", "version": {"method": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.ff0eccb3.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.17f42bbf.min.js"></script>
       
         <script src="../../../js/version-select.js"></script>
       

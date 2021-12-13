@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://docs.nebula-graph.com.cn/master/2.quick-start/6.cheatsheet-for-ngql-command/">
       
       <link rel="icon" href="../../assets/images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.2">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.0">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.816931ca.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.82f3c0b9.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.9204c3b2.min.css">
@@ -48,21 +48,9 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-    <script>function __md_scope(e,t,_){return new URL(_||(t===localStorage?"../..":"../.."),location).pathname+"."+e}function __md_get(e,t=localStorage,_){return JSON.parse(t.getItem(__md_scope(e,t,_)))}function __md_set(e,t,_=localStorage,o){try{_.setItem(__md_scope(e,_,o),JSON.stringify(t))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
-  
-
-
-
-  
-  
-
-
-
-  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-60523578-15","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
-  <script async src="https://www.google-analytics.com/analytics.js"></script>
-
 
     
     
@@ -6944,7 +6932,7 @@ END
 <p><a href="../../3.ngql-guide/7.general-query-statements/5.lookup/">LOOKUP</a></p>
 <div class="highlight"><pre><span></span><code>LOOKUP ON {&lt;vertex_tag&gt; | &lt;edge_type&gt;} 
 [WHERE &lt;expression&gt; [AND &lt;expression&gt; ...]] 
-[YIELD &lt;return_list&gt; [AS &lt;alias&gt;]]
+YIELD &lt;return_list&gt; [AS &lt;alias&gt;]
 </code></pre></div>
 <table>
 <thead>
@@ -6995,7 +6983,7 @@ END
 <div class="highlight"><pre><span></span><code>GO [[&lt;M&gt; TO] &lt;N&gt; STEPS ] FROM &lt;vertex_list&gt;
 OVER &lt;edge_type_list&gt; [{REVERSELY | BIDIRECT}]
 [ WHERE &lt;conditions&gt; ]
-[YIELD [DISTINCT] &lt;return_list&gt;]
+YIELD [DISTINCT] &lt;return_list&gt;
 [| GROUP BY {col_name | expr | position} YIELD &lt;col_name&gt;]
 [| ORDER BY &lt;expression&gt; [{ASC | DESC}]]
 [| LIMIT [&lt;offset_value&gt;,] &lt;number_rows&gt;]
@@ -7049,7 +7037,7 @@ OVER &lt;edge_type_list&gt; [{REVERSELY | BIDIRECT}]
 <p><a href="../../3.ngql-guide/7.general-query-statements/4.fetch/">FETCH</a></p>
 <div class="highlight"><pre><span></span><code>FETCH PROP ON {&lt;tag_name&gt;[, tag_name ...] | *} 
 &lt;vid&gt; [, vid ...] 
-[YIELD &lt;return_list&gt; [AS &lt;alias&gt;]]
+YIELD &lt;return_list&gt; [AS &lt;alias&gt;]
 </code></pre></div>
 <table>
 <thead>
@@ -7486,7 +7474,7 @@ OVER &lt;edge_type_list&gt; [{REVERSELY | BIDIRECT}]
 <tbody>
 <tr>
 <td><a href="../../3.ngql-guide/12.vertex-statements/1.insert-vertex/">INSERT VERTEX</a></td>
-<td><code>INSERT VERTEX [IF NOT EXISTS] &lt;tag_name&gt; (&lt;prop_name_list&gt;) [, &lt;tag_name&gt; (&lt;prop_name_list&gt;), ...]  {VALUES | VALUE} VID: (&lt;prop_value_list&gt;[, &lt;prop_value_list&gt;])</code></td>
+<td><code>INSERT VERTEX [IF NOT EXISTS] &lt;tag_name&gt; (&lt;prop_name_list&gt;) [, &lt;tag_name&gt; (&lt;prop_name_list&gt;), ...]  VALUES VID: (&lt;prop_value_list&gt;[, &lt;prop_value_list&gt;])</code></td>
 <td><code>INSERT VERTEX t2 (name, age) VALUES "13":("n3", 12), "14":("n4", 8)</code></td>
 <td>在 Nebula Graph 实例的指定图空间中插入一个或多个点。</td>
 </tr>
@@ -7523,7 +7511,7 @@ OVER &lt;edge_type_list&gt; [{REVERSELY | BIDIRECT}]
 <tbody>
 <tr>
 <td><a href="../../3.ngql-guide/13.edge-statements/1.insert-edge/">INSERT EDGE</a></td>
-<td><code>INSERT EDGE [IF NOT EXISTS] &lt;edge_type&gt; ( &lt;prop_name_list&gt; ) {VALUES | VALUE} &lt;src_vid&gt; -&gt; &lt;dst_vid&gt;[@&lt;rank&gt;] : ( &lt;prop_value_list&gt; ) [, &lt;src_vid&gt; -&gt; &lt;dst_vid&gt;[@&lt;rank&gt;] : ( &lt;prop_value_list&gt; ), ...]</code></td>
+<td><code>INSERT EDGE [IF NOT EXISTS] &lt;edge_type&gt; ( &lt;prop_name_list&gt; ) VALUES &lt;src_vid&gt; -&gt; &lt;dst_vid&gt;[@&lt;rank&gt;] : ( &lt;prop_value_list&gt; ) [, &lt;src_vid&gt; -&gt; &lt;dst_vid&gt;[@&lt;rank&gt;] : ( &lt;prop_value_list&gt; ), ...]</code></td>
 <td><code>INSERT EDGE e2 (name, age) VALUES "11"-&gt;"13":("n1", 1)</code></td>
 <td>在 Nebula Graph 实例的指定图空间中插入一条或多条边。</td>
 </tr>
@@ -7822,7 +7810,7 @@ OVER &lt;edge_type_list&gt; [{REVERSELY | BIDIRECT}]
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 26, 2021</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 9, 2021</span>
       
     
   </small>
@@ -7914,10 +7902,10 @@ OVER &lt;edge_type_list&gt; [{REVERSELY | BIDIRECT}]
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../assets/javascripts/workers/search.01824240.min.js", "version": {"method": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../assets/javascripts/workers/search.cefbb252.min.js", "version": {"method": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.ff0eccb3.min.js"></script>
+      <script src="../../assets/javascripts/bundle.17f42bbf.min.js"></script>
       
         <script src="../../js/version-select.js"></script>
       

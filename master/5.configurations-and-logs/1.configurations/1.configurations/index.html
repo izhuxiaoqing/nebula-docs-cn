@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://docs.nebula-graph.com.cn/master/5.configurations-and-logs/1.configurations/1.configurations/">
       
       <link rel="icon" href="../../../assets/images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.2">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.0">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.816931ca.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.82f3c0b9.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.9204c3b2.min.css">
@@ -48,21 +48,9 @@
     
       <link rel="stylesheet" href="../../../stylesheets/extra.css">
     
-    <script>function __md_scope(e,t,_){return new URL(_||(t===localStorage?"../../..":"../../.."),location).pathname+"."+e}function __md_get(e,t=localStorage,_){return JSON.parse(t.getItem(__md_scope(e,t,_)))}function __md_set(e,t,_=localStorage,o){try{_.setItem(__md_scope(e,_,o),JSON.stringify(t))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
-  
-
-
-
-  
-  
-
-
-
-  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-60523578-15","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
-  <script async src="https://www.google-analytics.com/analytics.js"></script>
-
 
     
     
@@ -3203,6 +3191,33 @@
     配置文件简介
   </a>
   
+    <nav class="md-nav" aria-label="配置文件简介">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rpmdebtar" class="md-nav__link">
+    源码、RPM/DEB、TAR 包集群的配置文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker_compose" class="md-nav__link">
+    Docker Compose 集群的配置文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nebula_operator" class="md-nav__link">
+    Nebula Operator 集群的配置文件
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -6065,6 +6080,33 @@
     配置文件简介
   </a>
   
+    <nav class="md-nav" aria-label="配置文件简介">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rpmdebtar" class="md-nav__link">
+    源码、RPM/DEB、TAR 包集群的配置文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker_compose" class="md-nav__link">
+    Docker Compose 集群的配置文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nebula_operator" class="md-nav__link">
+    Nebula Operator 集群的配置文件
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -6092,7 +6134,7 @@
 
 
 <h1 id="_1">配置管理<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>Nebula Graph 基于 <a href="https://gflags.github.io/gflags/">gflags</a> 库打造了系统配置，多数配置项都是其中的 flags。Nebula Graph 服务启动时，默认会从<a href="#_4">配置文件</a> 中获取配置信息，文件中没有的配置项应用默认值。</p>
+<p>Nebula Graph 基于 <a href="https://gflags.github.io/gflags/">gflags</a> 库打造了系统配置，多数配置项都是其中的 flags。Nebula Graph 服务启动时，默认会从<a href="#_4">配置文件</a>中获取配置信息。对于文件中没有的配置项，系统使用默认值。</p>
 <div class="admonition enterpriseonly">
 <p class="admonition-title">Enterpriseonly</p>
 <p>性能、参数、查询语句的调优方式及服务。</p>
@@ -6144,7 +6186,8 @@ curl <span class="m">127</span>.0.0.1:19779/flags
 <p>实际环境中需使用真实的主机 IP 地址取代以上示例中的<code>127.0.0.1</code>。</p>
 </div>
 <h2 id="_4">配置文件简介<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>Nebula Graph 为每个服务都提供了两份初始配置文件<code>&lt;service_name&gt;.conf.default</code>和<code>&lt;service_name&gt;.conf.production</code>，方便用户在不同场景中使用。文件的默认路径为<code>/usr/local/nebula/etc/</code>。</p>
+<h3 id="rpmdebtar">源码、RPM/DEB、TAR 包集群的配置文件<a class="headerlink" href="#rpmdebtar" title="Permanent link">&para;</a></h3>
+<p>Nebula Graph 为每个服务都提供了两份初始配置文件<code>&lt;service_name&gt;.conf.default</code>和<code>&lt;service_name&gt;.conf.production</code>，方便用户在不同场景中使用。使用源码和 RPM/DEB 安装集群的配置文件的默认路径为<code>/usr/local/nebula/etc/</code>；使用 TAR 包安装集群的配置文件路径为<code>&lt;install_path&gt;/&lt;tar_package_directory&gt;/etc</code>TAR 包的安装路径。</p>
 <p>初始配置文件中的配置值仅供参考，使用时可根据实际需求调整。如需使用初始配置文件，从上述两个文件选择其一，删除后缀<code>.default</code>或<code>.production</code>使其生效。</p>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
@@ -6182,8 +6225,20 @@ curl <span class="m">127</span>.0.0.1:19779/flags
 <p class="admonition-title">Caution</p>
 <p>不建议修改<code>local_config</code>的值为<code>false</code>。修改后 Nebula Graph 服务启动后会先尝试从 Meta 服务获取缓存的配置信息，可能导致集群配置不一致，造成未知风险。</p>
 </div>
+<h3 id="docker_compose">Docker Compose 集群的配置文件<a class="headerlink" href="#docker_compose" title="Permanent link">&para;</a></h3>
+<p>对于使用 Docker Compose 创建的集群，集群的配置文件的默认路径为<code>&lt;install_path&gt;/nebula-docker-compose/docker-compose.yaml</code>。配置文件中的<code>command</code>下面的参数为各服务的启动参数。</p>
+<h3 id="nebula_operator">Nebula Operator 集群的配置文件<a class="headerlink" href="#nebula_operator" title="Permanent link">&para;</a></h3>
+<p>对于通过 Nebula Operator 使用 Kubectl 方式创建的集群，集群的配置文件的路径为用户创建集群 YAML 文件的路径。用户可通过配置文件中的<code>spec.{graphd|storaged|metad}.config</code>参数修改集群各个服务的相关配置。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>通过 Helm 部署的集群，暂不支持修改集群服务的相关配置。</p>
+</div>
+<p>关于 Nebula Graph 的配置相关的更多信息，参见 <a href="https://siwei.io/sketches/nebula-config-explained/">Nebula Config</a>。</p>
 <h2 id="_5">修改配置<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>默认情况下，所有 Nebula Graph 服务从配置文件获取配置。用户可以按照以下步骤修改配置并使其生效：</p>
+<p>默认情况下，所有 Nebula Graph 服务从配置文件获取配置。用户可以按照以下步骤修改配置并使其生效。</p>
+<ul>
+<li>
+<p>针对使用源码、RPM/DEB、TAR 包安装的集群：</p>
 <ol>
 <li>
 <p>使用文本编辑器修改目标服务的配置文件并保存。</p>
@@ -6192,13 +6247,30 @@ curl <span class="m">127</span>.0.0.1:19779/flags
 <p>选择合适的时间重启<strong>所有</strong> Nebula Graph 服务使修改生效。</p>
 </li>
 </ol>
+</li>
+</ul>
+<ul>
+<li>
+<p>针对使用 Docker Compose 安装的集群：</p>
+<ol>
+<li>在文件<code>&lt;install_path&gt;/nebula-docker-compose/docker-compose.yaml</code>中，修改服务配置。</li>
+<li>在目录<code>nebula-docker-compose</code>内执行命令<code>docker-compose up -d</code>重启涉及配置变化的服务。</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li>
+<p>针对使用 Kubectl 方式创建的集群：</p>
+<p>具体操作，参见<a href="../../../nebula-operator/8.custom-cluster-configurations/8.1.custom-conf-parameter/">自定义集群的配置参数</a>。</p>
+</li>
+</ul>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 25, 2021</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 3, 2021</span>
       
     
   </small>
@@ -6290,10 +6362,10 @@ curl <span class="m">127</span>.0.0.1:19779/flags
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../../assets/javascripts/workers/search.01824240.min.js", "version": {"method": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../../assets/javascripts/workers/search.cefbb252.min.js", "version": {"method": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.ff0eccb3.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.17f42bbf.min.js"></script>
       
         <script src="../../../js/version-select.js"></script>
       

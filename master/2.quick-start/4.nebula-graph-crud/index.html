@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://docs.nebula-graph.com.cn/master/2.quick-start/4.nebula-graph-crud/">
       
       <link rel="icon" href="../../assets/images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.2">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.0">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.816931ca.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.82f3c0b9.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.9204c3b2.min.css">
@@ -48,21 +48,9 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-    <script>function __md_scope(e,t,_){return new URL(_||(t===localStorage?"../..":"../.."),location).pathname+"."+e}function __md_get(e,t=localStorage,_){return JSON.parse(t.getItem(__md_scope(e,t,_)))}function __md_set(e,t,_=localStorage,o){try{_.setItem(__md_scope(e,_,o),JSON.stringify(t))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
-  
-
-
-
-  
-  
-
-
-
-  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-60523578-15","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
-  <script async src="https://www.google-analytics.com/analytics.js"></script>
-
 
     
     
@@ -6672,7 +6660,7 @@ nebula&gt; CREATE EDGE serve(start_year int, end_year int);
 <ul>
 <li>插入点<div class="highlight"><pre><span></span><code>INSERT VERTEX [IF NOT EXISTS] &lt;tag_name&gt; (&lt;property_name&gt;[, &lt;property_name&gt;...])
 [, &lt;tag_name&gt; (&lt;property_name&gt;[, &lt;property_name&gt;...]), ...]
-{VALUES | VALUE} &lt;vid&gt;: (&lt;property_value&gt;[, &lt;property_value&gt;...])
+VALUES &lt;vid&gt;: (&lt;property_value&gt;[, &lt;property_value&gt;...])
 [, &lt;vid&gt;: (&lt;property_value&gt;[, &lt;property_value&gt;...];
 </code></pre></div>
 <p><code>VID</code>是 Vertex ID 的缩写，<code>VID</code>在一个图空间中是唯一的。参数详情请参见 <a href="../../3.ngql-guide/12.vertex-statements/1.insert-vertex/">INSERT VERTEX</a>。</p>
@@ -6680,7 +6668,7 @@ nebula&gt; CREATE EDGE serve(start_year int, end_year int);
 </ul>
 <ul>
 <li>插入边<div class="highlight"><pre><span></span><code>INSERT EDGE [IF NOT EXISTS] &lt;edge_type&gt; (&lt;property_name&gt;[, &lt;property_name&gt;...])
-{VALUES | VALUE} &lt;src_vid&gt; -&gt; &lt;dst_vid&gt;[@&lt;rank&gt;] : (&lt;property_value&gt;[, &lt;property_value&gt;...])
+VALUES &lt;src_vid&gt; -&gt; &lt;dst_vid&gt;[@&lt;rank&gt;] : (&lt;property_value&gt;[, &lt;property_value&gt;...])
 [, &lt;src_vid&gt; -&gt; &lt;dst_vid&gt;[@&lt;rank&gt;] : (&lt;property_name&gt;[, &lt;property_name&gt;...]), ...];
 </code></pre></div>
 <p>参数详情请参见 <a href="../../3.ngql-guide/13.edge-statements/1.insert-edge/">INSERT EDGE</a>。</p>
@@ -6727,7 +6715,7 @@ nebula&gt; INSERT EDGE serve(start_year, end_year) VALUES &quot;player101&quot; 
 <li><code>GO</code><div class="highlight"><pre><span></span><code>GO [[&lt;M&gt; TO] &lt;N&gt; STEPS ] FROM &lt;vertex_list&gt;
 OVER &lt;edge_type_list&gt; [{REVERSELY | BIDIRECT}]
 [ WHERE &lt;conditions&gt; ]
-[YIELD [DISTINCT] &lt;return_list&gt;]
+YIELD [DISTINCT] &lt;return_list&gt;
 [{SAMPLE &lt;sample_list&gt; | LIMIT &lt;limit_list&gt;}]
 [| GROUP BY {col_name | expr | position} YIELD &lt;col_name&gt;]
 [| ORDER BY &lt;expression&gt; [{ASC | DESC}]]
@@ -6743,7 +6731,7 @@ OVER &lt;edge_type_list&gt; [{REVERSELY | BIDIRECT}]
 <p>查询 Tag 属性</p>
 <div class="highlight"><pre><span></span><code>FETCH PROP ON {&lt;tag_name&gt;[, tag_name ...] | *}
 &lt;vid&gt; [, vid ...]
-[YIELD &lt;return_list&gt; [AS &lt;alias&gt;]];
+YIELD &lt;return_list&gt; [AS &lt;alias&gt;];
 </code></pre></div>
 </li>
 </ul>
@@ -6751,7 +6739,7 @@ OVER &lt;edge_type_list&gt; [{REVERSELY | BIDIRECT}]
 <li>
 <p>查询边属性</p>
 <div class="highlight"><pre><span></span><code>FETCH PROP ON &lt;edge_type&gt; &lt;src_vid&gt; -&gt; &lt;dst_vid&gt;[@&lt;rank&gt;] [, &lt;src_vid&gt; -&gt; &lt;dst_vid&gt; ...]
-[YIELD &lt;output&gt;];
+YIELD &lt;output&gt;;
 </code></pre></div>
 </li>
 </ul>
@@ -6760,7 +6748,7 @@ OVER &lt;edge_type_list&gt; [{REVERSELY | BIDIRECT}]
 <ul>
 <li><code>LOOKUP</code><div class="highlight"><pre><span></span><code>LOOKUP ON {&lt;vertex_tag&gt; | &lt;edge_type&gt;}
 [WHERE &lt;expression&gt; [AND &lt;expression&gt; ...]]
-[YIELD &lt;return_list&gt; [AS &lt;alias&gt;]];
+YIELD &lt;return_list&gt; [AS &lt;alias&gt;];
 </code></pre></div>
 </li>
 </ul>
@@ -6771,12 +6759,13 @@ OVER &lt;edge_type_list&gt; [{REVERSELY | BIDIRECT}]
 </ul>
 <h3 id="go"><code>GO</code>语句示例<a class="headerlink" href="#go" title="Permanent link">&para;</a></h3>
 <ul>
-<li>从 VID 为<code>player101</code>的球员开始，沿着边<code>follow</code>找到连接的球员。<div class="highlight"><pre><span></span><code>nebula&gt; GO FROM &quot;player101&quot; OVER follow;
+<li>从 VID 为<code>player101</code>的球员开始，沿着边<code>follow</code>找到连接的球员。<div class="highlight"><pre><span></span><code>nebula&gt; GO FROM &quot;player101&quot; OVER follow YIELD id($$);
 +-------------+
-| follow._dst |
+| id($$)      |
 +-------------+
 | &quot;player100&quot; |
 | &quot;player102&quot; |
+| &quot;player125&quot; |
 +-------------+
 </code></pre></div>
 </li>
@@ -6784,11 +6773,12 @@ OVER &lt;edge_type_list&gt; [{REVERSELY | BIDIRECT}]
 <ul>
 <li>从 VID 为<code>player101</code>的球员开始，沿着边<code>follow</code>查找年龄大于或等于 35 岁的球员，并返回他们的姓名和年龄，同时重命名对应的列。<div class="highlight"><pre><span></span><code>nebula&gt; GO FROM &quot;player101&quot; OVER follow WHERE properties($$).age &gt;= 35 \
         YIELD properties($$).name AS Teammate, properties($$).age AS Age;
-+--------------+-----+
-| Teammate     | Age |
-+--------------+-----+
-| &quot;Tim Duncan&quot; | 42  |
-+--------------+-----+
++-----------------+-----+
+| Teammate        | Age |
++-----------------+-----+
+| &quot;Tim Duncan&quot;    | 42  |
+| &quot;Manu Ginobili&quot; | 41  |
++-----------------+-----+
 </code></pre></div>
 <table>
 <thead>
@@ -6826,7 +6816,10 @@ OVER &lt;edge_type_list&gt; [{REVERSELY | BIDIRECT}]
 +-----------------+---------------------+
 | Team            | Player              |
 +-----------------+---------------------+
+| &quot;Spurs&quot;         | &quot;Tim Duncan&quot;        |
 | &quot;Trail Blazers&quot; | &quot;LaMarcus Aldridge&quot; |
+| &quot;Spurs&quot;         | &quot;LaMarcus Aldridge&quot; |
+| &quot;Spurs&quot;         | &quot;Manu Ginobili&quot;     |
 +-----------------+---------------------+
 </code></pre></div>
 <table>
@@ -6866,7 +6859,10 @@ OVER &lt;edge_type_list&gt; [{REVERSELY | BIDIRECT}]
 +-----------------+---------------------+
 | Team            | Player              |
 +-----------------+---------------------+
+| &quot;Spurs&quot;         | &quot;Tim Duncan&quot;        |
 | &quot;Trail Blazers&quot; | &quot;LaMarcus Aldridge&quot; |
+| &quot;Spurs&quot;         | &quot;LaMarcus Aldridge&quot; |
+| &quot;Spurs&quot;         | &quot;Manu Ginobili&quot;     |
 +-----------------+---------------------+
 </code></pre></div>
 </li>
@@ -6875,12 +6871,12 @@ OVER &lt;edge_type_list&gt; [{REVERSELY | BIDIRECT}]
 </ul>
 <h3 id="fetch"><code>FETCH</code>语句示例<a class="headerlink" href="#fetch" title="Permanent link">&para;</a></h3>
 <p>查询 VID 为<code>player100</code>的球员的属性。</p>
-<div class="highlight"><pre><span></span><code>nebula&gt; FETCH PROP ON player &quot;player100&quot;;
-+----------------------------------------------------+
-| vertices_                                          |
-+----------------------------------------------------+
-| (&quot;player100&quot; :player{age: 42, name: &quot;Tim Duncan&quot;}) |
-+----------------------------------------------------+
+<div class="highlight"><pre><span></span><code>nebula&gt; FETCH PROP ON player &quot;player100&quot; YIELD properties(vertex);
++-------------------------------+
+| properties(VERTEX)            |
++-------------------------------+
+| {age: 42, name: &quot;Tim Duncan&quot;} |
++-------------------------------+
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -6916,29 +6912,29 @@ SET &lt;properties to be updated&gt; [WHEN &lt;condition&gt;] [YIELD &lt;columns
 <ul>
 <li>用<code>UPDATE</code>修改 VID 为<code>player100</code>的球员的<code>name</code>属性，然后用<code>FETCH</code>语句检查结果。<div class="highlight"><pre><span></span><code>nebula&gt; UPDATE VERTEX &quot;player100&quot; SET player.name = &quot;Tim&quot;;
 
-nebula&gt; FETCH PROP ON player &quot;player100&quot;;
-+---------------------------------------------+
-| vertices_                                   |
-+---------------------------------------------+
-| (&quot;player100&quot; :player{age: 42, name: &quot;Tim&quot;}) |
-+---------------------------------------------+
+nebula&gt; FETCH PROP ON player &quot;player100&quot; YIELD properties(vertex);
++------------------------+
+| properties(VERTEX)     |
++------------------------+
+| {age: 42, name: &quot;Tim&quot;} |
++------------------------+
 </code></pre></div>
 </li>
 </ul>
 <ul>
 <li>用<code>UPDATE</code>修改某条边的<code>degree</code>属性，然后用<code>FETCH</code>检查结果。<div class="highlight"><pre><span></span><code>nebula&gt; UPDATE EDGE &quot;player101&quot; -&gt; &quot;player100&quot; OF follow SET degree = 96;
 
-nebula&gt; FETCH PROP ON follow &quot;player101&quot; -&gt; &quot;player100&quot;;
-+----------------------------------------------------+
-| edges_                                             |
-+----------------------------------------------------+
-| [:follow &quot;player101&quot;-&gt;&quot;player100&quot; @0 {degree: 96}] |
-+----------------------------------------------------+
+nebula&gt; FETCH PROP ON follow &quot;player101&quot; -&gt; &quot;player100&quot; YIELD properties(edge);
++------------------+
+| properties(EDGE) |
++------------------+
+| {degree: 96}     |
++------------------+
 </code></pre></div>
 </li>
 </ul>
 <ul>
-<li>用<code>INSERT</code>插入一个 VID 为<code>player111</code>的点，然后用<code>UPSERT</code>更新它。<div class="highlight"><pre><span></span><code>nebula&gt; INSERT VERTEX player(name,age) values &quot;player111&quot;:(&quot;David West&quot;, 38);
+<li>用<code>INSERT</code>插入一个 VID 为<code>player111</code>的点，然后用<code>UPSERT</code>更新它。<div class="highlight"><pre><span></span><code>nebula&gt; INSERT VERTEX player(name,age) VALUES &quot;player111&quot;:(&quot;David West&quot;, 38);
 
 nebula&gt; UPSERT VERTEX &quot;player111&quot; SET player.name = &quot;David&quot;, player.age = $^.player.age + 11 \
         WHEN $^.player.name == &quot;David West&quot; AND $^.player.age &gt; 20 \
@@ -7002,7 +6998,7 @@ ON {&lt;tag_name&gt; | &lt;edge_name&gt;} ([&lt;prop_name_list&gt;]) [COMMENT = 
 <p>确保<code>LOOKUP</code>或<code>MATCH</code>有一个索引可用。如果没有，请先创建索引。</p>
 <p>找到 Tag 为<code>player</code>的点的信息，它的<code>name</code>属性值为<code>Tony Parker</code>。</p>
 <div class="highlight"><pre><span></span><code>// 为 name 属性创建索引 player_index_1。
-nebula&gt; CREATE TAG INDEX player_index_1 ON player(name(20));
+nebula&gt; CREATE TAG INDEX IF NOT EXISTS player_index_1 ON player(name(20));
 
 // 重建索引确保能对已存在数据生效。
 nebula&gt; REBUILD TAG INDEX player_index_1
@@ -7015,11 +7011,11 @@ nebula&gt; REBUILD TAG INDEX player_index_1
 // 使用 LOOKUP 语句检索点的属性。
 nebula&gt; LOOKUP ON player WHERE player.name == &quot;Tony Parker&quot; \
         YIELD properties(vertex).name AS name, properties(vertex).age AS age;
-+-------------+---------------+-----+
-| VertexID    | name          | age |
-+-------------+---------------+-----+
-| &quot;player101&quot; | &quot;Tony Parker&quot; | 36  |
-+-------------+---------------+-----+
++---------------+-----+
+| name          | age |
++---------------+-----+
+| &quot;Tony Parker&quot; | 36  |
++---------------+-----+
 
 // 使用 MATCH 语句检索点的属性。
 nebula&gt; MATCH (v:player{name:&quot;Tony Parker&quot;}) RETURN v;
@@ -7035,7 +7031,7 @@ nebula&gt; MATCH (v:player{name:&quot;Tony Parker&quot;}) RETURN v;
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 29, 2021</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 9, 2021</span>
       
     
   </small>
@@ -7127,10 +7123,10 @@ nebula&gt; MATCH (v:player{name:&quot;Tony Parker&quot;}) RETURN v;
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../assets/javascripts/workers/search.01824240.min.js", "version": {"method": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../assets/javascripts/workers/search.cefbb252.min.js", "version": {"method": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.ff0eccb3.min.js"></script>
+      <script src="../../assets/javascripts/bundle.17f42bbf.min.js"></script>
       
         <script src="../../js/version-select.js"></script>
       

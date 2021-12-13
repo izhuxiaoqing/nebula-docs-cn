@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://docs.nebula-graph.com.cn/master/nebula-dashboard-ent/3.create-import-dashboard/2.import-cluster/">
       
       <link rel="icon" href="../../../assets/images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.2">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.0">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.816931ca.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.82f3c0b9.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.9204c3b2.min.css">
@@ -48,21 +48,9 @@
     
       <link rel="stylesheet" href="../../../stylesheets/extra.css">
     
-    <script>function __md_scope(e,t,_){return new URL(_||(t===localStorage?"../../..":"../../.."),location).pathname+"."+e}function __md_get(e,t=localStorage,_){return JSON.parse(t.getItem(__md_scope(e,t,_)))}function __md_set(e,t,_=localStorage,o){try{_.setItem(__md_scope(e,_,o),JSON.stringify(t))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
-  
-
-
-
-  
-  
-
-
-
-  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-60523578-15","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
-  <script async src="https://www.google-analytics.com/analytics.js"></script>
-
 
     
     
@@ -6068,13 +6056,16 @@
 <h2 id="_2">操作步骤<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<ul>
-<li>在同一集群下，服务需要统一版本。不支持在同一集群中导入不同版本的 Nebula Graph 实例。</li>
-<li>Nebula Graph 的安装路径需要为默认安装路径<code>/usr/local</code>。</li>
-</ul>
+<p>在同一集群下，服务需要统一版本。不支持在同一集群中导入不同版本的 Nebula Graph 实例。</p>
 </div>
 <ol>
-<li>在集群管理页面，点击 <strong>导入集群</strong> 标签。</li>
+<li>
+<p>在各个服务的配置文件中，将<code>&lt;meta|graph|storage&gt;_server_addrs</code>和<code>local_ip</code>中的IP地址改为本机的IP地址，然后启动服务。</p>
+<p>具体步骤，参见<a href="../../../5.configurations-and-logs/1.configurations/1.configurations/">配置管理</a>和<a href="../../../4.deployment-and-installation/manage-service/">管理服务</a>。</p>
+</li>
+<li>
+<p>在集群管理页面，点击 <strong>导入集群</strong> 标签。</p>
+</li>
 <li>
 <p>在导入集群页面，输入连接 Nebula Graph 的信息：</p>
 <ul>
@@ -6094,10 +6085,16 @@
 <ul>
 <li>输入集群的名称，最大可输入 15 个字符，本示例设置为<code>create_1027</code>。</li>
 <li>对节点进行 <strong>授权</strong>，授权需输入每个节点的 SSH 用户名及密码。</li>
-<li><strong>批量授权</strong>需要上传 CSV 文件。请根据下载的 CSV 文件，编辑每个节点授权信息，尽量确保节点信息正确，否则容易造成上传失败。
-  <img alt="批量授权" src="../../figs/ds-026.png" /></li>
-<li>页面中节点状态变为 <strong>已授权</strong>，则该节点授权成功。
-  <img alt="授权" src="../../figs/ds-027.png" /></li>
+<li>
+<p><strong>批量授权</strong>需要上传 CSV 文件。请根据下载的 CSV 文件，编辑每个节点授权信息，尽量确保节点信息正确，否则容易造成上传失败。</p>
+<p><img alt="批量授权" src="../../figs/ds-026.png" /></p>
+</li>
+</ul>
+<ul>
+<li>
+<p>页面中节点状态变为 <strong>已授权</strong>，则该节点授权成功。</p>
+<p><img alt="授权" src="../../figs/ds-027.png" /></p>
+</li>
 </ul>
 </li>
 <li>
@@ -6112,7 +6109,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 25, 2021</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 9, 2021</span>
       
     
   </small>
@@ -6204,10 +6201,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../../assets/javascripts/workers/search.01824240.min.js", "version": {"method": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../../assets/javascripts/workers/search.cefbb252.min.js", "version": {"method": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.ff0eccb3.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.17f42bbf.min.js"></script>
       
         <script src="../../../js/version-select.js"></script>
       
