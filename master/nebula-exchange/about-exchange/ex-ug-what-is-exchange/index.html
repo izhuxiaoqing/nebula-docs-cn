@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://docs.nebula-graph.com.cn/master/nebula-exchange/about-exchange/ex-ug-what-is-exchange/">
       
       <link rel="icon" href="../../../assets/images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.0">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.1">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.82f3c0b9.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.23b6d78a.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.9204c3b2.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.e6a45f82.min.css">
         
       
     
@@ -6112,7 +6112,7 @@
 <p>Exchange 由 Reader、Processor 和 Writer 三部分组成。Reader 读取不同来源的数据返回 DataFrame 后，Processor 遍历 DataFrame 的每一行，根据配置文件中<code>fields</code>的映射关系，按列名获取对应的值。在遍历指定批处理的行数后，Writer 会将获取的数据一次性写入到 Nebula Graph 中。下图描述了 Exchange 完成数据转换和迁移的过程。</p>
 <p><img alt="Nebula Graph&reg; Exchange 由 Reader、Processor、Writer 组成，可以完成多种不同格式和来源的数据向 Nebula Graph 的迁移" src="../../figs/ex-ug-003.png" title="Nebula Graph&reg; Exchange 转数据转换和迁移的过程" /></p>
 <h2 id="_1">版本系列<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>Exchange 有社区版和企业版两个系列。社区版在 <a href="https://github.com/vesoft-inc/nebula-exchange">GitHub</a> 开源开发，企业版除了支持社区版的功能，还增加了额外的特性，详情参见<a href="https://nebula-graph.com.cn/pricing/">版本对比</a>。</p>
+<p>Exchange 有社区版和企业版两个系列，二者功能不同。社区版在 <a href="https://github.com/vesoft-inc/nebula-exchange">GitHub</a> 开源开发，企业版属于 Nebula Graph 企业套餐，详情参见<a href="https://nebula-graph.com.cn/pricing/">版本对比</a>。</p>
 <h2 id="_2">适用场景<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>Exchange 适用于以下场景：</p>
 <ul>
@@ -6203,8 +6203,8 @@
 <ul>
 <li>发布/订阅消息平台：<a href="../../use-exchange/ex-ug-import-from-pulsar/">Apache Pulsar 2.4.5</a></li>
 </ul>
-<p>除了用 nGQL 语句的形式导入数据，Exchange 还支持将数据源的数据生成 SST 文件，然后通过 Console<a href="../../use-exchange/ex-ug-import-from-sst/">导入 SST 文件</a>。</p>
-<p>此外，企业版 Exchange 还支持以 Nebula Graph 为源，将数据<a href="../../use-exchange/ex-ug-export-from-nebula/">导出到 CSV 文件</a>。</p>
+<p>除了用 nGQL 语句的形式导入数据，Exchange 还支持将数据源的数据生成 SST 文件，然后通过 Console <a href="../../use-exchange/ex-ug-import-from-sst/">导入 SST 文件</a>。</p>
+<p>此外，企业版 Exchange 支持以 Nebula Graph 为源，将数据<a href="../../use-exchange/ex-ug-export-from-nebula/">导出到 CSV 文件</a>。</p>
 <h2 id="_5">更新说明<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/vesoft-inc/nebula-exchange/releases/tag/v2.6.1">Release</a></p>
 <h2 id="_6">视频<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
@@ -6218,7 +6218,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 25, 2021</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 14, 2021</span>
       
     
   </small>
@@ -6310,10 +6310,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../../assets/javascripts/workers/search.cefbb252.min.js", "version": {"method": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../../assets/javascripts/workers/search.c7dec7e7.min.js", "version": {"method": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.17f42bbf.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.da79ceb7.min.js"></script>
       
         <script src="../../../js/version-select.js"></script>
       
