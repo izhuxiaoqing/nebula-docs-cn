@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://docs.nebula-graph.com.cn/master/3.ngql-guide/3.data-types/4.date-and-time/">
       
       <link rel="icon" href="../../../assets/images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.1">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.2">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.23b6d78a.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.f7951f6f.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.e6a45f82.min.css">
@@ -6120,15 +6120,21 @@
 <ul>
 <li>函数<code>date()</code>、<code>time()</code>和<code>datetime()</code>可以用属性名称获取自身的某一个具体属性值，例如<code>date().month</code>获取当前月份、<code>time("02:59:40").minute</code>获取传入时间的分钟数。</li>
 </ul>
+<ul>
+<li>函数<code>date()</code>、<code>time()</code>和<code>datetime()</code>可以指定时区进行转换，例如<code>datetime("2017-03-04 22:30:40.003000+08:00")</code>或<code>datetime("2017-03-04T22:30:40.003000[Asia/Shanghai]")</code>。</li>
+</ul>
 <h2 id="opencypher">openCypher 兼容性<a class="headerlink" href="#opencypher" title="Permanent link">&para;</a></h2>
 <ul>
-<li>支持年、月、日、时、分、秒，不支持毫秒。</li>
+<li>支持年、月、日、时、分、秒、毫秒、微秒，不支持纳秒。</li>
 </ul>
 <ul>
 <li>不支持函数<code>localdatetime()</code>和<code>duration()</code>。</li>
 </ul>
 <ul>
 <li>不支持大部分字符串时间格式，支持<code>YYYY-MM-DDThh:mm:ss</code>和<code>YYYY-MM-DD hh:mm:ss</code>。</li>
+</ul>
+<ul>
+<li>支持单个数字的字符串时间格式，例如<code>time("1:1:1")</code>。</li>
 </ul>
 <h2 id="date">DATE<a class="headerlink" href="#date" title="Permanent link">&para;</a></h2>
 <p><code>DATE</code>包含日期，但是不包含时间。Nebula Graph 检索和显示<code>DATE</code>的格式为<code>YYYY-MM-DD</code>。支持的范围是<code>-32768-01-01</code>到<code>32767-12-31</code>。</p>
@@ -6184,7 +6190,7 @@ nebula&gt; RETURN timestamp(&quot;2021-07-05T06:18:43.984000&quot;);
 </li>
 <li>
 <p>插入点，名称为<code>test1</code>。</p>
-<div class="highlight"><pre><span></span><code>nebula&gt; INSERT VERTEX date1(p1, p2, p3) VALUES &quot;test1&quot;:(date(&quot;2021-03-17&quot;), time(&quot;17:53:59&quot;), datetime(&quot;2021-03-17T17:53:59&quot;));
+<div class="highlight"><pre><span></span><code>nebula&gt; INSERT VERTEX date1(p1, p2, p3) VALUES &quot;test1&quot;:(date(&quot;2021-03-17&quot;), time(&quot;17:53:59&quot;), datetime(&quot;2017-03-04T22:30:40.003000[Asia/Shanghai]&quot;));
 </code></pre></div>
 </li>
 <li>
@@ -6244,7 +6250,7 @@ nebula&gt; WITH date({year: 1984, month: 10, day: 11}) AS x RETURN x + 1;
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 25, 2021</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 17, 2021</span>
       
     
   </small>
@@ -6336,10 +6342,10 @@ nebula&gt; WITH date({year: 1984, month: 10, day: 11}) AS x RETURN x + 1;
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../../assets/javascripts/workers/search.c7dec7e7.min.js", "version": {"method": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../../assets/javascripts/workers/search.0bbba5b5.min.js", "version": {"method": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.da79ceb7.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.649a939e.min.js"></script>
       
         <script src="../../../js/version-select.js"></script>
       

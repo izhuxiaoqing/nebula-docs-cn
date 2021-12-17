@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://docs.nebula-graph.com.cn/master/nebula-spark-connector/">
       
       <link rel="icon" href="../assets/images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.1">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.2">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.23b6d78a.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.f7951f6f.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
@@ -6408,7 +6408,7 @@
   <span class="p">.</span><span class="n">withVidAsProp</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
   <span class="p">.</span><span class="n">withUser</span><span class="p">(</span><span class="s">&quot;root&quot;</span><span class="p">)</span>
   <span class="p">.</span><span class="n">withPasswd</span><span class="p">(</span><span class="s">&quot;nebula&quot;</span><span class="p">)</span>
-  <span class="p">.</span><span class="n">withBatch</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+  <span class="p">.</span><span class="n">withBatch</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
   <span class="p">.</span><span class="n">build</span><span class="p">()</span>    
 <span class="n">df</span><span class="p">.</span><span class="n">write</span><span class="p">.</span><span class="n">nebula</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">nebulaWriteVertexConfig</span><span class="p">).</span><span class="n">writeVertices</span><span class="p">()</span>
 
@@ -6426,7 +6426,7 @@
   <span class="p">.</span><span class="n">withRankAsProperty</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
   <span class="p">.</span><span class="n">withUser</span><span class="p">(</span><span class="s">&quot;root&quot;</span><span class="p">)</span>
   <span class="p">.</span><span class="n">withPasswd</span><span class="p">(</span><span class="s">&quot;nebula&quot;</span><span class="p">)</span>
-  <span class="p">.</span><span class="n">withBatch</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+  <span class="p">.</span><span class="n">withBatch</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
   <span class="p">.</span><span class="n">build</span><span class="p">()</span>
 <span class="n">df</span><span class="p">.</span><span class="n">write</span><span class="p">.</span><span class="n">nebula</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">nebulaWriteEdgeConfig</span><span class="p">).</span><span class="n">writeEdges</span><span class="p">()</span>
 </code></pre></div>
@@ -6442,7 +6442,7 @@
   <span class="p">.</span><span class="n">withTag</span><span class="p">(</span><span class="s">&quot;person&quot;</span><span class="p">)</span>
   <span class="p">.</span><span class="n">withVidField</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span>
   <span class="p">.</span><span class="n">withVidAsProp</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
-  <span class="p">.</span><span class="n">withBatch</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+  <span class="p">.</span><span class="n">withBatch</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
   <span class="p">.</span><span class="n">withWriteMode</span><span class="p">(</span><span class="nc">WriteMode</span><span class="p">.</span><span class="nc">UPDATE</span><span class="p">)</span>
   <span class="p">.</span><span class="n">build</span><span class="p">()</span>
 <span class="n">df</span><span class="p">.</span><span class="n">write</span><span class="p">.</span><span class="n">nebula</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">nebulaWriteVertexConfig</span><span class="p">).</span><span class="n">writeVertices</span><span class="p">()</span>
@@ -6528,7 +6528,7 @@
 <tr>
 <td align="left"><code>withBatch</code></td>
 <td align="left">是</td>
-<td align="left">一次写入的数据行数。默认值为<code>1000</code>.</td>
+<td align="left">一次写入的数据行数，默认值为<code>512</code>。当<code>withWriteMode</code>为<code>update</code>时，该参数的最大值为<code>512</code>。</td>
 </tr>
 <tr>
 <td align="left"><code>withWriteMode</code></td>
@@ -6614,7 +6614,7 @@
 <tr>
 <td align="left"><code>withBatch</code></td>
 <td align="left">是</td>
-<td align="left">一次写入的数据行数。默认值为<code>1000</code>.</td>
+<td align="left">一次写入的数据行数，默认值为<code>512</code>。当<code>withWriteMode</code>为<code>update</code>时，该参数的最大值为<code>512</code>。</td>
 </tr>
 <tr>
 <td align="left"><code>withWriteMode</code></td>
@@ -6633,7 +6633,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 3, 2021</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 16, 2021</span>
       
     
   </small>
@@ -6725,10 +6725,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../assets/javascripts/workers/search.c7dec7e7.min.js", "version": {"method": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../assets/javascripts/workers/search.0bbba5b5.min.js", "version": {"method": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.da79ceb7.min.js"></script>
+      <script src="../assets/javascripts/bundle.649a939e.min.js"></script>
       
         <script src="../js/version-select.js"></script>
       

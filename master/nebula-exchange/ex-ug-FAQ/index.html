@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://docs.nebula-graph.com.cn/master/nebula-exchange/ex-ug-FAQ/">
       
       <link rel="icon" href="../../assets/images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.1">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.2">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.23b6d78a.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.f7951f6f.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
@@ -5550,6 +5550,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#qhive_schema" class="md-nav__link">
+    Q：Hive 数据导入时提示 schema 版本不一致
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -6217,6 +6224,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#qhive_schema" class="md-nav__link">
+    Q：Hive 数据导入时提示 schema 版本不一致
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -6373,6 +6387,28 @@ nebula-docker-compose_storaged2_1   ./bin/nebula-storaged --fl ...   Up <span cl
 &lt;nebula-exchange-2.x.y.jar_path&gt; <span class="se">\</span>
 -c application.conf
 </code></pre></div>
+<h3 id="qhive_schema">Q：Hive 数据导入时提示 schema 版本不一致<a class="headerlink" href="#qhive_schema" title="Permanent link">&para;</a></h3>
+<p>Spark 日志提示 <code>Hive Schema version 1.2.0 does not match metastore's schema version 2.1.0 Metastore is not upgraded or corrupt</code> 的原因是 Hive 环境中配置的 metastore schema 版本和 Spark 使用的 metastore 版本不一致。</p>
+<p>解决方法：</p>
+<ol>
+<li>
+<p>将 Hive 环境中存储 Hive metastore 信息的 MySQL version 信息更新为 Spark 中使用的 metastore 版本。</p>
+<p>假设 Hive 在 MySQL 中存储 metastore 的数据库是<code>hive</code>，需要按如下方式修改 <code>hive.VERSION</code> 表中的 <code>version</code> 字段：</p>
+<div class="highlight"><pre><span></span><code>update hive.VERSION set SCHEMA_VERSION=&quot;2.1.0&quot; where VER_ID=1
+</code></pre></div>
+</li>
+<li>
+<p>在 Hive 环境的 <code>hive-site.xml</code> 文件中增加如下配置：</p>
+<div class="highlight"><pre><span></span><code>&lt;property&gt;
+&lt;name&gt;hive.metastore.schema.verification&lt;/name&gt;
+&lt;value&gt;false&lt;/value&gt;
+&lt;/property&gt;
+</code></pre></div>
+</li>
+<li>
+<p>重启 Hive。</p>
+</li>
+</ol>
 <h2 id="_3">配置问题<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="q">Q：哪些配置项影响导入性能？<a class="headerlink" href="#q" title="Permanent link">&para;</a></h3>
 <ul>
@@ -6406,7 +6442,7 @@ nebula-docker-compose_storaged2_1   ./bin/nebula-storaged --fl ...   Up <span cl
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 25, 2021</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 16, 2021</span>
       
     
   </small>
@@ -6498,10 +6534,10 @@ nebula-docker-compose_storaged2_1   ./bin/nebula-storaged --fl ...   Up <span cl
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../assets/javascripts/workers/search.c7dec7e7.min.js", "version": {"method": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../assets/javascripts/workers/search.0bbba5b5.min.js", "version": {"method": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.da79ceb7.min.js"></script>
+      <script src="../../assets/javascripts/bundle.649a939e.min.js"></script>
       
         <script src="../../js/version-select.js"></script>
       

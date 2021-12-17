@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://docs.nebula-graph.com.cn/master/8.service-tuning/2.graph-modeling/">
       
       <link rel="icon" href="../../assets/images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.1">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.2">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.23b6d78a.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.f7951f6f.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
@@ -3675,7 +3675,7 @@
       
         <li class="md-nav__item">
   <a href="#_10" class="md-nav__link">
-    不能支持动态图（时序图）
+    关于支持动态图（时序图）
   </a>
   
 </li>
@@ -6193,7 +6193,7 @@
       
         <li class="md-nav__item">
   <a href="#_10" class="md-nav__link">
-    不能支持动态图（时序图）
+    关于支持动态图（时序图）
   </a>
   
 </li>
@@ -6264,6 +6264,7 @@ nebula&gt; MATCH (v1:player)-[e:temp]-&gt;() return collect(e.tmp);
 | [1, 2, 3]      |
 +----------------+
 </code></pre></div>
+<p>对于自环的操作没有封装任何的语法糖，操作方式与普通的边无异。</p>
 <h3 id="_6">广度优先大于深度优先<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Nebula Graph 基于图拓扑结构进行深度图遍历的性能较低，广度优先遍历以及获取属性的性能较好。例如，模型 a 包括姓名、年龄、眼睛颜色三种属性，建议创建一个 Tag<code>person</code>，然后为它添加姓名、年龄、眼睛颜色的属性。如果创建一个包含眼睛颜色的 Tag 和一个 Edge type<code>has</code>，然后创建一个边用来表示人拥有的眼睛颜色，这种建模方法会降低遍历性能。</li>
@@ -6285,9 +6286,9 @@ nebula&gt; MATCH (v1:player)-[e:temp]-&gt;() return collect(e.tmp);
 <p>参考<a href="../../1.introduction/3.vid/">点 VID 一节</a>。</p>
 <h3 id="_9">长文本<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>为边创建属性时请勿使用长文本：这些属性会被<a href="../../1.introduction/3.nebula-graph-architecture/4.storage-service/">存储 2 份</a>，导致写入放大问题（write amplification）。此时建议将长文本放在 HBase/ES 中，将其地址存放在 Nebula Graph 中。</p>
-<h2 id="_10">不能支持动态图（时序图）<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h2 id="_10">关于支持动态图（时序图）<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <p>在某些场景下，图需要同时带有时序信息，以描述整个图的结构随着时间变化的情况 <sup id="fnref:twitter"><a class="footnote-ref" href="#fn:twitter">1</a></sup>。</p>
-<p>Nebula Graph master 的边可以使用 Rank 字段存放时间信息 (int64)，但是点上没有字段可以存放时间信息（存放在属性会被新写入覆盖）。因此不能支持动态时序图。</p>
+<p>Nebula Graph master 的边可以使用 Rank 字段存放时间信息 (int64)，但是点上没有字段可以存放时间信息（存放在属性会被新写入覆盖）。一个折中的办法是在点上设计自己指向自己的自环，并将时间信息放置在自环上。但 Rank 字段目前缺少 <code>next(), pre(), head(), tail(), max(), min(), lessThan(), moreThan()</code> 等语法功能(也不能创建索引加速)，需要取得全部的 Rank 然后应用程序自己拼接。 </p>
 <p><img alt="image" src="../sequence.png" /></p>
 <div class="footnote">
 <hr />
@@ -6303,7 +6304,7 @@ nebula&gt; MATCH (v1:player)-[e:temp]-&gt;() return collect(e.tmp);
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 3, 2021</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 15, 2021</span>
       
     
   </small>
@@ -6395,10 +6396,10 @@ nebula&gt; MATCH (v1:player)-[e:temp]-&gt;() return collect(e.tmp);
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../assets/javascripts/workers/search.c7dec7e7.min.js", "version": {"method": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.top", "header.autohide"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../assets/javascripts/workers/search.0bbba5b5.min.js", "version": {"method": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.da79ceb7.min.js"></script>
+      <script src="../../assets/javascripts/bundle.649a939e.min.js"></script>
       
         <script src="../../js/version-select.js"></script>
       
