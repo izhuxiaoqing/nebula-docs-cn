@@ -531,7 +531,7 @@ plugins:
 #      - '.*\.(tmp|bin|tar)$'
 
   - with-pdf:
-      copyright: 2021 Vesoft Inc.
+      copyright: 2021 vesoft Inc.
       cover_subtitle: master sinnce 2.6.1
       author: 吴敏，周瑶，梁振亚，杨怡璇，黄凤仙
       cover: true
