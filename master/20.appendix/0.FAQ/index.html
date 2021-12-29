@@ -6158,14 +6158,34 @@
         
           <li class="md-nav__item">
   <a href="#_13" class="md-nav__link">
-    防火墙中需要开放哪些端口
+    防火墙中需要开放哪些端口？
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#_14" class="md-nav__link">
-    如何测试端口是否已开放
+    如何测试端口是否已开放？
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    关于 License
+  </a>
+  
+    <nav class="md-nav" aria-label="关于 License">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#license_license" class="md-nav__link">
+    License 过期前后，是否有信息提示？License 过期后如何续期？
   </a>
   
 </li>
@@ -6568,14 +6588,34 @@
         
           <li class="md-nav__item">
   <a href="#_13" class="md-nav__link">
-    防火墙中需要开放哪些端口
+    防火墙中需要开放哪些端口？
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#_14" class="md-nav__link">
-    如何测试端口是否已开放
+    如何测试端口是否已开放？
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    关于 License
+  </a>
+  
+    <nav class="md-nav" aria-label="关于 License">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#license_license" class="md-nav__link">
+    License 过期前后，是否有信息提示？License 过期后如何续期？
   </a>
   
 </li>
@@ -6857,7 +6897,7 @@ nebula-graphd version <span class="m">2</span>.5.0, Git: c397299c, Build Time: A
 <h3 id="host_host_offline">修改 Host 名称后，旧的 Host 一直显示 <code>OFFLINE</code> 怎么办？<a class="headerlink" href="#host_host_offline" title="Permanent link">&para;</a></h3>
 <p><code>OFFLINE</code> 状态的 Host 将在一天后自动删除。</p>
 <h2 id="_12">关于连接<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
-<h3 id="_13">防火墙中需要开放哪些端口<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<h3 id="_13">防火墙中需要开放哪些端口？<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <p>如果没有修改过<a href="../../5.configurations-and-logs/1.configurations/1.configurations/">配置文件</a> 中预设的端口，请在防火墙中开放如下端口：</p>
 <table>
 <thead>
@@ -6883,7 +6923,7 @@ nebula-graphd version <span class="m">2</span>.5.0, Git: c397299c, Build Time: A
 </table>
 <p>如果修改过配置文件中预设的端口，请找出实际使用的端口并在防火墙中开放它们。</p>
 <p>周边工具各自使用不用的端口，请参考各工具文档。</p>
-<h3 id="_14">如何测试端口是否已开放<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<h3 id="_14">如何测试端口是否已开放？<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
 <p>用户可以使用如下 telnet 命令检查端口状态：</p>
 <div class="highlight"><pre><span></span><code>telnet &lt;ip&gt; &lt;port&gt;
 </code></pre></div>
@@ -6903,13 +6943,47 @@ $ telnet <span class="m">192</span>.168.1.10 <span class="m">9777</span>
 Trying <span class="m">192</span>.168.1.10...
 telnet: connect to address <span class="m">192</span>.168.1.10: Connection refused
 </code></pre></div>
+<h2 id="license">关于 License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
+<h3 id="license_license">License 过期前后，是否有信息提示？License 过期后如何续期？<a class="headerlink" href="#license_license" title="Permanent link">&para;</a></h3>
+<p>在License 过期前的 3 天内和过期后的 7 天内，用户会收到系统发出的 License 过期告警提示。</p>
+<table>
+<thead>
+<tr>
+<th>License 使用时间</th>
+<th>产品使用状态</th>
+<th>消息提示及续费方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>未到生效期</td>
+<td>不可登录且无法使用</td>
+<td>您的 License 还未到生效时间，请于有效期范围内使用。</td>
+</tr>
+<tr>
+<td>过期前 3 天内</td>
+<td>可以登录并继续使用</td>
+<td>您的 License 证书有效时间还剩 &lt;3|2|1|0&gt; 天，过期7天后无法使用，请及时联系销售（<a href="mailto:inqury@vesoft.com">inqury@vesoft.com</a>）购买并更换新的证书。</td>
+</tr>
+<tr>
+<td>过期后 7 天内</td>
+<td>可以登录并继续使用</td>
+<td>您的 License 证书已过期 &lt;0|1|2|3|4|5|6|7&gt; 天，过期7天后无法使用，请及时联系销售（<a href="mailto:inqury@vesoft.com">inqury@vesoft.com</a>）购买并更换新的证书。</td>
+</tr>
+<tr>
+<td>过期后 7 天以上</td>
+<td>不可登录且无法使用</td>
+<td>您的 License 已过期 7 天以上，产品无法正常使用，请及时联系销售（<a href="mailto:inqury@vesoft.com">inqury@vesoft.com</a>）购买并更换新的证书。</td>
+</tr>
+</tbody>
+</table>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 1, 2021</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 29, 2021</span>
       
     
   </small>
