@@ -6537,7 +6537,7 @@
 <h3 id="_1">异步实现创建和修改<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>Nebula Graph 中执行如下创建和修改操作，是异步实现的。要在<strong>下一个</strong>心跳周期之后才能生效；否则访问会报错。</p>
+<p>Nebula Graph 中执行如下创建和修改操作，是异步实现的。要在<strong>下一个</strong>心跳周期之后才能生效，否则访问会报错。为确保数据同步，后续操作能顺利进行，请等待 2 个心跳周期（20 秒）。</p>
 </div>
 <ul>
 <li><code>CREATE SPACE</code></li>
@@ -6552,13 +6552,6 @@
 <p class="admonition-title">Note</p>
 <p>默认心跳周期是 10 秒。修改心跳周期参数<code>heartbeat_interval_secs</code>，请参见<a href="../../5.configurations-and-logs/1.configurations/1.configurations/">配置简介</a>。</p>
 </div>
-<p>为确保数据同步，后续操作能顺利进行，可采取以下方法之一：</p>
-<ul>
-<li>执行<code>SHOW</code>或<code>DESCRIBE</code>命令检查相应对象的状态，确保创建或修改已完成。如果没有完成，请等待几秒重试。</li>
-</ul>
-<ul>
-<li>等待 2 个心跳周期（20 秒）。</li>
-</ul>
 <h2 id="_2">创建和选择图空间<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="ngql">nGQL 语法<a class="headerlink" href="#ngql" title="Permanent link">&para;</a></h3>
 <ul>
@@ -7046,7 +7039,7 @@ nebula&gt; MATCH (v:player{name:&quot;Tony Parker&quot;}) RETURN v;
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 9, 2021</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 29, 2021</span>
       
     
   </small>

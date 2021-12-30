@@ -6190,14 +6190,7 @@ nebula&gt; CREATE TAG IF NOT EXISTS woman(name string, age int, \
         TTL_DURATION = 100, TTL_COL = &quot;create_time&quot;;
 </code></pre></div>
 <h2 id="tag">创建 Tag 说明<a class="headerlink" href="#tag" title="Permanent link">&para;</a></h2>
-<p>尝试使用新创建的 Tag 可能会失败，因为创建是异步实现的。</p>
-<p>Nebula Graph 将在下一个心跳周期内完成 Tag 的创建，为了确保创建成功，可以使用如下方法之一：</p>
-<ul>
-<li>在 <a href="../4.show-tags/"><code>SHOW TAGS</code></a> 语句的结果中查找新的 Tag，如果找不到，请等待几秒重试。</li>
-</ul>
-<ul>
-<li>等待两个心跳周期，例如 20 秒。</li>
-</ul>
+<p>尝试使用新创建的 Tag 可能会失败，因为创建是异步实现的。为确保数据同步，后续操作能顺利进行，请等待 2 个心跳周期（20 秒）。</p>
 <p>如果需要修改心跳间隔，请为<a href="../../../5.configurations-and-logs/1.configurations/1.configurations/">所有配置文件</a>修改参数<code>heartbeat_interval_secs</code>。</p>
 
   <hr>
@@ -6205,7 +6198,7 @@ nebula&gt; CREATE TAG IF NOT EXISTS woman(name string, age int, \
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 10, 2021</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 29, 2021</span>
       
     
   </small>

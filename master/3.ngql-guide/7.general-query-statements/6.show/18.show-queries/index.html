@@ -6090,23 +6090,23 @@
 </div>
 <h2 id="_1">注意事项<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>SHOW QUERIES</code>从本地缓存获取当前 Session 中查询的状态，几乎没有延迟。</li>
+<li><code>SHOW LOCAL QUERIES</code>从本地缓存获取当前 Session 中查询的状态，几乎没有延迟。</li>
 </ul>
 <ul>
-<li><code>SHOW ALL QUERIES</code>从 Meta 服务获取所有 Session 中的查询信息。这些信息会根据参数<code>session_reclaim_interval_secs</code>定义的周期同步到 Meta 服务，因此在客户端获取到的信息可能属于上个同步周期。</li>
+<li><code>SHOW QUERIES</code>从 Meta 服务获取所有 Session 中的查询信息。这些信息会根据参数<code>session_reclaim_interval_secs</code>定义的周期同步到 Meta 服务，因此在客户端获取到的信息可能属于上个同步周期。</li>
 </ul>
 <h2 id="_2">语法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>SHOW [ALL] QUERIES;
+<div class="highlight"><pre><span></span><code>SHOW [LOCAL] QUERIES;
 </code></pre></div>
 <h2 id="_3">示例<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>nebula&gt; SHOW QUERIES;
+<div class="highlight"><pre><span></span><code>nebula&gt; SHOW LOCAL QUERIES;
 +------------------+-----------------+--------+----------------------+----------------------------+----------------+-----------+-----------------+
 | SessionID        | ExecutionPlanID | User   | Host                 | StartTime                  | DurationInUSec | Status    | Query           |
 +------------------+-----------------+--------+----------------------+----------------------------+----------------+-----------+-----------------+
 | 1625463842921750 | 46              | &quot;root&quot; | &quot;&quot;192.168.x.x&quot;:9669&quot; | 2021-07-05T05:44:19.502903 | 0              | &quot;RUNNING&quot; | &quot;SHOW QUERIES;&quot; |
 +------------------+-----------------+--------+----------------------+----------------------------+----------------+-----------+-----------------+
 
-nebula&gt; SHOW ALL QUERIES;
+nebula&gt; SHOW QUERIES;
 +------------------+-----------------+---------+----------------------+----------------------------+----------------+-----------+---------------------------------------------------------+
 | SessionID        | ExecutionPlanID | User    | Host                 | StartTime                  | DurationInUSec | Status    | Query                                                   |
 +------------------+-----------------+---------+----------------------+----------------------------+----------------+-----------+---------------------------------------------------------+
@@ -6114,7 +6114,7 @@ nebula&gt; SHOW ALL QUERIES;
 +------------------+-----------------+---------+----------------------+----------------------------+----------------+-----------+---------------------------------------------------------+
 
 # 返回耗时 TOP 10 的查询。
-nebula&gt; SHOW ALL QUERIES | ORDER BY $-.DurationInUSec DESC | LIMIT 10;
+nebula&gt; SHOW QUERIES | ORDER BY $-.DurationInUSec DESC | LIMIT 10;
 +------------------+-----------------+---------+----------------------+----------------------------+----------------+-----------+-------------------------------------------------------+
 | SessionID        | ExecutionPlanID | User    | Host                 | StartTime                  | DurationInUSec | Status    | Query                                                 |
 +------------------+-----------------+---------+----------------------+----------------------------+----------------+-----------+-------------------------------------------------------+
@@ -6171,7 +6171,7 @@ nebula&gt; SHOW ALL QUERIES | ORDER BY $-.DurationInUSec DESC | LIMIT 10;
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 25, 2021</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 29, 2021</span>
       
     
   </small>

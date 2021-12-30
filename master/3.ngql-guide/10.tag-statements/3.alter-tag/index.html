@@ -6130,14 +6130,7 @@ nebula&gt; ALTER TAG t1 TTL_DURATION = 2, TTL_COL = &quot;p2&quot;;
 nebula&gt; ALTER TAG t1 COMMENT = &#39;test1&#39;;
 </code></pre></div>
 <h2 id="tag">修改 Tag 说明<a class="headerlink" href="#tag" title="Permanent link">&para;</a></h2>
-<p>尝试使用刚修改的 Tag 可能会失败，因为修改是异步实现的。</p>
-<p>Nebula Graph 将在下一个心跳周期内完成 Tag 的修改，为了确保修改成功，可以使用如下方法之一：</p>
-<ul>
-<li>在 <a href="../5.describe-tag/"><code>DESCRIBE TAG</code></a> 语句的结果中查看 Tag 信息，确认修改成功。如果没有修改成功，请等待几秒重试。</li>
-</ul>
-<ul>
-<li>等待两个心跳周期，例如 20 秒。</li>
-</ul>
+<p>尝试使用刚修改的 Tag 可能会失败，因为修改是异步实现的。为确保数据同步，后续操作能顺利进行，请等待 2 个心跳周期（20 秒）。</p>
 <p>如果需要修改心跳间隔，请为<a href="../../../5.configurations-and-logs/1.configurations/1.configurations/">所有配置文件</a>修改参数<code>heartbeat_interval_secs</code>。</p>
 
   <hr>
@@ -6145,7 +6138,7 @@ nebula&gt; ALTER TAG t1 COMMENT = &#39;test1&#39;;
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 25, 2021</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 29, 2021</span>
       
     
   </small>

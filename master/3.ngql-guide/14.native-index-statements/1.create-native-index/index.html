@@ -6177,13 +6177,7 @@
 <p class="admonition-title">Note</p>
 <p>如果先创建索引再导入数据，会因为写性能的下降导致导入速度极慢。</p>
 <p>日常增量写入时保持 <code>--disable_auto_compaction = false</code>。</p>
-<p>新创建的索引并不会立刻生效。创建新的索引并尝试立刻使用（例如<code>LOOKUP</code>或者<code>REBUILD INDEX</code>) 通常会失败（报错<code>can't find xxx in the space</code>）。因为创建步骤是异步实现的，Nebula Graph 要在下一个心跳周期才能完成索引的创建。可以使用如下方法之一：</p>
-<ul>
-<li>在 <a href="../2.show-native-indexes/"><code>SHOW TAG/EDGE INDEXES</code></a> 语句的结果中查找到新的索引。或者，</li>
-</ul>
-<ul>
-<li>等待两个心跳周期，例如 20 秒。如果需要修改心跳间隔，请为<a href="../../../5.configurations-and-logs/1.configurations/1.configurations/">所有配置文件</a>修改参数<code>heartbeat_interval_secs</code>。</li>
-</ul>
+<p>新创建的索引并不会立刻生效。创建新的索引并尝试立刻使用（例如<code>LOOKUP</code>或者<code>REBUILD INDEX</code>) 通常会失败（报错<code>can't find xxx in the space</code>）。因为创建步骤是异步实现的，Nebula Graph 要在下一个心跳周期才能完成索引的创建。为确保数据同步，后续操作能顺利进行，请等待 2 个心跳周期（20 秒）。如果需要修改心跳间隔，请为<a href="../../../5.configurations-and-logs/1.configurations/1.configurations/">所有配置文件</a>修改参数<code>heartbeat_interval_secs</code>。</p>
 </div>
 <div class="admonition danger">
 <p class="admonition-title">Danger</p>
@@ -6290,7 +6284,7 @@ nebula&gt; MATCH (v:t) WHERE t.p1 == 1 and t.p2 == 2 and t.p3 == 3;
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 10, 2021</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 29, 2021</span>
       
     
   </small>

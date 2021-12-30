@@ -6083,13 +6083,22 @@
 
 
 <h1 id="show_sessions">SHOW SESSIONS<a class="headerlink" href="#show_sessions" title="Permanent link">&para;</a></h1>
-<p><code>SHOW SESSIONS</code>语句显示所有会话信息，也可以指定会话 ID 进行查看。</p>
+<p>登录 Nebula Graph 数据库时，会创建对应会话，用户可以查询会话信息。</p>
 <h2 id="_1">注意事项<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>使用 Nebula Console 登录数据库时，会创建一个会话，操作结束执行<code>exit</code>退出登录时，客户端会调用 API <code>release</code>，释放会话并清除会话信息。</p>
-<p>如果没有正常退出，且没有在配置文件 <a href="../../../../5.configurations-and-logs/1.configurations/3.graph-config/">nebula-graphd.conf</a> 设置空闲会话超时时间（<code>session_idle_timeout_secs</code>），会话不会自动释放。</p>
-<p>对于未自动释放的会话，需要手动删除指定会话 (TODO: coding)。</p>
+<ul>
+<li>执行<code>exit</code>退出登录时，客户端会调用 API <code>release</code>，释放会话并清除会话信息。如果没有正常退出，且没有在配置文件 <a href="../../../../5.configurations-and-logs/1.configurations/3.graph-config/">nebula-graphd.conf</a> 设置空闲会话超时时间（<code>session_idle_timeout_secs</code>），会话不会自动释放。对于未自动释放的会话，需要手动删除指定会话 (TODO: coding)。</li>
+</ul>
+<ul>
+<li><code>SHOW SESSIONS</code>查询所有 Graph 服务上的会话信息。</li>
+</ul>
+<ul>
+<li><code>SHOW LOCAL SESSIONS</code>从当前连接的 Graph 服务获取会话信息，不会查询其他 Graph 服务上的会话信息。</li>
+</ul>
+<ul>
+<li><code>SHOW SESSION &lt;Session_Id&gt;</code>查询指定 Session ID 的会话信息。</li>
+</ul>
 <h2 id="_2">语法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>SHOW SESSIONS;
+<div class="highlight"><pre><span></span><code>SHOW [LOCAL] SESSIONS;
 SHOW SESSION &lt;Session_Id&gt;;
 </code></pre></div>
 <h2 id="_3">示例<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
@@ -6171,7 +6180,7 @@ nebula&gt; SHOW SESSION 1635254859271703;
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 25, 2021</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 29, 2021</span>
       
     
   </small>
